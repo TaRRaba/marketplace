@@ -7,10 +7,10 @@ import { Provider } from 'react-redux'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   
-  <Provider store={undefined} >
+  // <Provider store={undefined} >
     <BrowserRouter>  
       <App />
     </BrowserRouter>
-  </Provider>
+  // </Provider>
   
 )
