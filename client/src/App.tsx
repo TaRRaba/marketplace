@@ -5,9 +5,10 @@ import RegistrationSeller from './components/seller/RegistrationSeller/Registrat
 import LoginUser from './components/user/LoginUser/LoginUser'
 import ProfileUser from './components/user/ProfileUser/ProfileUser'
 import RegistrationUser from './components/user/RegistrationUser/RegistrationUser'
+import ProfileSeller from './components/seller/ProfileSeller/ProfileSeller'
+import CartInList from './components/user/CartInList/CartInList'
 import { UserNavBar } from './components/navbars/UserNavBar'
 import { Route, Routes } from 'react-router-dom'
-import ProfileSeller from './components/seller/ProfileSeller/ProfileSeller'
 
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
       {/* <RegistrationUser></RegistrationUser> */}
       {/* <LoginUser></LoginUser> */}
       {/* <ProfileUser></ProfileUser> */}
-      <ProfileSeller></ProfileSeller>
+      {/* <ProfileSeller></ProfileSeller> */}
+      <CartInList></CartInList>
     </>
   )
 }
