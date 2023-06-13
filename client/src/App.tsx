@@ -5,17 +5,23 @@ import RegistrationSeller from './components/seller/RegistrationSeller/Registrat
 import LoginUser from './components/user/LoginUser/LoginUser'
 import RegistrationUser from './components/user/RegistrationUser/RegistrationUser'
 import { UserNavBar } from './components/navbars/UserNavBar'
+import { Route, Routes } from 'react-router-dom'
 
 
 function App() {
   
   return (
     <>
+      <UserNavBar/>
+
+      <Routes>
+      <Route path="/login" element={<LoginUser />}/>
+      <Route path="/red" element={<RegistrationUser />}/>
+      </Routes>
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
       {/* <RegistrationUser></RegistrationUser> */}
-      <LoginUser></LoginUser>
-      <UserNavBar/>
+      {/* <LoginUser></LoginUser> */}
     </>
   )
 }

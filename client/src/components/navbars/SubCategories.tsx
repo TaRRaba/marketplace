@@ -6,7 +6,7 @@ export default function Placement() {
     <div className="flex flex-col gap-4">
     <div className="flex items-center gap-4">
 
-<Dropdown style={{color:'black'}}
+<Dropdown 
 label="Category 1"
 placement="right-start"
 >

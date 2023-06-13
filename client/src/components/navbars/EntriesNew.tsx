@@ -1,9 +1,11 @@
 import { Dropdown } from 'flowbite-react';
 import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 
-export default function Entries() {
+export default function DropdownItemsWithIcon() {
   return (
-    <Dropdown style={{color:'black'}}  label="Dropdown">
+    <Dropdown style={{background: "white", color:"black"}}
+     label="Dropdown">
       <Dropdown.Header>
         <span className="block text-sm">
           Bonnie Green
@@ -16,10 +18,13 @@ export default function Entries() {
         Profile
       </Dropdown.Item>
       <Dropdown.Item icon={HiCog}>
-        Sing in
+      <Link to='/login'>Sing in</Link>
+        
       </Dropdown.Item>
       <Dropdown.Item icon={HiCurrencyDollar}>
-        Sing up
+      <Link to='/reg'>Sing up</Link>
+       
+        
       </Dropdown.Item>
       <Dropdown.Divider />
       <Dropdown.Item icon={HiLogout}>
