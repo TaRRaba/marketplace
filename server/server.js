@@ -11,12 +11,12 @@ const isAuth = require('./src/middlewares/isAuth');
 
 const sessionConfig = {
   name: 'MarketPlace',
-  store: new FileStore(), // добавить после установки session-file-store
+  store: new FileStore(),
   secret: process.env.COOKIE_SECRET || 'sometext321',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    maxAge: 200 * 60 * 1000, // устанавливаем сколько живет кука
+    maxAge: 200 * 60 * 1000,
     httpOnly: false,
   },
 };
