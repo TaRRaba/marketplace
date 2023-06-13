@@ -1,10 +1,13 @@
 import { Dropdown } from 'flowbite-react';
+import React from 'react';
 import { HiCog, HiCurrencyDollar, HiLogout, HiViewGrid } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 
 export default function DropdownItemsWithIcon() {
+  // const [showModalReg, setShowModalRed] = React.useState(false);
+
   return (
-    <Dropdown style={{background: "white", color:"black"}}
+    <Dropdown style={{background: "white", color:"black", }}
      label="Dropdown">
       <Dropdown.Header>
         <span className="block text-sm">
