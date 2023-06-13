@@ -1,5 +1,6 @@
 
 import './App.css'
+import { Cart } from './components/cart/Cart'
 import LoginSeller from './components/seller/LoginSeller/LoginSeller'
 import RegistrationSeller from './components/seller/RegistrationSeller/RegistrationSeller'
 import LoginUser from './components/user/LoginUser/LoginUser'
@@ -12,7 +13,8 @@ function App() {
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
       {/* <RegistrationUser></RegistrationUser> */}
-      <LoginUser></LoginUser>
+      {/* <LoginUser></LoginUser> */}
+      <Cart />
     </>
   )
 }
