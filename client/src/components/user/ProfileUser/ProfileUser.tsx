@@ -2,9 +2,9 @@ import React from 'react'
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import { Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiInbox, HiShoppingBag } from 'react-icons/hi';
-import Settings from '../Settings/Settings';
+import Settings from '../SettingsUser/SettingsUser';
 
-export default function Profile() {
+export default function ProfileUser() {
   return (
     <div className="grid grid-cols-3" >
         <div >
