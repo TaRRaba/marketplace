@@ -1,7 +1,7 @@
 import React from 'react'
-import "./Login.css";
+import "./LoginSeller.css";
 
-export default function Login() {
+export default function LoginSeller() {
   return (
     <div 
     // className={modalActive ? "modal active" : "modal"}

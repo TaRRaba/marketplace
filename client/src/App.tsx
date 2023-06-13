@@ -1,14 +1,18 @@
 
 import './App.css'
-import Login from './components/seller/Login/Login'
-import Registration from './components/seller/Registration/Registration'
+import LoginSeller from './components/seller/LoginSeller/LoginSeller'
+import RegistrationSeller from './components/seller/RegistrationSeller/RegistrationSeller'
+import LoginUser from './components/user/LoginUser/LoginUser'
+import RegistrationUser from './components/user/RegistrationUser/RegistrationUser'
 
 function App() {
   
   return (
     <>
-      <Registration></Registration>
-      {/* <Login></Login> */}
+      {/* <RegistrationSeller></RegistrationSeller> */}
+      {/* <LoginSeller></LoginSeller> */}
+      {/* <RegistrationUser></RegistrationUser> */}
+      <LoginUser></LoginUser>
     </>
   )
 }

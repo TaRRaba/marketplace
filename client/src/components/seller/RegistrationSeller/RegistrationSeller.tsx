@@ -1,7 +1,7 @@
 import React from 'react'
-import "./Registration.css";
+import "./RegistrationSeller.css";
 
-export default function registration() {
+export default function RegistrationSeller() {
   return (
     <div 
     // className={modalActive ? "modal active" : "modal"}
