@@ -10,6 +10,7 @@ import ProfileSeller from './components/seller/ProfileSeller/ProfileSeller'
 import CartInList from './components/user/CartInList/CartInList'
 import { UserNavBar } from './components/navbars/UserNavBar'
 import { Route, Routes } from 'react-router-dom'
+import { Favourites } from './components/favourites/Favourites'
 
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
       {/* <LoginSeller></LoginSeller> */}
       {/* <RegistrationUser></RegistrationUser> */}
       {/* <LoginUser></LoginUser> */}
-      <Cart />
+      {/* <Cart /> */}
+      <Favourites />
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
       <CartInList></CartInList>
