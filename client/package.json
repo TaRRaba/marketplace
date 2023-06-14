@@ -13,15 +13,18 @@
     "@headlessui/react": "^1.7.15",
     "@heroicons/react": "^2.0.18",
     "@reduxjs/toolkit": "^1.9.5",
+    "classnames": "^2.3.2",
     "flowbite": "^1.6.5",
     "flowbite-react": "^0.4.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropdown": "^1.11.0",
     "react-redux": "^8.1.0",
     "react-router-dom": "^6.12.1",
     "redux-thunk": "^2.4.2"
   },
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.4",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
