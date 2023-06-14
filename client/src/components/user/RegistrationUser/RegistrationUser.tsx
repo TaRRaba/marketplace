@@ -6,11 +6,11 @@ import { useAppDispatch } from '../../../redux/store/hooks';
 
 export default function RegistrationUser() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const initRepeatUser = false
+  const initRepeatUser = false;
 
-  const [repeatUser, setRepeatUser] = useState(initRepeatUser)
+  const [repeatUser, setRepeatUser] = useState(initRepeatUser);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -56,15 +56,10 @@ export default function RegistrationUser() {
         <input type="text" name='name' placeholder='Имя' required/>
         <input type="email" name='email' placeholder='Email' required/>
         <input type='password' name='password' placeholder='Пароль' required/>
-        <button type="submit"
-        >Зарегистрироваться</button>
+        <button type="submit">Зарегистрироваться</button>
       </form>
       {repeatUser && <h1 className='text-rose-500'>Пользователь с такой электронной почтой уже существует</h1>}
     </div>
 </div>
   )
-}
-
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
 }
