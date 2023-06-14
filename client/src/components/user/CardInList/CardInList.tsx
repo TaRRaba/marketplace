@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CartInList() {
+export default function CardInList() {
   return (
     <div className='grid grid-cols-12'>
         <div className='col-span-3'>
