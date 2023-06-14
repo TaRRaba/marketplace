@@ -10,13 +10,17 @@ import ProfileSeller from './components/seller/ProfileSeller/ProfileSeller'
 import CartInList from './components/user/CartInList/CartInList'
 import { UserNavBar } from './components/navbars/UserNavBar'
 import { Route, Routes } from 'react-router-dom'
-import  Try15234134  from './components/navbars/CatalogFinal'
-import Menu from './components/navbars/FinalTryBeforeSleep'
+
 import InfoSeller from './components/seller/Info/InfoSeller'
 
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import { DropDownCatalog } from './components/navbars/DropDownCatalog'
+
+import DefaultFooter from './components/footer/Footer'
+import { FooterFinal } from './components/footer/FooterFinal'
+import { Main } from './components/main/Main'
+
+
+
 
 
 function App() {
@@ -24,15 +28,15 @@ function App() {
   return (
     <>
       <UserNavBar/>
-    
-      <DropDownCatalog/>
+
    
 
       <Routes>
       <Route path="/login" element={<LoginUser />}/>
-      <Route path="/red" element={<RegistrationUser />}/>
+      <Route path="/reg" element={<RegistrationUser />}/>
       <Route path="/cart" element={<Cart />}/>
       <Route path="/profile" element={<ProfileUser />}/>
+      <Route path="/" element={<Main/>}/>
       </Routes> 
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
@@ -43,6 +47,10 @@ function App() {
       {/* <ProfileSeller></ProfileSeller> */}
       {/* <CartInList></CartInList> */}
       {/* <InfoSeller></InfoSeller> */}
+
+      {/* <DefaultFooter/> */}
+      
+      <FooterFinal/>
     </>
   )
 }

@@ -8,7 +8,7 @@ import CatalogFinal from './CatalogFinal'
 export const UserNavBar = () => {
   return (    
    
-    <nav className='grid px-5'>
+    <nav className='grid px-5 sticky top-0 bg-gray-100 z-10'>
       <div className='flex justify-between'>
         <div>Location</div>
         <Link to=''>
@@ -16,11 +16,11 @@ export const UserNavBar = () => {
         </Link>
       </div>
       <div className='mt-5 flex items-center'>
-      <div className=" flex ">
+      <div className=" flex  ">
 
       <img
-      className="mx-auto h-16 w-auto"
-      src="/logo/Logo.jpg"
+      className="mx-auto h-12 w-auto"
+      src="/logo/LM5.png"
       alt="Your Company"
       />
       <p className="text-2xl font-bold text-blue-800 ml-4"></p>
