@@ -1,11 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { RootState } from "./store";
-
-interface userInfo {
-    id: number;
-    name: string;
-    email: string;
-}
+import { IuserInfo } from "../../types/cart/authTypes";
 
 const initialState = {
     users: {},
@@ -15,7 +10,7 @@ export const UserSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<userInfo>) => {
+        setUser: (state, action: PayloadAction<IuserInfo>) => {
             state.users = action.payload;
         },
         deleteUser: (state, action) => {

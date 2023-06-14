@@ -10,6 +10,7 @@ import ProfileSeller from './components/seller/ProfileSeller/ProfileSeller'
 import CardInList from './components/user/CardInList/CardInList'
 import { UserNavBar } from './components/navbars/UserNavBar'
 import { Route, Routes } from 'react-router-dom'
+import { Favourites } from './components/favourites/Favourites'
 import InfoSeller from './components/seller/Info/InfoSeller'
 import GoodsCard from './components/goods/GoodsCard'
 
@@ -26,9 +27,13 @@ function App() {
       </Routes> */}
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
-      {/* <RegistrationUser></RegistrationUser> */}
+      <RegistrationUser></RegistrationUser>
       {/* <LoginUser></LoginUser> */}
+      {/* <ProfileUser></ProfileUser> */}
+      {/* <ProfileSeller></ProfileSeller> */}
+      {/* <CartInList></CartInList> */}
       {/* <Cart /> */}
+      {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
       {/* <CardInList></CardInList> */}
