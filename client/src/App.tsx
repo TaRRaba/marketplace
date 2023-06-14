@@ -14,20 +14,26 @@ import  Try15234134  from './components/navbars/CatalogFinal'
 import Menu from './components/navbars/FinalTryBeforeSleep'
 import InfoSeller from './components/seller/Info/InfoSeller'
 
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import { DropDownCatalog } from './components/navbars/DropDownCatalog'
+
 
 function App() {
-  
+
   return (
     <>
       <UserNavBar/>
-      {/* < Try15234134/> */}
-      {/* <Menu/> */}
-      {/* <UserNavBar/>
+    
+      <DropDownCatalog/>
+   
 
       <Routes>
       <Route path="/login" element={<LoginUser />}/>
       <Route path="/red" element={<RegistrationUser />}/>
-      </Routes> */}
+      <Route path="/cart" element={<Cart />}/>
+      <Route path="/profile" element={<ProfileUser />}/>
+      </Routes> 
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
       {/* <RegistrationUser></RegistrationUser> */}
@@ -36,7 +42,7 @@ function App() {
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
       {/* <CartInList></CartInList> */}
-      <InfoSeller></InfoSeller>
+      {/* <InfoSeller></InfoSeller> */}
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export const Try = () => {
+export const EntriesMenu = () => {
   const [showMenuUser, SershowMenuUser] = useState('hidden')
 
 
@@ -25,7 +25,7 @@ export const Try = () => {
 
   <div style={{visibility: showMenuUser}} onMouseLeave={closeMenuUser} className="menuUser absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
     <div className="py-1 hover:bg-slate-100" role="none">
-      <a href="#" className="text-gray-700 block px-4 py-2 text-sm " role="menuitem"  id="menu-item-0">Profile</a>    
+      <a href="/profile" className="text-gray-700 block px-4 py-2 text-sm " role="menuitem"  id="menu-item-0">Profile</a>    
     </div>  
     <div className="py-1" role="none">
       <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100" role="menuitem"  id="menu-item-4">Sing in</a>

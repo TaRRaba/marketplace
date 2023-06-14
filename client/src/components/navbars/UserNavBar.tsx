@@ -1,10 +1,8 @@
-import React from 'react'
-import Entries from './Entries'
+
 import { Link } from 'react-router-dom'
-import EntriesNew from './EntriesNew'
-import Catalog from './Catalog'
-import { Try } from './EntriesMenu'
-import  DropdownMenu, { TryCatalog }  from './TryCatalog'
+
+import { EntriesMenu} from './EntriesMenu'
+
 import CatalogFinal from './CatalogFinal'
 
 export const UserNavBar = () => {
@@ -22,15 +20,14 @@ export const UserNavBar = () => {
 
       <img
       className="mx-auto h-16 w-auto"
-      src="../../../public/logo/Logo.jpg"
+      src="/logo/Logo.jpg"
       alt="Your Company"
       />
       <p className="text-2xl font-bold text-blue-800 ml-4"></p>
       </div>
     
         <div className='ml-4 w-1/12'>
-          <TryCatalog/>
-          {/* <CatalogFinal/> */}
+          <CatalogFinal/>
         </div>
         <search className='ml-3 w-6/12 flex'>
           <input className='w-11/12 py-1.5 border-2 border-gray-500 rounded-lg text-center'></input>
@@ -41,7 +38,7 @@ export const UserNavBar = () => {
         </search>
         <div className='w-2/12'>
         
-         <Try/>
+         <EntriesMenu/>
         
 
         </div>
