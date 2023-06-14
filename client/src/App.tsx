@@ -14,6 +14,8 @@ import { Favourites } from './components/favourites/Favourites'
 
 import InfoSeller from './components/seller/Info/InfoSeller'
 import GoodsCard from './components/goods/GoodsCard'
+import SettingsSeller from './components/seller/SettingsSeller/SettingsSeller'
+import GoodsSeller from './components/seller/GoodsSeller/GoodsSeller'
 
 import 'react-dropdown/style.css';
 
@@ -28,18 +30,23 @@ import { Main } from './components/main/Main'
 function App() {
 
   return (
-    <>
+    <> 
       <UserNavBar/>
-
    
-
       <Routes>
       <Route path="/login" element={<LoginUser />}/>
       <Route path="/reg" element={<RegistrationUser />}/>
       <Route path="/cart" element={<Cart />}/>
       <Route path="/profile" element={<ProfileUser />}/>
       <Route path="/" element={<Main/>}/>
+        
+      <Route path="/profileSeller" element={<ProfileSeller/>}> 
+          <Route path='settings' element={<SettingsSeller/>}></Route>
+          <Route path='goods' element={<GoodsSeller></GoodsSeller>}></Route>
+          <Route path='orders' element={<p>orders</p>}></Route>     
+      </Route>
       </Routes> 
+
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
       {/* <RegistrationUser></RegistrationUser> */}
@@ -50,12 +57,10 @@ function App() {
       {/* <Cart /> */}
       {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
-      {/* <ProfileSeller></ProfileSeller> */}
       {/* <CardInList></CardInList> */}
       {/* <GoodsCard></GoodsCard> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <InfoSeller></InfoSeller> */}
-
       {/* <DefaultFooter/> */}
       
       <FooterFinal/>

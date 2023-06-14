@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from 'react'
-import "./registrationUser.css";
+import "./RegistrationUser.css";
 import { useNavigate } from 'react-router-dom';
 import { setUser } from '../../../redux/store/userSlice';
 import { useAppDispatch } from '../../../redux/store/hooks';
