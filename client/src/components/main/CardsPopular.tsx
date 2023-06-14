@@ -8,9 +8,6 @@ export const CardsPopular = () => {
   const card = useAppSelector((state: RootState) => state.good.good)
   const dispatch = useAppDispatch();
 
-  console.log(card);
-  
-
   
   useEffect(() => {
       dispatch(getPopularGood())
