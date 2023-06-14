@@ -13,21 +13,28 @@ import { Route, Routes } from 'react-router-dom'
 import { Favourites } from './components/favourites/Favourites'
 import InfoSeller from './components/seller/Info/InfoSeller'
 import GoodsCard from './components/goods/GoodsCard'
+import SettingsSeller from './components/seller/SettingsSeller/SettingsSeller'
+import GoodsSeller from './components/seller/GoodsSeller/GoodsSeller'
 
 
 function App() {
   
   return (
     <>
-      {/* <UserNavBar/>
+      {/* <UserNavBar/> */}
 
       <Routes>
       <Route path="/login" element={<LoginUser />}/>
       <Route path="/red" element={<RegistrationUser />}/>
-      </Routes> */}
+      <Route path="/profileSeller" element={<ProfileSeller/>}> 
+          <Route path='settings' element={<SettingsSeller/>}></Route>
+          <Route path='goods' element={<GoodsSeller></GoodsSeller>}></Route>
+          <Route path='orders' element={<p>orders</p>}></Route>     
+      </Route>
+
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
-      <RegistrationUser></RegistrationUser>
+      {/* <RegistrationUser></RegistrationUser> */}
       {/* <LoginUser></LoginUser> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
@@ -35,10 +42,11 @@ function App() {
       {/* <Cart /> */}
       {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
-      {/* <ProfileSeller></ProfileSeller> */}
+
       {/* <CardInList></CardInList> */}
-      <GoodsCard></GoodsCard>
+      {/* <GoodsCard></GoodsCard> */}
       {/* <InfoSeller></InfoSeller> */}
+      </Routes> 
     </>
   )
 }
