@@ -32,7 +32,8 @@ function App() {
 
   return (
     <> 
-      <UserNavBar/>
+      {/* <UserNavBar/>
+      {/* <UserNavBar/>
    
       <Routes>
       <Route path="/login" element={<LoginUser />}/>
@@ -48,13 +49,17 @@ function App() {
           <Route path='goods' element={<GoodsSeller></GoodsSeller>}></Route>
           <Route path='orders' element={<p>orders</p>}></Route>     
       </Route>
-      </Routes> 
+      </Routes>  */}
 
       {/* <Route path="/" element={<Main/>}/> */}
+
       {/* </Routes>  */}
+
+      </Routes> 
+
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
-      {/* <RegistrationUser></RegistrationUser> */}
+      <RegistrationUser></RegistrationUser>
       {/* <LoginUser></LoginUser> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
@@ -68,7 +73,7 @@ function App() {
       {/* <InfoSeller></InfoSeller> */}
       {/* <DefaultFooter/> */}
       
-      <FooterFinal/>
+      {/* <FooterFinal/> */}
     </>
   )
 }
