@@ -1,3 +1,10 @@
+export interface IInitialState {
+    users: object;
+    // users: IuserInfo;
+    modalreg: boolean;
+    modallog: boolean;
+}
+
 export interface IuserInfo {
     id: number;
     name: string;
@@ -9,4 +16,12 @@ export interface IsellerInfo {
     name: string;
     INN: string;
     email: string;
+}
+
+export interface Imodallog {
+    modallog: boolean;
+}
+
+export interface Imodalreg {
+    modalreg: boolean;
 }

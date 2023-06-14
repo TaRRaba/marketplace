@@ -1,13 +1,25 @@
 import React, { useState } from 'react'
 import "./LoginUser.css";
-import { useAppDispatch } from '../../../redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { setUser } from '../../../redux/store/userSlice';
+import { changeModallog, setUser } from '../../../redux/store/userSlice';
+import { RootState } from '../../../redux/store/store';
 
 export default function LoginUser() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
 
+  const selectUserModalLog = useAppSelector((state: RootState) => state.users.modallog)
+
+  const setModalInactive = () => {
+    dispatch(changeModallog(false))
+  }
+
+    // Для активации модалки
+    // const setModalInactive = () => {
+    //   dispatch(changeModallog(true))
+    // }
+  
   const initWrongEmail = false
   const initWrongPassword = false
 
@@ -33,6 +45,7 @@ export default function LoginUser() {
       setWrongEmail(false)
       setWrongPassword(false)
       dispatch(setUser({id: result.id, name: result.name, email: result.email}))
+      dispatch(changeModallog(false))
       navigate('/') // указать куда перекидывать
     } else if (result.status === 403){
       setWrongEmail(false)
@@ -48,11 +61,10 @@ export default function LoginUser() {
 
   return (
     <div 
-    // className={modalActive ? "modal active" : "modal"}
-    className="modal active"
+    className={selectUserModalLog ? "modal active" : "modal"}
     >
     <button type='button'
-    // onClick={() => setModalActive(false)}
+    onClick={setModalInactive}
     >X</button>
     <h1>Авторизация</h1>
     <div className='logContainer'>
