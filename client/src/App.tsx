@@ -26,16 +26,16 @@ function App() {
       </Routes> */}
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
-      {/* <RegistrationUser></RegistrationUser> */}
+      <RegistrationUser></RegistrationUser>
       {/* <LoginUser></LoginUser> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
       {/* <CartInList></CartInList> */}
       {/* <Cart /> */}
-      <Favourites />
+      {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
-      <CardInList></CardInList>
+      {/* <CardInList></CardInList> */}
       {/* <InfoSeller></InfoSeller> */}
     </>
   )
