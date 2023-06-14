@@ -3,3 +3,10 @@ export interface IuserInfo {
     name: string;
     email: string;
 }
+
+export interface IsellerInfo {
+    id: number;
+    name: string;
+    INN: string;
+    email: string;
+}
