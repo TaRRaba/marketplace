@@ -49,7 +49,7 @@ export const SearchBar = () => {
 
   // console.log(findGood);
   
-  console.log(searchWord);
+  // console.log(searchWord);
   
 
 
