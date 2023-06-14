@@ -7,7 +7,7 @@ import LoginUser from './components/user/LoginUser/LoginUser'
 import ProfileUser from './components/user/ProfileUser/ProfileUser'
 import RegistrationUser from './components/user/RegistrationUser/RegistrationUser'
 import ProfileSeller from './components/seller/ProfileSeller/ProfileSeller'
-import CartInList from './components/user/CartInList/CartInList'
+import CardInList from './components/user/CardInList/CardInList'
 import { UserNavBar } from './components/navbars/UserNavBar'
 import { Route, Routes } from 'react-router-dom'
 import InfoSeller from './components/seller/Info/InfoSeller'
@@ -30,8 +30,8 @@ function App() {
       {/* <Cart /> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
-      {/* <CartInList></CartInList> */}
-      <InfoSeller></InfoSeller>
+      <CardInList></CardInList>
+      {/* <InfoSeller></InfoSeller> */}
     </>
   )
 }
