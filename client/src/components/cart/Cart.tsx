@@ -47,11 +47,11 @@ export const Cart = () => {
             <div id="amount" className="rounded-lg md:w-2/3">
               {cart && cart.map(({ id, quantity, Good }) => (
                 <div key={Good.id} id={String(id)} className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-                  {/* <img src={`/pics/${Good.id}.jpeg`} alt="" className="rounded-lg w-40" /> */}
+                  <img src={`http://localhost:3001${Good.img_url}`} alt="" className="rounded-lg w-40" />
                   <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                     <div className="mt-5 w-80 sm:mt-0">
-                      <a href={`/goods/${Good.name}`}><h2 className="text-lg font-bold text-gray-900 hover:text-gray-500">{Good.name}</h2></a>
-                      <p className="mt-1 text-sm text-gray-700">
+                      <a href={`/goods/${Good.name}`}><h2 className="text-left text-lg font-bold text-gray-900 hover:text-gray-500">{Good.name}</h2></a>
+                      <p className="text-left mt-1 text-sm text-gray-700">
                         {Good.price}
                         {' '}
                         ₽

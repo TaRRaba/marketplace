@@ -27,11 +27,11 @@ function App() {
       {/* <LoginSeller></LoginSeller> */}
       {/* <RegistrationUser></RegistrationUser> */}
       {/* <LoginUser></LoginUser> */}
-      {/* <Cart /> */}
+      <Cart />
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
       {/* <CartInList></CartInList> */}
-      <InfoSeller></InfoSeller>
+      {/* <InfoSeller></InfoSeller> */}
     </>
   )
 }
