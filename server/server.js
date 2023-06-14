@@ -7,7 +7,9 @@ const cors = require('cors');
 const expressSession = require('express-session');
 const FileStore = require('session-file-store')(expressSession);
 
-const isAuth = require('./src/middlewares/isAuth');
+const cartApi = require('./src/routes/cart.api');
+
+// const isAuth = require('./src/middlewares/isAuth');
 
 const sessionConfig = {
   name: 'MarketPlace',
@@ -36,5 +38,8 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public/')));
+app.use('/pics', express.static('pics'));
+
+app.use('/api/cart', cartApi);
 
 app.listen(PORT, () => console.log(`Сервер крутится на ${PORT} порту!`));
