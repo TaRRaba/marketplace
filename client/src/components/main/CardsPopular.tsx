@@ -8,6 +8,9 @@ export const CardsPopular = () => {
   const card = useAppSelector((state: RootState) => state.good.good)
   const dispatch = useAppDispatch();
 
+  console.log(card);
+  
+
   
   useEffect(() => {
       dispatch(getPopularGood())
@@ -36,7 +39,7 @@ export const CardsPopular = () => {
             <p className="text-lg font-bold text-teal-800">
               {price}
               {' '}
-              ₽
+              ₸
             </p>
             {/* {user ? (
               <>
