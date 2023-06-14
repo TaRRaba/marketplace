@@ -28,6 +28,9 @@ function App() {
       {/* <LoginSeller></LoginSeller> */}
       {/* <RegistrationUser></RegistrationUser> */}
       {/* <LoginUser></LoginUser> */}
+      {/* <ProfileUser></ProfileUser> */}
+      {/* <ProfileSeller></ProfileSeller> */}
+      {/* <CartInList></CartInList> */}
       {/* <Cart /> */}
       <Favourites />
       {/* <ProfileUser></ProfileUser> */}

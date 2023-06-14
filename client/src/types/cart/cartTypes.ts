@@ -3,6 +3,7 @@ export interface IGoodData {
     name: string;
     price: number;
     amount: number;
+    img_url: string;
 }
 
 export interface ICartData {
