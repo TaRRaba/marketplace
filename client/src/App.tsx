@@ -47,6 +47,8 @@ function App() {
       </Route>
       </Routes>  */}
 
+      {/* <Route path="/" element={<Main/>}/> */}
+      </Routes> 
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
       <RegistrationUser></RegistrationUser>
