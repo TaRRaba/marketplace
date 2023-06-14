@@ -27,10 +27,7 @@ export const EntriesMenu = () => {
     <div className="py-1 hover:bg-slate-100" role="none">
       <a href="/profile" className="text-gray-700 block px-4 py-2 text-sm " role="menuitem"  id="menu-item-0">Profile</a>    
     </div>  
-    <div className="py-1" role="none">
-      <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100" role="menuitem"  id="menu-item-4">Sing in</a>
-      <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100" role="menuitem"  id="menu-item-5">Sing up</a>
-    </div>
+   
     <div className="py-1" role="none">
       <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100" role="menuitem"  id="menu-item-6">Sing out</a>
     </div>

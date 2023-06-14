@@ -38,11 +38,11 @@ function App() {
       <Route path="/reg" element={<RegistrationUser />}/>
       <Route path="/cart" element={<Cart />}/>
       <Route path="/profile" element={<ProfileUser />}/>
-      <Route path="/" element={<Main/>}/>
+      {/* <Route path="/" element={<Main/>}/> */}
       </Routes> 
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
-      {/* <RegistrationUser></RegistrationUser> */}
+      <RegistrationUser></RegistrationUser>
       {/* <LoginUser></LoginUser> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}

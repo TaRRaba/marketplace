@@ -39,7 +39,10 @@ export const UserNavBar = () => {
         <div className='w-2/12'>
         
          <EntriesMenu/>
-        
+        </div>
+        <div className='w-2/12'>
+        <button className='px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Sing in</button>
+        <button className='ml-2 px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Sing up</button>
 
         </div>
         <Link to='/profile/favorites' className='w-1/12 ml-4'>
