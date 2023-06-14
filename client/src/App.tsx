@@ -42,7 +42,7 @@ function App() {
       </Routes> 
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
-      <RegistrationUser></RegistrationUser>
+      {/* <RegistrationUser></RegistrationUser> */}
       {/* <LoginUser></LoginUser> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
@@ -52,7 +52,7 @@ function App() {
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
       {/* <CardInList></CardInList> */}
-      <GoodsCard></GoodsCard>
+      {/* <GoodsCard></GoodsCard> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <InfoSeller></InfoSeller> */}
 
