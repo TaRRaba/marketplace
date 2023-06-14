@@ -12,6 +12,10 @@ export interface ICartData {
     Good: IGoodData;
 }
 
+export interface IFavData {
+    good_id: number;
+}
+
 export interface IActPayload {
     id: number;
     newAmount: number;

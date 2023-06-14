@@ -12,30 +12,31 @@ import { UserNavBar } from './components/navbars/UserNavBar'
 import { Route, Routes } from 'react-router-dom'
 import { Favourites } from './components/favourites/Favourites'
 import InfoSeller from './components/seller/Info/InfoSeller'
+import { GoodsList } from './components/goods/GoodsList'
 
 
 function App() {
   
   return (
     <>
-      {/* <UserNavBar/>
+      {/* <UserNavBar/> */}
 
-      <Routes>
+      {/* <Routes>
       <Route path="/login" element={<LoginUser />}/>
       <Route path="/red" element={<RegistrationUser />}/>
-      </Routes> */}
+      </Routes>  */}
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
       {/* <RegistrationUser></RegistrationUser> */}
       {/* <LoginUser></LoginUser> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
-      {/* <CartInList></CartInList> */}
       {/* <Cart /> */}
-      <Favourites />
+      {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
-      <CardInList></CardInList>
+      {/* <CardInList></CardInList> */}
+      <GoodsList />
       {/* <InfoSeller></InfoSeller> */}
     </>
   )

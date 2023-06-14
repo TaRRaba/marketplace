@@ -9,6 +9,7 @@ const FileStore = require('session-file-store')(expressSession);
 
 const cartApi = require('./src/routes/cart.api');
 const cardApi = require('./src/routes/card.api');
+const favApi = require('./src/routes/fav.api');
 
 // const isAuth = require('./src/middlewares/isAuth');
 
@@ -43,5 +44,6 @@ app.use('/pics', express.static('pics'));
 
 app.use('/api/cart', cartApi);
 app.use('/api/card', cardApi);
+app.use('/api/fav', favApi);
 
 app.listen(PORT, () => console.log(`Сервер крутится на ${PORT} порту!`));
