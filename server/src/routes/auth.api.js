@@ -52,4 +52,58 @@ authApi.post('/login', async (req, res) => {
   }
 });
 
+authApi.post('/registration/seller', async (req, res) => {
+  const {
+    name, email, INN, password,
+  } = req.body;
+  try {
+    const hashPass = await bcrypt.hash(password, 10);
+
+    const [newSeller, created] = await Sellers.findOrCreate({
+      where: { email },
+      defaults: {
+        name,
+        INN,
+        password: hashPass,
+      },
+    });
+    if (created) {
+      req.session.seller = newSeller.get({ plain: true });
+      res.json({
+        status: 201,
+        name: newSeller.name,
+        id: newSeller.id,
+        email: newSeller.email,
+        INN: newSeller.INN,
+      });
+    } else {
+      res.json({ status: 405 });
+    }
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+authApi.post('/login/seller', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const cheack = await Sellers.findOne({ where: { email } });
+    if (cheack) {
+      const hashPass = await bcrypt.compare(password, cheack.password);
+      if (hashPass) {
+        req.session.seller = cheack.get({ plain: true });
+        res.json({
+          status: 200, name: cheack.name, id: cheack.id, email: cheack.email, INN: cheack.INN,
+        });
+      } else {
+        res.json({ status: 403 });
+      }
+    } else {
+      res.json({ status: 404 });
+    }
+  } catch (error) {
+    res.json(error);
+  }
+});
+
 module.exports = authApi;

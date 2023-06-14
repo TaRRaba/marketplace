@@ -25,8 +25,8 @@ function App() {
       <Route path="/red" element={<RegistrationUser />}/>
       </Routes> */}
       {/* <RegistrationSeller></RegistrationSeller> */}
-      {/* <LoginSeller></LoginSeller> */}
-      <RegistrationUser></RegistrationUser>
+      <LoginSeller></LoginSeller>
+      {/* <RegistrationUser></RegistrationUser> */}
       {/* <LoginUser></LoginUser> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
