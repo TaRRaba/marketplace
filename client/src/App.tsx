@@ -11,20 +11,35 @@ import CardInList from './components/user/CardInList/CardInList'
 import { UserNavBar } from './components/navbars/UserNavBar'
 import { Route, Routes } from 'react-router-dom'
 import { Favourites } from './components/favourites/Favourites'
+
 import InfoSeller from './components/seller/Info/InfoSeller'
 import GoodsCard from './components/goods/GoodsCard'
 
+import 'react-dropdown/style.css';
+
+import DefaultFooter from './components/footer/Footer'
+import { FooterFinal } from './components/footer/FooterFinal'
+import { Main } from './components/main/Main'
+
+
+
+
 
 function App() {
-  
+
   return (
     <>
-      {/* <UserNavBar/>
+      <UserNavBar/>
+
+   
 
       <Routes>
       <Route path="/login" element={<LoginUser />}/>
-      <Route path="/red" element={<RegistrationUser />}/>
-      </Routes> */}
+      <Route path="/reg" element={<RegistrationUser />}/>
+      <Route path="/cart" element={<Cart />}/>
+      <Route path="/profile" element={<ProfileUser />}/>
+      <Route path="/" element={<Main/>}/>
+      </Routes> 
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
       <RegistrationUser></RegistrationUser>
@@ -39,6 +54,11 @@ function App() {
       {/* <CardInList></CardInList> */}
       <GoodsCard></GoodsCard>
       {/* <InfoSeller></InfoSeller> */}
+      {/* <InfoSeller></InfoSeller> */}
+
+      {/* <DefaultFooter/> */}
+      
+      <FooterFinal/>
     </>
   )
 }
