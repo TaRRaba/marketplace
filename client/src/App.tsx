@@ -22,6 +22,7 @@ import 'react-dropdown/style.css';
 import DefaultFooter from './components/footer/Footer'
 import { FooterFinal } from './components/footer/FooterFinal'
 import { Main } from './components/main/Main'
+import { SearchCard } from './components/Search/SearchCard'
 
 
 
@@ -38,8 +39,10 @@ function App() {
       <Route path="/login" element={<LoginUser />}/>
       <Route path="/reg" element={<RegistrationUser />}/>
       <Route path="/cart" element={<Cart />}/>
-      <Route path="/profile" element={<ProfileUser />}/>
+      <Route path="/profile" element={<ProfileUser />}/>      
       <Route path="/" element={<Main/>}/>
+      <Route path="/search" element={<SearchCard/>}/>
+      
         
       <Route path="/profileSeller" element={<ProfileSeller/>}> 
           <Route path='settings' element={<SettingsSeller/>}></Route>
@@ -49,7 +52,11 @@ function App() {
       </Routes>  */}
 
       {/* <Route path="/" element={<Main/>}/> */}
+
+      {/* </Routes>  */}
+
       </Routes> 
+
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
       <RegistrationUser></RegistrationUser>

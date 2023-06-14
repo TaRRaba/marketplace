@@ -36,7 +36,7 @@ export const CardsPopular = () => {
             <p className="text-lg font-bold text-teal-800">
               {price}
               {' '}
-              ₽
+              ₸
             </p>
             {/* {user ? (
               <>

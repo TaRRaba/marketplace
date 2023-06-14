@@ -28,7 +28,7 @@ console.log(goods);
               {goods && goods.map((el) => (
                 <div key={el?.id} className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                  
-                  <img src={`http://localhost:3001/${el?.img_url}`} alt="goods" className="rounded-lg w-40" />
+                  <img src={`http://localhost:3001${el?.img_url}`} alt="goods" className="rounded-lg w-40" />
                   <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                     <div className="mt-5 w-80 sm:mt-0">
                         <h2 className="text-left text-lg font-bold text-gray-900 hover:text-gray-500">{el.name}</h2>
