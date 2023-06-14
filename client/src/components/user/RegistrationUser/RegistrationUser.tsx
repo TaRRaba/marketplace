@@ -1,14 +1,25 @@
 import React, { ChangeEvent, useState } from 'react'
 import "./RegistrationUser.css";
 import { useNavigate } from 'react-router-dom';
-import { setUser } from '../../../redux/store/userSlice';
-import { useAppDispatch } from '../../../redux/store/hooks';
+import { changeModalreg, setUser } from '../../../redux/store/userSlice';
+import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
+import { RootState } from '../../../redux/store/store';
 
 export default function RegistrationUser() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const initRepeatUser = false;
+  const selectUserModalReg = useAppSelector((state: RootState) => state.users.modalreg)
+
+  const setModalInactive = () => {
+    dispatch(changeModalreg(false))
+  }
+
+  // Для активации модалки
+  // const setModalInactive = () => {
+  //   dispatch(changeModalreg(true))
+  // }
 
   const [repeatUser, setRepeatUser] = useState(initRepeatUser);
 
@@ -44,11 +55,10 @@ export default function RegistrationUser() {
 
   return (
     <div 
-    // className={modalActive ? "modal active" : "modal"}
-    className="modal active"
+    className={selectUserModalReg ? "modal active" : "modal"}
     >
     <button type='button'
-    // onClick={() => setModalActive(false)}
+    onClick={setModalInactive}
     >X</button>
     <h1>Регистрация</h1>
     <div className='regContainer'>
