@@ -11,6 +11,7 @@ import CardInList from './components/user/CardInList/CardInList'
 import { UserNavBar } from './components/navbars/UserNavBar'
 import { Route, Routes } from 'react-router-dom'
 import InfoSeller from './components/seller/Info/InfoSeller'
+import GoodsCard from './components/goods/GoodsCard'
 
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
       {/* <Cart /> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
-      <CardInList></CardInList>
+      {/* <CardInList></CardInList> */}
+      <GoodsCard></GoodsCard>
       {/* <InfoSeller></InfoSeller> */}
     </>
   )
