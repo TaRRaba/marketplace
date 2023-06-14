@@ -12,9 +12,21 @@ sellerApi.get("/goods", async (req, res) => {
         where: { seller_id: id },
       })
     ).map((el) => el.get({ plain: true }));
-
-    // console.log(allGoods);
     res.json(allGoods);
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+sellerApi.delete("/goods", async (req, res) => {
+  const { goodsId } = req.body;
+  //   const { id } = req.session.seller;
+  const id = 1;
+  try {
+    await Goods.destroy({
+      where: { seller_id: id, id: goodsId },
+    });
+    res.json({ status: 200 });
   } catch (error) {
     res.json(error);
   }

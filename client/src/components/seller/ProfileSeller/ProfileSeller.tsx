@@ -6,7 +6,7 @@ import { Link, Outlet } from 'react-router-dom';
 
 export default function ProfileSeller() {
   return (
-    <div className="grid grid-cols-3" >
+    <div className="grid grid-cols-3 mt-12" >
 
     <div >
     <Sidebar aria-label="Default sidebar example">
