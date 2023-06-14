@@ -9,7 +9,7 @@ export default function GoodsCard() {
 
   useEffect(()=> {
     (async function () {
-     const response = await fetch(`http://localhost:3000/api/card/subcategory/goods/${26}`, {
+     const response = await fetch(`http://localhost:3001/api/card/subcategory/goods/${26}`, {
         credentials: 'include'
       })
       const result = await response.json()
@@ -33,7 +33,7 @@ export default function GoodsCard() {
         <div className="lg:flex lg:items-start">
           <div className="lg:order-2 lg:ml-5">
             <div className="max-w-xl overflow-hidden rounded-lg">
-              <img className="h-full w-full max-w-full object-cover" src={`http://localhost:3000${card.img_url}`} alt="" />
+              <img className="h-full w-full max-w-full object-cover" src={`http://localhost:3001${card.img_url}`} alt="" />
             </div>
           </div>
         </div>
