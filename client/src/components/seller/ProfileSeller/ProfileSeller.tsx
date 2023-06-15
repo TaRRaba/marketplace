@@ -33,7 +33,7 @@ export default function ProfileSeller() {
       </Sidebar.Item>
       </Link>
     
-      <Link to="/profileSeller/orders">
+      <Link to="/profileSeller/reports">
       <Sidebar.Item
         icon={HiChartPie}>
         <p>Отчет</p>
