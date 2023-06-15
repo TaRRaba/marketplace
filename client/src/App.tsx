@@ -23,6 +23,7 @@ import DefaultFooter from './components/footer/Footer'
 import { FooterFinal } from './components/footer/FooterFinal'
 import { Main } from './components/main/Main'
 import { SearchCard } from './components/Search/SearchCard'
+import Reports from './components/seller/Reports/Reports'
 
 
 
@@ -33,7 +34,7 @@ function App() {
   return (
     <> 
       
-      {/* <UserNavBar/>
+      <UserNavBar/>
    
       <Routes>
       <Route path="/login" element={<LoginUser />}/>
@@ -47,9 +48,9 @@ function App() {
       <Route path="/profileSeller" element={<ProfileSeller/>}> 
           <Route path='settings' element={<SettingsSeller/>}></Route>
           <Route path='goods' element={<GoodsSeller></GoodsSeller>}></Route>
-          <Route path='orders' element={<p>orders</p>}></Route>     
+          <Route path='reports' element={<Reports></Reports>}></Route>     
       </Route>
-      </Routes>  */}
+      </Routes> 
 
   
 
