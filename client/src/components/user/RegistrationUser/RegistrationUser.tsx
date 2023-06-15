@@ -12,12 +12,8 @@ export default function RegistrationUser() {
   const initRepeatUser = false;
   const selectUserModalReg = useAppSelector((state: RootState) => state.users.modalreg)
 
-  const setModalInactive = () => {
-    dispatch(changeModalreg(false))
-  }
-
   // Для активации модалки
-  // const setModalInactive = () => {
+  // const setModalActive = () => {
   //   dispatch(changeModalreg(true))
   // }
 
@@ -44,6 +40,7 @@ export default function RegistrationUser() {
         if (result.status === 201) {
         setRepeatUser(false)
         dispatch(setUser({id: result.id, name: result.name, email: result.email}))
+        dispatch(changeModalreg(false))
         navigate('/') // указать куда перекидывать
         } else {
           setRepeatUser(true);
@@ -55,10 +52,9 @@ export default function RegistrationUser() {
 
   return (
     <div 
-    className={selectUserModalReg ? "modal active" : "modal"}
-    >
+    className={selectUserModalReg ? "modal active" : "modal"}>
     <button type='button'
-    onClick={setModalInactive}
+    onClick={() => dispatch(changeModalreg(false))}
     >X</button>
     <h1>Регистрация</h1>
     <div className='regContainer'>

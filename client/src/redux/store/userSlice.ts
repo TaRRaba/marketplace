@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { RootState } from "./store";
-import { IInitialState, Imodallog, IuserInfo } from "../../types/cart/authTypes";
+import { IInitialState, Imodallog, IuserInfo } from "../../types/user/authTypes";
 
 const initialState: IInitialState = {
     users: {},

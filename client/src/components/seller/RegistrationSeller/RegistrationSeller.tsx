@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
 import "./RegistrationSeller.css";
-import { useAppDispatch } from '../../../redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { setSeller } from '../../../redux/store/sellerSlice';
+import { changeModalreg, setSeller } from '../../../redux/store/sellerSlice';
+import { RootState } from '../../../redux/store/store';
 
 export default function RegistrationSeller() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const initRepeatSeller = false;
+  const selectSellerModalReg = useAppSelector((state: RootState) => state.sellers.modalreg)
+
+    // Для активации модалки
+  // const setModalActive = () => {
+  //   dispatch(changeModalreg(true))
+  // }
 
   const [repeatSeller, setRepeatSeller] = useState(initRepeatSeller);
 
@@ -33,6 +40,7 @@ export default function RegistrationSeller() {
       if (result.status === 201) {
         setRepeatSeller(false)
         dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))
+        dispatch(changeModalreg(false))
         navigate('/') // указать куда перекидывать
       } else {
         setRepeatSeller(true)
@@ -44,11 +52,9 @@ export default function RegistrationSeller() {
 
   return (
     <div 
-    // className={modalActive ? "modal active" : "modal"}
-    className="modal active"
-    >
+    className={selectSellerModalReg ? "modal active" : "modal"}>
     <button type='button'
-    // onClick={() => setModalActive(false)}
+    onClick={() => dispatch(changeModalreg(false))}
     >X</button>
     <h1>Регистрация</h1>
     <div className='regContainer'>

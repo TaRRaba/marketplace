@@ -11,21 +11,17 @@ export default function LoginUser() {
 
   const selectUserModalLog = useAppSelector((state: RootState) => state.users.modallog)
 
-  const setModalInactive = () => {
-    dispatch(changeModallog(false))
-  }
-
-    // Для активации модалки
-    // const setModalInactive = () => {
-    //   dispatch(changeModallog(true))
-    // }
-  
   const initWrongEmail = false
   const initWrongPassword = false
 
   const [wrongEmail, setWrongEmail] = useState(initWrongEmail)
   const [wrongPassword, setWrongPassword] = useState(initWrongPassword)
 
+    // Для активации модалки
+    // const setModalActive = () => {
+    //   dispatch(changeModallog(true))
+    // }
+  
   const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget)
@@ -61,10 +57,9 @@ export default function LoginUser() {
 
   return (
     <div 
-    className={selectUserModalLog ? "modal active" : "modal"}
-    >
+    className={selectUserModalLog ? "modal active" : "modal"}>
     <button type='button'
-    onClick={setModalInactive}
+    onClick={() => dispatch(changeModallog(false))}
     >X</button>
     <h1>Авторизация</h1>
     <div className='logContainer'>
