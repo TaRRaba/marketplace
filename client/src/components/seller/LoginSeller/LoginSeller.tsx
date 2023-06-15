@@ -1,18 +1,26 @@
 import React, { useState } from 'react'
 import "./LoginSeller.css";
-import { useAppDispatch } from '../../../redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { setSeller } from '../../../redux/store/sellerSlice';
+import { changeModallog, setSeller } from '../../../redux/store/sellerSlice';
+import { RootState } from '../../../redux/store/store';
 
 export default function LoginSeller() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
 
+  const selectSellerModalLog = useAppSelector((state: RootState) => state.sellers.modallog)
+  
   const initWrongEmail = false
   const initWrongPassword = false
 
   const [wrongEmail, setWrongEmail] = useState(initWrongEmail)
   const [wrongPassword, setWrongPassword] = useState(initWrongPassword)
+
+      // Для активации модалки
+    // const setModalActive = () => {
+    //   dispatch(changeModallog(true))
+    // }
 
 const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
@@ -34,6 +42,7 @@ const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
       setWrongEmail(false)
       setWrongPassword(false)
       dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))
+      dispatch(changeModallog(false))
       navigate('/') // указать куда перекидывать
     } else if (result.status === 403){
       setWrongEmail(false)
@@ -49,11 +58,9 @@ const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
 
   return (
     <div 
-    // className={modalActive ? "modal active" : "modal"}
-    className="modal active"
-    >
+    className={selectSellerModalLog ? "modal active" : "modal"}>
     <button type='button'
-    // onClick={() => setModalActive(false)}
+    onClick={() => dispatch(changeModallog(false))}
     >X</button>
     <h1>Авторизация</h1>
     <div className='logContainer'>
