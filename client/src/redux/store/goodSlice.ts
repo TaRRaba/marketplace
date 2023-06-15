@@ -3,16 +3,19 @@ import { RootState } from "./store";
 
 import { IGoodData } from "../../types/goodTypes/goodTypes";
 import { getPopularGood } from "../thunks/goodThunks/getPopularGood.thunk";
+import { getAllCategory } from "../thunks/goodThunks/getAllCategory.thunk";
 
 
 interface IGoodState {
     good: IGoodData[];
     findGood: IGoodData[];
+    category: []
 }
 
 const initialState: IGoodState = {
   good: [],
-  findGood: []
+  findGood: [],
+  category: [],
 }
 
 export const GoodSlice = createSlice({
@@ -27,6 +30,11 @@ export const GoodSlice = createSlice({
         builder.addCase(getPopularGood.fulfilled, (state, action) => {
             if (action.payload !== null) {
             state.good = action.payload;
+            }
+        }),
+        builder.addCase(getAllCategory.fulfilled, (state, action) => {
+            if (action.payload !== null) {
+            state.category = action.payload;
             }
         })
         // builder.addCase(incrAmount.fulfilled, (state, action) => {
