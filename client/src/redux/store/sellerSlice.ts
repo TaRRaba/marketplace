@@ -6,6 +6,7 @@ const initialState = {
     seller: {},
     modalreg: false,
     modallog: false,
+    check: false
 }
 
 export const SellerSlice = createSlice({
@@ -21,13 +22,16 @@ export const SellerSlice = createSlice({
         changeModalreg: (state, action)=> {
             state.modalreg = action.payload;
         },
-        changeModallog: (state, action)=> {
+        changeModallogSeller: (state, action)=> {
             state.modallog = action.payload;
+        },
+         checkSeller: (state, action)=> {
+            state.check = action.payload;
         }
     }
 })
 
-export const { setSeller, deleteSeller, changeModalreg, changeModallog } = SellerSlice.actions
+export const { setSeller, deleteSeller, changeModalreg, changeModallogSeller, checkSeller } = SellerSlice.actions
 
 export const selectSeller = (state: RootState) => state.sellers.seller
 

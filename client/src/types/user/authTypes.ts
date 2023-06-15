@@ -3,6 +3,7 @@ export interface IInitialState {
     // users: IuserInfo;
     modalreg: boolean;
     modallog: boolean;
+    check: boolean
 }
 
 export interface IuserInfo {

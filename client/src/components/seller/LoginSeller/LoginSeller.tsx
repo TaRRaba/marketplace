@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./LoginSeller.css";
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { changeModallog, setSeller } from '../../../redux/store/sellerSlice';
+import { changeModallogSeller, setSeller } from '../../../redux/store/sellerSlice';
 import { RootState } from '../../../redux/store/store';
 
 export default function LoginSeller() {
@@ -42,7 +42,7 @@ const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
       setWrongEmail(false)
       setWrongPassword(false)
       dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))
-      dispatch(changeModallog(false))
+      dispatch(changeModallogSeller(false))
       navigate('/') // указать куда перекидывать
     } else if (result.status === 403){
       setWrongEmail(false)
@@ -60,7 +60,7 @@ const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
     <div 
     className={selectSellerModalLog ? "modal active" : "modal"}>
     <button type='button'
-    onClick={() => dispatch(changeModallog(false))}
+    onClick={() => dispatch(changeModallogSeller(false))}
     >X</button>
     <h1>Авторизация</h1>
     <div className='logContainer'>

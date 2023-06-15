@@ -1,5 +1,7 @@
 import React from 'react'
 import { CardsPopular } from './CardsPopular'
+import LoginUser from '../user/LoginUser/LoginUser'
+import RegistrationUser from '../user/RegistrationUser/RegistrationUser'
 
 export const Main = () => {
 
@@ -7,6 +9,8 @@ export const Main = () => {
 
   return (
     <>
+    <LoginUser />
+    <RegistrationUser />
     <a href='/#'>
     <video autoPlay loop controlsList='nodownload' className="n8o9J" muted data-testid="main-banner-video" playsInline ><source src="https://cdn2.static1-sima-land.com/share/16809.mp4"/></video>
     </a>
