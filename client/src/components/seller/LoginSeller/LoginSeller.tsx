@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./LoginSeller.css";
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { changeModallogSeller, setSeller } from '../../../redux/store/sellerSlice';
+import { changeModallogSeller, checkSeller, setSeller } from '../../../redux/store/sellerSlice';
 import { RootState } from '../../../redux/store/store';
 
 export default function LoginSeller() {
@@ -43,6 +43,7 @@ const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
       setWrongPassword(false)
       dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))
       dispatch(changeModallogSeller(false))
+      dispatch(checkSeller(true))  
       navigate('/') // указать куда перекидывать
     } else if (result.status === 403){
       setWrongEmail(false)

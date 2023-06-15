@@ -61,6 +61,7 @@ export const UserNavBar = () => {
       </div>
       <div className='mt-5 flex items-center'>
       <div className=" flex  ">
+          <Link to='/'>
 
       <img
       className="mx-auto h-12 w-auto"
@@ -68,6 +69,7 @@ export const UserNavBar = () => {
       alt="Your Company"
       />
       <p className="text-2xl font-bold text-blue-800 ml-4"></p>
+          </Link>
       </div>
     
         <div className='ml-4 w-1/12'>
