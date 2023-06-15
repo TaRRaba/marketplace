@@ -1,13 +1,32 @@
 import React, { useState } from 'react'
-import { useAppSelector } from '../../redux/store/hooks'
+import { useAppDispatch, useAppSelector } from '../../redux/store/hooks'
 import { RootState } from '../../redux/store/store'
+import { useNavigate } from 'react-router-dom';
+import { deleteUser, resetCheckUser } from '../../redux/store/userSlice';
+import { deleteSeller, resetCheckSeller } from '../../redux/store/sellerSlice';
 
 export const EntriesMenu = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
+
   const [showMenuUser, SershowMenuUser] = useState('hidden')
 
   const userIsActive = useAppSelector((state: RootState) => state.users.check)
   const sellerIsActive = useAppSelector((state: RootState) => state.sellers.check)
 
+  const signOut = () => {
+    fetch('http://localhost:3001/api/auth/logout', {
+      credentials: 'include',
+    })
+    .then((res) => res.json())
+    // .then((data) => console.log(data))
+    .catch((error) => console.log(error))
+    dispatch(deleteUser({}))
+    dispatch(deleteSeller({}))
+    dispatch(resetCheckUser(false))
+    dispatch(resetCheckSeller(false))
+    navigate('/')
+  }
 
   const openMenuUser = () => {
     SershowMenuUser('visible')     
@@ -35,7 +54,7 @@ export const EntriesMenu = () => {
     </div>  
    
     <div className="py-1" role="none">
-      <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100" role="menuitem"  id="menu-item-6">Sing out</a>
+      <a onClick={signOut} className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100" role="menuitem"  id="menu-item-6">Sing out</a>
     </div>
   </div>
     </>
@@ -47,7 +66,7 @@ export const EntriesMenu = () => {
     </div>  
    
     <div className="py-1" role="none">
-      <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100" role="menuitem"  id="menu-item-6">Seller Sing out</a>
+      <a onClick={signOut} className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100" role="menuitem"  id="menu-item-6">Seller Sing out</a>
     </div>
   </div>
     </>

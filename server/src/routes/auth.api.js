@@ -129,4 +129,18 @@ authApi.post('/login/seller', async (req, res) => {
   }
 });
 
+authApi.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie('MarketPlace');
+    res.json({ status: 200 });
+  });
+});
+
+authApi.get('/logout/seller', (req, res) => {
+  req.session.destroy(() => {
+    res.clearCookie('MarketPlace');
+    res.json({ status: 200 });
+  });
+});
+
 module.exports = authApi;

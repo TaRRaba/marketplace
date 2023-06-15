@@ -32,11 +32,6 @@ import { checkUser } from './redux/store/userSlice'
 import { checkSeller } from './redux/store/sellerSlice'
 import Reports from './components/seller/Reports/Reports'
 
-
-
-
-
-
 function App() {
 
   const dispatch = useAppDispatch()
@@ -47,7 +42,7 @@ function App() {
         credentials: "include",
         })
         const result = await response.json()
-        console.log(result);
+        // console.log(result);
         
         dispatch(checkUser(result))     
     
@@ -75,18 +70,14 @@ function App() {
 
   return (
     <> 
-      
       <UserNavBar/>
 
       <Routes>
-     
       <Route path="/cart" element={<Cart />}/>
       <Route path="/profile" element={<ProfileUser />}/>      
       <Route path="/infoSeller" element={<InfoSeller />}/>      
       <Route path="/" element={<Main/>}/>
       <Route path="/search" element={<SearchCard/>}/>
-      
-        
       <Route path="/profileSeller" element={<ProfileSeller/>}> 
           <Route path='settings' element={<SettingsSeller/>}></Route>
           <Route path='goods' element={<GoodsSeller></GoodsSeller>}></Route>
@@ -96,9 +87,6 @@ function App() {
       </Route>
       </Routes> 
 
-  
-
-    
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
       {/* <RegistrationUser></RegistrationUser> */}
@@ -126,6 +114,7 @@ function App() {
           <Route path='edit_goods/:id' element={<p>edit goods</p>}></Route>   
       </Route>
        */}
+
       {/* <FooterFinal/> */}
 
     </>

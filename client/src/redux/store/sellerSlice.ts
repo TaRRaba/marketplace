@@ -17,7 +17,10 @@ export const SellerSlice = createSlice({
             state.seller = action.payload;
         },
         deleteSeller: (state, action) => {
-            state.seller = {};
+            state.seller = action.payload;
+        },
+        resetCheckSeller: (state, action)=>{
+            state.check = action.payload
         },
         changeModalreg: (state, action)=> {
             state.modalreg = action.payload;
@@ -31,7 +34,7 @@ export const SellerSlice = createSlice({
     }
 })
 
-export const { setSeller, deleteSeller, changeModalreg, changeModallogSeller, checkSeller } = SellerSlice.actions
+export const { setSeller, deleteSeller, resetCheckSeller, changeModalreg, changeModallogSeller, checkSeller } = SellerSlice.actions
 
 export const selectSeller = (state: RootState) => state.sellers.seller
 
