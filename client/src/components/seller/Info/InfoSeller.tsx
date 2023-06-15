@@ -1,7 +1,21 @@
 import React from 'react'
+import { useAppDispatch } from '../../../redux/store/hooks';
+import {  changeModallogSeller, changeModalreg } from '../../../redux/store/sellerSlice';
+import RegistrationSeller from '../RegistrationSeller/RegistrationSeller';
 
 export default function InfoSeller() {
+    const dispatch = useAppDispatch();
+
+
+
+    const setModalActiveReg = () => {
+  dispatch(changeModalreg(true))
+}
+
   return (
+    <>
+    <RegistrationSeller/>
+        <button onClick={setModalActiveReg} className='ml-96 py-2 px-10 border-2 rounded-lg  border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Seller Sing Up</button>
     <div className='grid grid-cols-3 grid-rows-6'>
         <div className='row-start-1 col-span-2'>
             <div>
@@ -46,5 +60,6 @@ export default function InfoSeller() {
             <img className='rounded-lg' src="https://periscopeup.com/wp-content/uploads/2021/01/Depositphotos_23450934_xl-2015-scaled-1.jpg" alt="seller logo" />
         </div>
     </div>
+    </>
   )
 }

@@ -23,6 +23,10 @@ import DefaultFooter from './components/footer/Footer'
 import { FooterFinal } from './components/footer/FooterFinal'
 import { Main } from './components/main/Main'
 import { SearchCard } from './components/Search/SearchCard'
+import { useAppDispatch } from './redux/store/hooks'
+import { useEffect } from 'react'
+import { checkUser } from './redux/store/userSlice'
+import { checkSeller } from './redux/store/sellerSlice'
 import Reports from './components/seller/Reports/Reports'
 
 
@@ -31,16 +35,50 @@ import Reports from './components/seller/Reports/Reports'
 
 function App() {
 
+  const dispatch = useAppDispatch()
+
+  useEffect( () => {
+    (async function () { try {
+        const response = await fetch ('http://localhost:3001/api/auth/checkUser', {
+        credentials: "include",
+        })
+        const result = await response.json()
+        console.log(result);
+        
+        dispatch(checkUser(result))     
+    
+      } catch (error) {
+        console.log(error);
+      }      
+          
+      })()
+    }, [])
+
+    useEffect( () => {
+      (async function () { try {
+          const response = await fetch ('http://localhost:3001/api/auth/checkSeller', {
+          credentials: "include",
+          })
+          const result = await response.json()
+          dispatch(checkSeller(result))     
+      
+        } catch (error) {
+          console.log(error);
+        }      
+            
+        })()
+      }, [])
+
   return (
     <> 
       
       <UserNavBar/>
-   
+
       <Routes>
-      <Route path="/login" element={<LoginUser />}/>
-      <Route path="/reg" element={<RegistrationUser />}/>
+     
       <Route path="/cart" element={<Cart />}/>
       <Route path="/profile" element={<ProfileUser />}/>      
+      <Route path="/infoSeller" element={<InfoSeller />}/>      
       <Route path="/" element={<Main/>}/>
       <Route path="/search" element={<SearchCard/>}/>
       

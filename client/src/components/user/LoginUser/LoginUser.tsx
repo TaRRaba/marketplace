@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import "./LoginUser.css";
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { changeModallog, setUser } from '../../../redux/store/userSlice';
+import { changeModallog, checkUser, setUser } from '../../../redux/store/userSlice';
 import { RootState } from '../../../redux/store/store';
+import { checkSeller } from '../../../redux/store/sellerSlice';
 
 export default function LoginUser() {
   const dispatch = useAppDispatch();
@@ -42,6 +43,7 @@ export default function LoginUser() {
       setWrongPassword(false)
       dispatch(setUser({id: result.id, name: result.name, email: result.email}))
       dispatch(changeModallog(false))
+      dispatch(checkUser(true))
       navigate('/') // указать куда перекидывать
     } else if (result.status === 403){
       setWrongEmail(false)

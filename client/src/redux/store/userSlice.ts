@@ -6,6 +6,7 @@ const initialState: IInitialState = {
     users: {},
     modalreg: false,
     modallog: false,
+    check: false
 }
 
 export const UserSlice = createSlice({
@@ -24,11 +25,14 @@ export const UserSlice = createSlice({
         },
         changeModallog: (state, action)=> {
             state.modallog = action.payload;
+        },
+        checkUser: (state, action)=> {
+            state.check = action.payload;
         }
     }
 })
 
-export const { setUser, deleteUser, changeModallog, changeModalreg } = UserSlice.actions
+export const { setUser, deleteUser, changeModallog, changeModalreg, checkUser } = UserSlice.actions
 
 export const selectUser = (state: RootState) => state.users.users
 

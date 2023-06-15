@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react'
 import "./RegistrationUser.css";
 import { useNavigate } from 'react-router-dom';
-import { changeModalreg, setUser } from '../../../redux/store/userSlice';
+import { changeModalreg, checkUser, setUser } from '../../../redux/store/userSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { RootState } from '../../../redux/store/store';
 
@@ -41,6 +41,7 @@ export default function RegistrationUser() {
         setRepeatUser(false)
         dispatch(setUser({id: result.id, name: result.name, email: result.email}))
         dispatch(changeModalreg(false))
+        dispatch(checkUser(true))  
         navigate('/') // указать куда перекидывать
         } else {
           setRepeatUser(true);
