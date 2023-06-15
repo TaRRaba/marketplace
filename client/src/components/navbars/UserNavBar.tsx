@@ -10,6 +10,8 @@ import { changeModallog, changeModalreg } from '../../redux/store/userSlice'
 import { RootState } from '../../redux/store/store'
 import { changeModallogSeller } from '../../redux/store/sellerSlice'
 import LoginSeller from '../seller/LoginSeller/LoginSeller'
+import LoginUser from '../user/LoginUser/LoginUser'
+import RegistrationUser from '../user/RegistrationUser/RegistrationUser'
 
 export const UserNavBar = () => {
 
@@ -35,6 +37,8 @@ export const UserNavBar = () => {
   return (    
    
     <nav className='grid px-5 sticky top-0 bg-gray-100 z-10'>
+          <LoginUser />
+    <RegistrationUser />
       <LoginSeller/>
       <div className='flex justify-between'>
         <div>Location</div>
