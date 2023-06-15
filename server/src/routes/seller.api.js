@@ -1,7 +1,7 @@
 const express = require("express");
 
 const sellerApi = express.Router();
-const { Goods } = require("../../db/models");
+const { Goods, Categories, SubCategories } = require("../../db/models");
 
 sellerApi.get("/goods", async (req, res) => {
   //   const { id } = req.session.seller;
@@ -14,7 +14,7 @@ sellerApi.get("/goods", async (req, res) => {
     ).map((el) => el.get({ plain: true }));
     res.json(allGoods);
   } catch (error) {
-    res.json(error);
+    console.log(error);
   }
 });
 
@@ -28,7 +28,18 @@ sellerApi.delete("/goods", async (req, res) => {
     });
     res.json({ status: 200 });
   } catch (error) {
-    res.json(error);
+    console.log(error);
+  }
+});
+
+sellerApi.get("/categories", async (req, res) => {
+  try {
+    const allCategories = (
+      await Categories.findAll({ include: SubCategories })
+    ).map((el) => el.get({ plain: true }));
+    res.json(allCategories);
+  } catch (error) {
+    console.log(error);
   }
 });
 

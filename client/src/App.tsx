@@ -22,6 +22,7 @@ import 'react-dropdown/style.css';
 import DefaultFooter from './components/footer/Footer'
 import { FooterFinal } from './components/footer/FooterFinal'
 import { Main } from './components/main/Main'
+import { NewGoodsSeller } from './components/seller/GoodsSeller/NewGoodsSeller'
 
 
 
@@ -43,7 +44,9 @@ function App() {
       <Route path="/profileSeller" element={<ProfileSeller/>}> 
           <Route path='settings' element={<SettingsSeller/>}></Route>
           <Route path='goods' element={<GoodsSeller></GoodsSeller>}></Route>
-          <Route path='orders' element={<p>orders</p>}></Route>     
+          <Route path='reports' element={<p>orders</p>}></Route>  
+          <Route path='new_goods' element={<NewGoodsSeller></NewGoodsSeller>}></Route>
+          <Route path='edit_goods/:id' element={<p>edit goods</p>}></Route>   
       </Route>
       </Routes> 
 

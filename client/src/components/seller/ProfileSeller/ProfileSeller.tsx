@@ -3,8 +3,13 @@ import { UserCircleIcon } from '@heroicons/react/24/solid'
 import { Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiTable, HiChartPie, HiAdjustments } from 'react-icons/hi';
 import { Link, Outlet } from 'react-router-dom';
+import { useAppSelector } from '../../../redux/store/hooks';
+import { RootState } from '../../../redux/store/store';
 
 export default function ProfileSeller() {
+
+  const goods = useAppSelector((state: RootState) => state.goodsSeller.goodsSeller);
+
   return (
     <div className="grid grid-cols-3 mt-12" >
 
@@ -28,12 +33,12 @@ export default function ProfileSeller() {
       <Link to="/profileSeller/goods">
       <Sidebar.Item
         icon={HiTable}
-        label="3">
+        label={goods.length}>
         <p>Товары</p>
       </Sidebar.Item>
       </Link>
     
-      <Link to="/profileSeller/orders">
+      <Link to="/profileSeller/reports">
       <Sidebar.Item
         icon={HiChartPie}>
         <p>Отчет</p>
@@ -44,6 +49,11 @@ export default function ProfileSeller() {
         icon={HiArrowSmRight}>
         <p>Выйти</p>
       </Sidebar.Item>
+
+      <Link to="profileSeller/new_goods"> 
+      </Link> 
+      <Link to="profileSeller/edit_goods/:id"> 
+      </Link> 
 
     </Sidebar.ItemGroup>
   </Sidebar.Items>

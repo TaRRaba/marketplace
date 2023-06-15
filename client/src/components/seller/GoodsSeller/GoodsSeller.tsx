@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { getGoodsSeller } from '../../../redux/thunks/goodsSellerThunks/getGoodsSeller.thunk';
 import { RootState } from '../../../redux/store/store';
 import { delGoodsSeller } from '../../../redux/thunks/goodsSellerThunks/delGoodsSeller.thunk';
+import { Link } from 'react-router-dom';
 
 export default function GoodsSeller() {
 
@@ -14,14 +15,14 @@ export default function GoodsSeller() {
     dispatch(getGoodsSeller())
   }, [])
 
-console.log(goods);
+// console.log(goods);
 
   return (
     <div>
       <div className=' flex justify-end mr-16'>
-        <Button label="2">
-          <p>Добавить товар</p> 
-        </Button>
+          <a href="/profileSeller/new_goods">
+             <Button label="2"><p>Добавить товар</p> </Button>
+          </a>
       </div>
 
         {goods?.length > 0 ? (
@@ -38,9 +39,11 @@ console.log(goods);
                         <h2 className=" line-clamp-2 text-left text-l font-bold text-gray-900 hover:text-gray-500">{el.name}</h2>
                     
                     <div className="mt-6 ml-5 flex flex-col sm:flex-row">
+                    <a href={`/profileSeller/edit_goods/${el?.id}`}>
                     <button className="mr-2 mb-4 flex cursor-pointer items-center justify-center rounded-md bg-emerald-400 py-2 px-8 text-center text-white transition duration-150 ease-in-out hover:translate-y-1 hover:bg-emerald-500">
                       <p>Изменить</p> 
                      </button>
+                     </a>
                     <button onClick={() => (dispatch(delGoodsSeller({goodsId: el?.id})))} className="mr-2 mb-4 flex cursor-pointer items-center justify-center rounded-md border py-2 px-8 text-center text-gray-500 transition duration-150 ease-in-out hover:translate-y-1 hover:bg-rose-500 hover:text-white">
                       <p>Удалить</p>
                       </button>
