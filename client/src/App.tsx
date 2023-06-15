@@ -22,6 +22,9 @@ import 'react-dropdown/style.css';
 import DefaultFooter from './components/footer/Footer'
 import { FooterFinal } from './components/footer/FooterFinal'
 import { Main } from './components/main/Main'
+
+import { NewGoodsSeller } from './components/seller/GoodsSeller/NewGoodsSeller'
+
 import { SearchCard } from './components/Search/SearchCard'
 import { useAppDispatch } from './redux/store/hooks'
 import { useEffect } from 'react'
@@ -78,6 +81,8 @@ function App() {
       <Route path="/profileSeller" element={<ProfileSeller/>}> 
           <Route path='settings' element={<SettingsSeller/>}></Route>
           <Route path='goods' element={<GoodsSeller></GoodsSeller>}></Route>
+          <Route path='new_goods' element={<NewGoodsSeller></NewGoodsSeller>}></Route>
+          <Route path='edit_goods/:id' element={<p>edit goods</p>}></Route>   
           <Route path='reports' element={<Reports></Reports>}></Route>     
       </Route>
       </Routes> 
@@ -97,7 +102,21 @@ function App() {
       {/* <InfoSeller></InfoSeller> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <DefaultFooter/> */}
+      
+      <FooterFinal/>
+
+    {/* рабочая версия роута кабинета продавца */}
+      {/* <Route path="/profileSeller" element={<ProfileSeller/>}> 
+          <Route path='settings' element={<SettingsSeller/>}></Route>
+          <Route path='goods' element={<GoodsSeller></GoodsSeller>}></Route>
+          <Route path='reports' element={<p>orders</p>}></Route>  
+          <Route path='new_goods' element={<NewGoodsSeller></NewGoodsSeller>}></Route>
+          <Route path='edit_goods/:id' element={<p>edit goods</p>}></Route>   
+      </Route>
+       */}
+
       {/* <FooterFinal/> */}
+
     </>
   )
 }

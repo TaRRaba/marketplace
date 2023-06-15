@@ -7,7 +7,7 @@ import { getPopularGood } from '../../redux/thunks/goodThunks/getPopularGood.thu
 export const CardsPopular = () => {
   const card = useAppSelector((state: RootState) => state.good.good)
   const dispatch = useAppDispatch();
-
+  const userIsActive = useAppSelector((state: RootState) => state.users.check)
   
   useEffect(() => {
       dispatch(getPopularGood())
@@ -38,7 +38,7 @@ export const CardsPopular = () => {
               {' '}
               ₸
             </p>
-            {/* {user ? (
+            {userIsActive ? (
               <>
               <div className="addToCart visibility: visible flex text-sm items-center cursor-pointer space-x-1.5 rounded-lg bg-[#4520aa] px-4 py-1.5 text-white duration-100 hover:bg-[#4520aa]/80">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="addToCart mr-2 h-4 w-4">
@@ -50,7 +50,7 @@ export const CardsPopular = () => {
               В корзине
               </div>
               </>
-            ) : (null)} */}
+            ) : (null)}
           </div>
         </article>
       ))}

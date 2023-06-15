@@ -5,10 +5,14 @@ import { HiArrowSmRight, HiTable, HiChartPie, HiAdjustments } from 'react-icons/
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../redux/store/hooks';
 import { deleteSeller, resetCheckSeller } from '../../../redux/store/sellerSlice';
+import { useAppSelector } from '../../../redux/store/hooks';
+import { RootState } from '../../../redux/store/store';
 
 export default function ProfileSeller() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
+  
+   const goods = useAppSelector((state: RootState) => state.goodsSeller.goodsSeller);
   
   const signOut = () => {
     fetch('http://localhost:3001/api/auth/logout', {
@@ -21,9 +25,9 @@ export default function ProfileSeller() {
     dispatch(resetCheckSeller(false))
     navigate('/')
   }
-
+  
   return (
-    <div className="grid grid-cols-3" >
+    <div className="grid grid-cols-3 mt-12" >
 
     <div >
     <Sidebar aria-label="Default sidebar example">
@@ -45,7 +49,7 @@ export default function ProfileSeller() {
       <Link to="/profileSeller/goods">
       <Sidebar.Item
         icon={HiTable}
-        label="3">
+        label={goods.length}>
         <p>Товары</p>
       </Sidebar.Item>
       </Link>
@@ -62,6 +66,11 @@ export default function ProfileSeller() {
         icon={HiArrowSmRight}>
         <p>Выйти</p>
       </Sidebar.Item>
+
+      <Link to="profileSeller/new_goods"> 
+      </Link> 
+      <Link to="profileSeller/edit_goods/:id"> 
+      </Link> 
 
     </Sidebar.ItemGroup>
   </Sidebar.Items>

@@ -1,60 +1,46 @@
 
 
 import { Dropdown } from 'flowbite-react';
+import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
+import { useEffect } from 'react';
+import { RootState } from '../../redux/store/store';
+import { getAllCategory } from '../../redux/thunks/goodThunks/getAllCategory.thunk';
 
 
 export default function InlineDropdown() {
+  const category = useAppSelector((state: RootState) => state.good.category)
+  const dispatch = useAppDispatch();
+  console.log(category);
+  
+  useEffect(() => {
+    dispatch(getAllCategory())
+}, [])
+
+
+  
   return (
     <Dropdown
       class='bg-green-300 rounded-lg'
       label="Каталог"
       placement="bottom"
     >
-      <Dropdown class='bg-green-300 rounded-lg'
-          label="Category 1"
-          placement="right-start"
-        >
-          <Dropdown.Item>
-            SubCategoties 1
-          </Dropdown.Item>
-          <Dropdown.Item>
-            SubCategoties 2
-          </Dropdown.Item>
-          <Dropdown.Item>
-            SubCategoties 3
-          </Dropdown.Item>
-      
-        </Dropdown>
-      <Dropdown class='bg-green-300 rounded-lg'
-          label="Category 2"
-          placement="right-start"
-        >
-          <Dropdown.Item>
-            SubCategoties 1
-          </Dropdown.Item>
-          <Dropdown.Item>
-            SubCategoties 2
-          </Dropdown.Item>
-          <Dropdown.Item>
-            SubCategoties 3
-          </Dropdown.Item>
-      
-        </Dropdown>
-      <Dropdown class='bg-green-300 rounded-lg'
-          label="Category 3"
-          placement="right-start"
-        >
-          <Dropdown.Item>
-            SubCategoties 1
-          </Dropdown.Item>
-          <Dropdown.Item>
-            SubCategoties 2
-          </Dropdown.Item>
-          <Dropdown.Item>
-            SubCategoties 3
-          </Dropdown.Item>
-      
-        </Dropdown>
-    </Dropdown>
-  )
-}
+      {category && category.map((el) =>(
+            <Dropdown key={el.id} id={el.id} class='bg-green-300 rounded-lg'
+            label={el.fullName}
+            placement="right-start"
+          >
+            {el.SubCategories.map((element) => (
+
+            <Dropdown.Item key={element.id} id={element.id}>
+              {element.fullName}
+            </Dropdown.Item>
+            ))}
+            
+        
+          </Dropdown>
+
+      ))}
+          </Dropdown>
+            )
+          }
+          
