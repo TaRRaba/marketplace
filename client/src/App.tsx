@@ -55,8 +55,8 @@ function App() {
 
     
       {/* <RegistrationSeller></RegistrationSeller> */}
-      <LoginSeller></LoginSeller>
-      {/* <RegistrationUser></RegistrationUser> */}
+      {/* <LoginSeller></LoginSeller> */}
+      <RegistrationUser></RegistrationUser>
       {/* <LoginUser></LoginUser> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
