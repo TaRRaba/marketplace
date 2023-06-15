@@ -1,10 +1,12 @@
+
 const express = require("express");
 const fileMiddleware = require("../middlewares/file");
 
 const sellerApi = express.Router();
-const { Goods, Categories, SubCategories } = require("../../db/models");
+const { Goods, Categories, SubCategories, Entries } = require("../../db/models");
 
-sellerApi.get("/goods", async (req, res) => {
+
+sellerApi.get('/goods', async (req, res) => {
   //   const { id } = req.session.seller;
   const id = 1;
   try {
@@ -87,6 +89,21 @@ sellerApi.post("/newgoods", fileMiddleware.single("img"), async (req, res) => {
     ).get({ plain: true });
     // console.log("newGoods ============>", newGoods);
     res.json(newGoods);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+sellerApi.get('/reports', async (req, res) => {
+  // const { id } = req.session.seller;
+  const id = 1;
+  try {
+    const allReports = (await Entries.findAll({
+      include: Goods,
+      where: { seller_id: id },
+    })).map((el) => el.get({ plain: true }));
+    console.log(allReports);
+    res.json(allReports);
   } catch (error) {
     console.log(error);
   }

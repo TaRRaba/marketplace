@@ -1,14 +1,21 @@
 import React, { ChangeEvent, useState } from 'react'
 import "./RegistrationUser.css";
 import { useNavigate } from 'react-router-dom';
-import { setUser } from '../../../redux/store/userSlice';
-import { useAppDispatch } from '../../../redux/store/hooks';
+import { changeModalreg, checkUser, setUser } from '../../../redux/store/userSlice';
+import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
+import { RootState } from '../../../redux/store/store';
 
 export default function RegistrationUser() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const initRepeatUser = false;
+  const selectUserModalReg = useAppSelector((state: RootState) => state.users.modalreg)
+
+  // Для активации модалки
+  // const setModalActive = () => {
+  //   dispatch(changeModalreg(true))
+  // }
 
   const [repeatUser, setRepeatUser] = useState(initRepeatUser);
 
@@ -33,6 +40,8 @@ export default function RegistrationUser() {
         if (result.status === 201) {
         setRepeatUser(false)
         dispatch(setUser({id: result.id, name: result.name, email: result.email}))
+        dispatch(changeModalreg(false))
+        dispatch(checkUser(true))  
         navigate('/') // указать куда перекидывать
         } else {
           setRepeatUser(true);
@@ -44,11 +53,9 @@ export default function RegistrationUser() {
 
   return (
     <div 
-    // className={modalActive ? "modal active" : "modal"}
-    className="modal active"
-    >
+    className={selectUserModalReg ? "modal active" : "modal"}>
     <button type='button'
-    // onClick={() => setModalActive(false)}
+    onClick={() => dispatch(changeModalreg(false))}
     >X</button>
     <h1>Регистрация</h1>
     <div className='regContainer'>

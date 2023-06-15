@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
+import { useAppSelector } from '../../redux/store/hooks'
+import { RootState } from '../../redux/store/store'
 
 export const EntriesMenu = () => {
   const [showMenuUser, SershowMenuUser] = useState('hidden')
+
+  const userIsActive = useAppSelector((state: RootState) => state.users.check)
+  const sellerIsActive = useAppSelector((state: RootState) => state.sellers.check)
 
 
   const openMenuUser = () => {
@@ -12,6 +17,7 @@ export const EntriesMenu = () => {
   }
 
   return (
+    
     <div onMouseEnter={openMenuUser}  className="relative inline-block text-left">
   <div>
     <button   type="button" className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
@@ -21,20 +27,37 @@ export const EntriesMenu = () => {
       </svg>
     </button>
   </div>
-
-
-  <div style={{visibility: showMenuUser}} onMouseLeave={closeMenuUser} className="menuUser absolute right-0 z-20 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
+    {userIsActive ?
+    <>
+       <div style={{visibility: showMenuUser}} onMouseLeave={closeMenuUser} className="menuUser absolute right-0 z-20 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
     <div className="py-1 hover:bg-slate-100" role="none">
       <a href="/profile" className="text-gray-700 block px-4 py-2 text-sm " role="menuitem"  id="menu-item-0">Profile</a>    
     </div>  
-    <div className="py-1" role="none">
-      <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100" role="menuitem"  id="menu-item-4">Sing in</a>
-      <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100" role="menuitem"  id="menu-item-5">Sing up</a>
-    </div>
+   
     <div className="py-1" role="none">
       <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100" role="menuitem"  id="menu-item-6">Sing out</a>
     </div>
   </div>
+    </>
+    : sellerIsActive ?
+    <>
+           <div style={{visibility: showMenuUser}} onMouseLeave={closeMenuUser} className="menuUser absolute right-0 z-20 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" >
+    <div className="py-1 hover:bg-slate-100" role="none">
+      <a href="/profileSeller/settings" className="text-gray-700 block px-4 py-2 text-sm " role="menuitem"  id="menu-item-0">Profile seller</a>    
+    </div>  
+   
+    <div className="py-1" role="none">
+      <a href="#" className="text-gray-700 block px-4 py-2 text-sm hover:bg-slate-100" role="menuitem"  id="menu-item-6">Seller Sing out</a>
+    </div>
+  </div>
+    </>
+    :
+    <>
+    
+    </>
+    }
+
+ 
 </div>
   )
 }

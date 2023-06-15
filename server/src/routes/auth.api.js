@@ -2,7 +2,29 @@ const express = require('express');
 
 const authApi = express.Router();
 const bcrypt = require('bcrypt');
-const { Users, Carts, Sellers } = require('../../db/models');
+const {
+  Users, Carts, Sellers, Favourites,
+} = require('../../db/models');
+
+authApi.get('/checkSeller', async (req, res) => {
+  if (req.session.seller) {
+    const sellerCheck = true;
+    res.json(sellerCheck);
+  } else {
+    const noSeller = false;
+    res.json(noSeller);
+  }
+});
+
+authApi.get('/checkUser', async (req, res) => {
+  if (req.session.user) {
+    const userCheck = true;
+    res.json(userCheck);
+  } else {
+    const noUser = false;
+    res.json(noUser);
+  }
+});
 
 authApi.post('/registration', async (req, res) => {
   const { name, email, password } = req.body;
@@ -18,6 +40,7 @@ authApi.post('/registration', async (req, res) => {
     });
     if (created) {
       await Carts.create({ user_id: newUser.id });
+      await Favourites.create({ user_id: newUser.id });
       req.session.user = newUser.get({ plain: true });
       res.json({
         status: 201, name: newUser.name, id: newUser.id, email: newUser.email,

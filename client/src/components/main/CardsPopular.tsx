@@ -8,13 +8,6 @@ export const CardsPopular = () => {
   const card = useAppSelector((state: RootState) => state.good.good)
   const dispatch = useAppDispatch();
 
-  // function getTotal () {
-  //     let total = 0;
-  //     for (let i = 0; i < cart.length; i++) {
-  //       total += cart[i].quantity * cart[i].Good.price;
-  //     }
-  //     return total;
-  // }
   
   useEffect(() => {
       dispatch(getPopularGood())
@@ -43,7 +36,7 @@ export const CardsPopular = () => {
             <p className="text-lg font-bold text-teal-800">
               {price}
               {' '}
-              ₽
+              ₸
             </p>
             {/* {user ? (
               <>

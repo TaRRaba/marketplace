@@ -7,19 +7,21 @@ import { getPopularGood } from "../thunks/goodThunks/getPopularGood.thunk";
 
 interface IGoodState {
     good: IGoodData[];
+    findGood: IGoodData[];
 }
 
 const initialState: IGoodState = {
   good: [],
+  findGood: []
 }
 
 export const GoodSlice = createSlice({
     name: 'good',
     initialState,
     reducers: {
-        // setCart: (state, action: PayloadAction<userInfo>) => {
-        //     state.users = action.payload;
-        // },
+        findByName: (state, action) => {
+            state.findGood = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(getPopularGood.fulfilled, (state, action) => {
@@ -58,7 +60,7 @@ export const GoodSlice = createSlice({
     }
 })
 
-export const {} = GoodSlice.actions
+export const {findByName} = GoodSlice.actions
 
 export const selectGood = (state: RootState) => state.good.good
 

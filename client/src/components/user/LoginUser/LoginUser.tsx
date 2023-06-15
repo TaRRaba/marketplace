@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import "./LoginUser.css";
-import { useAppDispatch } from '../../../redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { setUser } from '../../../redux/store/userSlice';
+import { changeModallog, checkUser, setUser } from '../../../redux/store/userSlice';
+import { RootState } from '../../../redux/store/store';
+import { checkSeller } from '../../../redux/store/sellerSlice';
 
 export default function LoginUser() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
+
+  const selectUserModalLog = useAppSelector((state: RootState) => state.users.modallog)
 
   const initWrongEmail = false
   const initWrongPassword = false
@@ -14,6 +18,11 @@ export default function LoginUser() {
   const [wrongEmail, setWrongEmail] = useState(initWrongEmail)
   const [wrongPassword, setWrongPassword] = useState(initWrongPassword)
 
+    // Для активации модалки
+    // const setModalActive = () => {
+    //   dispatch(changeModallog(true))
+    // }
+  
   const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget)
@@ -33,6 +42,8 @@ export default function LoginUser() {
       setWrongEmail(false)
       setWrongPassword(false)
       dispatch(setUser({id: result.id, name: result.name, email: result.email}))
+      dispatch(changeModallog(false))
+      dispatch(checkUser(true))
       navigate('/') // указать куда перекидывать
     } else if (result.status === 403){
       setWrongEmail(false)
@@ -48,11 +59,9 @@ export default function LoginUser() {
 
   return (
     <div 
-    // className={modalActive ? "modal active" : "modal"}
-    className="modal active"
-    >
+    className={selectUserModalLog ? "modal active" : "modal"}>
     <button type='button'
-    // onClick={() => setModalActive(false)}
+    onClick={() => dispatch(changeModallog(false))}
     >X</button>
     <h1>Авторизация</h1>
     <div className='logContainer'>
