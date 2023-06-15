@@ -1,15 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const getPopularGood = createAsyncThunk('good/getPopularGood',
+export const getAllCategory = createAsyncThunk('good/getAllCategory',
     async () => {
-        const response = await fetchGood();
+        const response = await fetchAllCategory();
         return response;
     }
 )
 
-const fetchGood = async () => {
+const fetchAllCategory = async () => {
     try {
-        const response = await fetch('http://localhost:3001/good', {
+        const response = await fetch('http://localhost:3001/catalog/category', {
             credentials: 'include',
         })
         const result = await response.json();
