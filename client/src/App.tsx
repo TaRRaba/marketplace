@@ -28,8 +28,8 @@ import { NewGoodsSeller } from './components/seller/GoodsSeller/NewGoodsSeller'
 import { SearchCard } from './components/Search/SearchCard'
 import { useAppDispatch } from './redux/store/hooks'
 import { useEffect } from 'react'
-import { checkUser } from './redux/store/userSlice'
-import { checkSeller } from './redux/store/sellerSlice'
+import { checkUser, setUser } from './redux/store/userSlice'
+import { checkSeller, setSeller } from './redux/store/sellerSlice'
 import Reports from './components/seller/Reports/Reports'
 
 function App() {
@@ -42,9 +42,12 @@ function App() {
         credentials: "include",
         })
         const result = await response.json()
-        // console.log(result);
-        
-        dispatch(checkUser(result))     
+        console.log(result);
+        if (result){
+
+          dispatch(checkUser(true))
+          dispatch(setUser({id: result.id, name: result.name, email: result.email}))     
+        }
     
       } catch (error) {
         console.log(error);
@@ -59,8 +62,11 @@ function App() {
           credentials: "include",
           })
           const result = await response.json()
-          dispatch(checkSeller(result))     
-      
+          if(result){
+
+            dispatch(checkSeller(true))     
+            dispatch(setSeller({id: result.id, name: result.name, email: result.email, inn: result.INN}))    
+          }
         } catch (error) {
           console.log(error);
         }      
