@@ -41,7 +41,8 @@ app.use(expressSession(sessionConfig));
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public/')));
+// app.use(express.static(path.join(__dirname, 'public/')));
+app.use(express.static(path.join(__dirname, 'pics')));
 app.use('/pics', express.static('pics'));
 
 app.use('/api/cart', cartApi);

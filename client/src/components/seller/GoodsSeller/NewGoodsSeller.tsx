@@ -1,8 +1,10 @@
 import { FileInput, Label } from 'flowbite-react'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export function NewGoodsSeller() {
-
+     
+     const navigate = useNavigate()
      const [allCategor, setAllCategor] = useState([])
      const [categoryValue, setCategoryValue] = useState('')
 
@@ -26,12 +28,31 @@ export function NewGoodsSeller() {
         return allCategor.filter((el) => el.id === Number(categoryValue))
       }
 
+      const handSummit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const data = new FormData(e.currentTarget)
+ 
+        try {
+            const response = await fetch('http://localhost:3001/api/seller/newgoods', {
+                method: "POST",
+                body: data,
+                credentials: 'include',
+            })
+            const result = await response.json();
+            // console.log("result====>", result);
+            navigate('/profileSeller/goods')
+            
+          } catch (error) {
+              console.log(error);
+          }
+      }
+
   return (
     <section className="pb-10 flex bg-gray-100">
 
     <div className="lg:m-10">
 
-  <form className="relative border border-gray-100 space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10">
+  <form onSubmit={handSummit} className="relative border border-gray-100 space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10">
   <h1 className="mb-6 text-xl font-semibold lg:text-2xl">Новый товар</h1>
 
   <div className="grid gap-3 md:grid-cols-2">
@@ -60,31 +81,39 @@ export function NewGoodsSeller() {
   </div>
   <div>
     <label className=""> Наименование товара </label>
-    <input type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+    <input required name='name' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
   </div>
   <div>
     <label className=""> Страна производитель</label>
-    <input type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+    <input required name='country' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
   </div>
   <div>
     <label className=""> Торговая марка</label>
-    <input type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+    <input required name='brand' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
   </div>
   <div>
     <label className=""> Артикул товара</label>
-    <input type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+    <input required name='code' type='number' className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
   </div>
   <div>
     <label className=""> Габариты</label>
-    <input type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+    <input required name='size' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
   </div>
   <div>
     <label className=""> Вес</label>
-    <input type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+    <input required name='weight' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
   </div>
   <div>
     <label className=""> Дополнительная информация (тип, материал и тд.)</label>
-    <input type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+    <input required name='type' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+  </div>
+  <div>
+    <label className=""> Количество товара на складе (в шт)</label>
+    <input required name='amount' type='number' className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+  </div>
+  <div>
+    <label className=""> Цена за единицу товара (шт)</label>
+    <input required name='price' type='number' className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
   </div>
 
     <div
@@ -97,14 +126,16 @@ export function NewGoodsSeller() {
         />
       </div>
       <FileInput
+        required
+        name='img'
         helperText="Рекомендуемый размер изображения 700 × 700 px"
         id="file"
       />
     </div>
  
   <div className=' flex justify-around mt-10'>
-    <button type="button" className="mt-5 w-48 rounded-md bg-green-500 p-2 text-center font-semibold text-white">Сохранить</button>
-    <button type="button" className="mt-5 w-48 rounded-md bg-blue-500 p-2 text-center font-semibold text-white">Отменить</button>
+    <button type='submit' className="mt-5 w-48 rounded-md bg-green-500 p-2 text-center font-semibold text-white">Сохранить</button>
+    <button onClick={()=> navigate('/profileSeller/goods')} type="button" className="mt-5 w-48 rounded-md bg-blue-500 p-2 text-center font-semibold text-white">Отменить</button>
   </div>
 </form>
 

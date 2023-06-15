@@ -67,6 +67,16 @@ function App() {
       {/* <DefaultFooter/> */}
       
       <FooterFinal/>
+
+    {/* рабочая версия роута кабинета продавца */}
+      {/* <Route path="/profileSeller" element={<ProfileSeller/>}> 
+          <Route path='settings' element={<SettingsSeller/>}></Route>
+          <Route path='goods' element={<GoodsSeller></GoodsSeller>}></Route>
+          <Route path='reports' element={<p>orders</p>}></Route>  
+          <Route path='new_goods' element={<NewGoodsSeller></NewGoodsSeller>}></Route>
+          <Route path='edit_goods/:id' element={<p>edit goods</p>}></Route>   
+      </Route>
+       */}
     </>
   )
 }
