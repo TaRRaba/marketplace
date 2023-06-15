@@ -16,9 +16,11 @@ export const UserSlice = createSlice({
         setUser: (state, action) => {
             state.users = action.payload;
         },
-        
         deleteUser: (state, action) => {
-            state.users = {};
+            state.users = action.payload
+        },
+        resetCheckUser: (state, action)=>{
+            state.check = action.payload
         },
         changeModalreg: (state, action)=> {
             state.modalreg = action.payload;
@@ -32,7 +34,7 @@ export const UserSlice = createSlice({
     }
 })
 
-export const { setUser, deleteUser, changeModallog, changeModalreg, checkUser } = UserSlice.actions
+export const { setUser, deleteUser, resetCheckUser, changeModallog, changeModalreg, checkUser } = UserSlice.actions
 
 export const selectUser = (state: RootState) => state.users.users
 
