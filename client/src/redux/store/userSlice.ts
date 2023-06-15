@@ -4,7 +4,7 @@ import { IInitialState, Imodallog, IuserInfo } from "../../types/user/authTypes"
 
 const initialState: IInitialState = {
     users: {},
-    modalreg: false,
+    modalreg: true,
     modallog: false,
 }
 
