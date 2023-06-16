@@ -27,6 +27,7 @@ interface ISpecs {
 }
 
 export default function GoodsCard() {
+
  const { id } = useParams()
  const cart = useAppSelector((state: RootState) => state.cart.cart);
  const favourites = useAppSelector((state: RootState) => state.favourites.favourites);

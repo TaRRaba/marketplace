@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 
 const express = require('express');
@@ -20,9 +21,9 @@ const orderApi = require('./src/routes/order.api');
 // const isAuth = require('./src/middlewares/isAuth');
 
 const sessionConfig = {
-  name: 'MarketPlace',
+  name: "MarketPlace",
   store: new FileStore(),
-  secret: process.env.COOKIE_SECRET || 'sometext321',
+  secret: process.env.COOKIE_SECRET || "sometext321",
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -35,17 +36,18 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(
   cors({
-    origin: ['http://localhost:5173'],
+    origin: ["http://localhost:5173"],
     credentials: true,
-  }),
+  })
 );
 
 app.use(expressSession(sessionConfig));
 
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // app.use(express.static(path.join(__dirname, 'public/')));
+
 app.use(express.static(path.join(__dirname, 'pics')));
 app.use('/pics', express.static('pics'));
 
