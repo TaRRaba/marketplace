@@ -79,9 +79,9 @@ export const UserNavBar = () => {
         <div className='ml-4 w-1/12'>
           <CatalogFinal/>
         </div>
-        <search className='ml-3 w-6/12 flex'>
+        <div className='ml-3 w-6/12 flex'>
          <SearchBar/>
-        </search>
+        </div>
         {userIsActive ? <> <div className='w-2/12'>
         
         <EntriesMenu/>
