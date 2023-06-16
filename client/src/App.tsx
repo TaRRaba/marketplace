@@ -33,6 +33,7 @@ import { checkUser, setUser } from './redux/store/userSlice'
 import { checkSeller, setSeller } from './redux/store/sellerSlice'
 import Reports from './components/seller/Reports/Reports'
 import { EditGoods } from './components/seller/GoodsSeller/EditGoods'
+import { DetailOrder } from './components/user/Orders/DetailOrder'
 
 function App() {
 
@@ -97,8 +98,8 @@ function App() {
 
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
-      {/* <RegistrationUser></RegistrationUser> */}
-      {/* <LoginUser></LoginUser> */}
+      {/* <RegistrationUser></RegistrationUser>
+      <LoginUser></LoginUser> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
       {/* <Cart /> */}
@@ -110,7 +111,10 @@ function App() {
       {/* <InfoSeller></InfoSeller> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <DefaultFooter/> */}
-      
+
+      <DetailOrder></DetailOrder>
+
+
       <FooterFinal/>
 
     </>
