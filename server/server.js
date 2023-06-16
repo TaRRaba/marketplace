@@ -15,6 +15,7 @@ const sellerApi = require('./src/routes/seller.api');
 const goodApi = require('./src/routes/good.main');
 const catalogApi = require('./src/routes/catalog.api');
 const userApi = require('./src/routes/user.api');
+const orderApi = require('./src/routes/order.api');
 
 // const isAuth = require('./src/middlewares/isAuth');
 
@@ -49,6 +50,7 @@ app.use(express.static(path.join(__dirname, 'pics')));
 app.use('/pics', express.static('pics'));
 
 app.use('/api/cart', cartApi);
+app.use('/api/order', orderApi);
 app.use('/api/card', cardApi);
 app.use('/api/fav', favApi);
 app.use('/api/auth', authApi);
