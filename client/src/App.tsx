@@ -103,7 +103,7 @@ function App() {
       {/* <Cart /> */}
       {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
-      <GoodsList />
+      {/* <GoodsList /> */}
       {/* <CardInList></CardInList> */}
       {/* <GoodsCard></GoodsCard> */}
       {/* <InfoSeller></InfoSeller> */}
