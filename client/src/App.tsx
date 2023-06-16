@@ -13,6 +13,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Favourites } from './components/favourites/Favourites'
 
 import InfoSeller from './components/seller/Info/InfoSeller'
+import { GoodsList } from './components/goods/GoodsList'
 import GoodsCard from './components/goods/GoodsCard'
 import SettingsSeller from './components/seller/SettingsSeller/SettingsSeller'
 import GoodsSeller from './components/seller/GoodsSeller/GoodsSeller'
@@ -93,10 +94,10 @@ function App() {
       {/* <LoginUser></LoginUser> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
-      {/* <CartInList></CartInList> */}
       {/* <Cart /> */}
       {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
+      <GoodsList />
       {/* <CardInList></CardInList> */}
       {/* <GoodsCard></GoodsCard> */}
       {/* <InfoSeller></InfoSeller> */}

@@ -5,6 +5,7 @@ import { IActPayload, IAmountPayload, ICartData } from "../../types/cart/cartTyp
 import { incrAmount } from "../thunks/cartThunks/incrAmount.thunk";
 import { decrAmount } from "../thunks/cartThunks/decrAmount.thunk";
 import { delPos } from "../thunks/cartThunks/delPos.thunk";
+import { addAmountCart } from "../thunks/cartThunks/addAmountCart.thunk";
 
 interface ICartState {
     cart: ICartData[];
@@ -14,7 +15,7 @@ const initialState: ICartState = {
     cart: [],
 }
 
-export const UserSlice = createSlice({
+export const CartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
@@ -29,7 +30,6 @@ export const UserSlice = createSlice({
             }
         }),
         builder.addCase(incrAmount.fulfilled, (state, action) => {
-            console.log(action.payload);
             if (action.payload !== null) {
             state.cart = state.cart.map((entry: ICartData) => {
                 if (entry.id === action.payload?.id) {
@@ -40,7 +40,6 @@ export const UserSlice = createSlice({
             }
         }),
         builder.addCase(decrAmount.fulfilled, (state, action) => {
-            console.log(action.payload);
             if (action.payload !== null) {
             state.cart = state.cart.map((entry: ICartData) => {
                 if (entry.id === action.payload?.id) {
@@ -51,16 +50,20 @@ export const UserSlice = createSlice({
             }
         }),
         builder.addCase(delPos.fulfilled, (state, action) => {
-            console.log(action.payload);
             if (action.payload !== null) {
             state.cart = state.cart.filter(entry => entry.id !== action.payload)
+            }
+        }),
+        builder.addCase(addAmountCart.fulfilled, (state, action) => {
+            if (action.payload !== null) {
+            state.cart = [...state.cart, action.payload]
             }
         })
     }
 })
 
-export const {} = UserSlice.actions
+export const {} = CartSlice.actions
 
 export const selectUser = (state: RootState) => state.cart.cart
 
-export default UserSlice.reducer
+export default CartSlice.reducer

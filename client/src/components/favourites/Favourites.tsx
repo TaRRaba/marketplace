@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
 import { RootState } from '../../redux/store/store';
 import { getCart } from '../../redux/thunks/cartThunks/getCart.thunk';
@@ -8,7 +8,12 @@ import { delPos } from '../../redux/thunks/cartThunks/delPos.thunk';
 
 export const Favourites = () => {
     const cart = useAppSelector((state: RootState) => state.cart.cart);
+    const [value, setValue] = useState(0)
     const dispatch = useAppDispatch();
+
+    const eventHandler = (e: ChangeEvent<HTMLInputElement>): void => {
+      setValue(Number(e.target.value));
+    }
 
     function getTotal () {
         let total = 0;

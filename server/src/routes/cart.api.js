@@ -18,12 +18,12 @@ cartApi.get('/', async (req, res) => {
   }
 });
 
-cartApi.post('/cartQtIncr', async (req, res) => {
-  const { productId, amount } = req.body;
+cartApi.post('/addAmountCart', async (req, res) => {
+  const { goodID, amount } = req.body;
   try {
-    const cart = (await Carts.findOne({ where: { user_id: req.session.user.id } }))
+    const cart = (await Carts.findOne({ where: { user_id: 1 } }))
       .get({ plain: true });
-    const cartPos = (await Entries.findAll({ where: { cart_id: cart.id, good_id: productId } }))
+    const cartPos = (await Entries.findAll({ where: { cart_id: cart.id, good_id: goodID } }))
       .map((el) => el.get({ plain: true }));
     if (cartPos.length > 0) {
       await Entries.update(
@@ -32,8 +32,9 @@ cartApi.post('/cartQtIncr', async (req, res) => {
       );
       res.json({ status: 200 });
     } else {
-      await Entries.create({ cart_id: cart.id, good_id: productId, quantity: amount });
-      res.json({ status: 201 });
+      const data = (await Entries.create({ cart_id: cart.id, good_id: goodID, quantity: amount }))
+        .get({ plain: true });
+      res.json({ status: 201, data });
     }
   } catch (error) {
     res.json(error);
