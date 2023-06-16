@@ -24,6 +24,8 @@ export interface ICartData {
 
 export interface IFavData {
     good_id: number;
+    id:  number;
+    Good: IGoodData;
 }
 
 export interface IActPayload {
