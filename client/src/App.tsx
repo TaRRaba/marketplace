@@ -103,12 +103,12 @@ function App() {
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
       {/* <Cart /> */}
-      <Orders />
+      {/* <Orders /> */}
       {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <GoodsList /> */}
       {/* <CardInList></CardInList> */}
-      {/* <GoodsCard></GoodsCard> */}
+      <GoodsCard></GoodsCard>
       {/* <InfoSeller></InfoSeller> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <DefaultFooter/> */}
