@@ -1,43 +1,128 @@
-import React from 'react'
-import Entries from './Entries'
+
 import { Link } from 'react-router-dom'
-import EntriesNew from './EntriesNew'
-import Catalog from './Catalog'
+
+import { EntriesMenu} from './EntriesMenu'
+
+import CatalogFinal from './CatalogFinal'
+import { SearchBar } from './SearchBar'
+import { useAppDispatch, useAppSelector } from '../../redux/store/hooks'
+import { changeModallog, changeModalreg } from '../../redux/store/userSlice'
+import { RootState } from '../../redux/store/store'
+import { changeModallogSeller } from '../../redux/store/sellerSlice'
+import LoginSeller from '../seller/LoginSeller/LoginSeller'
+import LoginUser from '../user/LoginUser/LoginUser'
+import RegistrationUser from '../user/RegistrationUser/RegistrationUser'
 
 export const UserNavBar = () => {
+
+  const userIsActive = useAppSelector((state: RootState) => state.users.check)
+  const sellerIsActive = useAppSelector((state: RootState) => state.sellers.check)
+
+  const dispatch = useAppDispatch();
+
+  const setModalActiveLogSeller = () => {
+    dispatch(changeModallogSeller(true))
+  }
+
+
+
+      const setModalActiveLog = () => {
+      dispatch(changeModallog(true))
+    }
+
+      const setModalActiveReg = () => {
+    dispatch(changeModalreg(true))
+  }
+    
   return (    
    
-    <nav className='grid'>
+    <nav className='grid px-5 sticky top-0 bg-gray-100 z-10'>
+          <LoginUser />
+    <RegistrationUser />
+      <LoginSeller/>
       <div className='flex justify-between'>
         <div>Location</div>
-        <Link to=''>
-        <div>Become a seller</div>
-        </Link>
-      </div>
-      <div className='mt-5 flex'>
-        <div className='w-1/12'>Logo</div>
-        <div className='w-1/12'>
-          <Catalog/>
-        </div>
-        <search className='w-6/12 flex'>
-          <input className='w-10/12 border-2 border-gray-500 rounded-lg py-1 text-center'></input>
-          <button className=''><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-          </svg>
-          </button>
-        </search>
-        <div className='w-2/12'>
-        
-         <EntriesNew/>
-        
+        <div className='flex items-center'>
+          {sellerIsActive ? 
+          <>
+               
 
+                <Link to='/infoSeller'>
+                <div>Become a seller</div>
+                </Link>
+          </>
+          :
+          <>
+           <button onClick={setModalActiveLogSeller} className='mr-4 px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Selleer Sing in</button>
+
+            <Link to='/infoSeller'>
+            <div>Become a seller</div>
+            </Link>
+          </>
+          }
+         
         </div>
-        <Link to='/profile/favorites' className='w-1/12 ml-4'>
+      </div>
+      <div className='mt-5 flex items-center'>
+      <div className=" flex  ">
+          <Link to='/'>
+
+      <img
+      className="mx-auto h-12 w-auto"
+      src="/logo/LM5.png"
+      alt="Your Company"
+      />
+      <p className="text-2xl font-bold text-blue-800 ml-4"></p>
+          </Link>
+      </div>
+    
+        <div className='ml-4 w-1/12'>
+          <CatalogFinal/>
+        </div>
+        <search className='ml-3 w-6/12 flex'>
+         <SearchBar/>
+        </search>
+        {userIsActive ? <> <div className='w-2/12'>
+        
+        <EntriesMenu/>
+       </div>
+       <Link to='/profile/favorites' className='w-1/12 ml-4'>
         <div>Favorites</div>
         </Link>
         <Link to='/cart' className='w-1/12'>
         <div >Cart</div>
         </Link>
+       </> :
+       sellerIsActive ?
+       <>
+       <div className='w-2/12'>
+        
+        <EntriesMenu/>
+       </div>
+       </> :
+       <>
+         <div className='w-2/12'>
+        <button onClick={setModalActiveLog} className='px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Sing in</button>
+        <button onClick={setModalActiveReg} className='ml-2 px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Sing up</button>
+
+        </div>
+       </>
+       }
+        {/* <div className='w-2/12'>
+        
+         <EntriesMenu/>
+        </div> */}
+        {/* <div className='w-2/12'>
+        <button onClick={setModalActiveLog} className='px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Sing in</button>
+        <button onClick={setModalActiveReg} className='ml-2 px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Sing up</button>
+
+        </div> */}
+        {/* <Link to='/profile/favorites' className='w-1/12 ml-4'>
+        <div>Favorites</div>
+        </Link>
+        <Link to='/cart' className='w-1/12'>
+        <div >Cart</div>
+        </Link> */}
       </div>
     </nav>
 

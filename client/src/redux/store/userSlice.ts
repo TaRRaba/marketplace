@@ -1,30 +1,40 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { RootState } from "./store";
+import { IInitialState, Imodallog, IuserInfo } from "../../types/user/authTypes";
 
-interface userInfo {
-    id: number;
-    name: string;
-    email: string;
-}
-
-const initialState = {
+const initialState: IInitialState = {
     users: {},
+    modalreg: false,
+    modallog: false,
+    check: false
 }
 
 export const UserSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        setUser: (state, action: PayloadAction<userInfo>) => {
+        setUser: (state, action) => {
             state.users = action.payload;
         },
         deleteUser: (state, action) => {
-            state.users = {};
+            state.users = action.payload
+        },
+        resetCheckUser: (state, action)=>{
+            state.check = action.payload
+        },
+        changeModalreg: (state, action)=> {
+            state.modalreg = action.payload;
+        },
+        changeModallog: (state, action)=> {
+            state.modallog = action.payload;
+        },
+        checkUser: (state, action)=> {
+            state.check = action.payload;
         }
     }
 })
 
-export const { setUser, deleteUser } = UserSlice.actions
+export const { setUser, deleteUser, resetCheckUser, changeModallog, changeModalreg, checkUser } = UserSlice.actions
 
 export const selectUser = (state: RootState) => state.users.users
 

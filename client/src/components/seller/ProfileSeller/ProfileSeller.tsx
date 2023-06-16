@@ -1,66 +1,86 @@
 import React from 'react'
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import { Sidebar } from 'flowbite-react';
-import { HiArrowSmRight, HiTable, HiChartPie } from 'react-icons/hi';
-import SettingsSeller from '../SettingsSeller/SettingsSeller';
+import { HiArrowSmRight, HiTable, HiChartPie, HiAdjustments } from 'react-icons/hi';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../redux/store/hooks';
+import { deleteSeller, resetCheckSeller } from '../../../redux/store/sellerSlice';
+import { useAppSelector } from '../../../redux/store/hooks';
+import { RootState } from '../../../redux/store/store';
 
 export default function ProfileSeller() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
+  
+   const goods = useAppSelector((state: RootState) => state.goodsSeller.goodsSeller);
+  
+  const signOut = () => {
+    fetch('http://localhost:3001/api/auth/logout', {
+      credentials: 'include',
+    })
+    .then((res) => res.json())
+    // .then((data) => console.log(data))
+    .catch((error) => console.log(error))
+    dispatch(deleteSeller({}))
+    dispatch(resetCheckSeller(false))
+    navigate('/')
+  }
+  
   return (
-    <div className="grid grid-cols-3" >
+    <div className="grid grid-cols-3 mt-12" >
+
     <div >
     <Sidebar aria-label="Default sidebar example">
-    <div className="flex justify-center">
-        <UserCircleIcon className="flex justify-center h-28 w-28 text-gray-300" aria-hidden="true" />
-    </div>
-        <p>
-        Name
-        </p>
+      <div className="flex justify-center">
+          <UserCircleIcon className="flex justify-center h-28 w-28 text-gray-300" aria-hidden="true" />
+      </div>
+      <p className=' pb-9'>Name</p>
+
   <Sidebar.Items>
     <Sidebar.ItemGroup>
-      <Sidebar.Item
-      >
 
-      </Sidebar.Item>
+      <Link to="/profileSeller/settings">
       <Sidebar.Item
-        href="#"
-      >
-        <p>
-        Изменить
-        </p>
+      icon={HiAdjustments}>
+        <p>Настройки</p>
       </Sidebar.Item>
+      </Link>
+
+      <Link to="/profileSeller/goods">
       <Sidebar.Item
-        href="#"
         icon={HiTable}
-        label="3"
-      >
-        <p>
-          Товары
-        </p>
+        label={goods.length}>
+        <p>Товары</p>
       </Sidebar.Item>
+      </Link>
     
+      <Link to="/profileSeller/reports">
       <Sidebar.Item
-        href="#"
-        icon={HiChartPie}
-      >
-        <p>
-            Отчет
-        </p>
+        icon={HiChartPie}>
+        <p>Отчет</p>
       </Sidebar.Item>
+      </Link>
+
       <Sidebar.Item
-        href="#"
-        icon={HiArrowSmRight}
-      >
-        <p>
-          Выйти
-        </p>
+        onClick={signOut}
+        icon={HiArrowSmRight}>
+        <p>Выйти</p>
       </Sidebar.Item>
+
+      <Link to="profileSeller/new_goods"> 
+      </Link> 
+      <Link to="profileSeller/edit_goods/:id"> 
+      </Link> 
+
     </Sidebar.ItemGroup>
   </Sidebar.Items>
 </Sidebar>
     </div>
+
 <div className='col-span-2'>
-    <SettingsSeller></SettingsSeller>
+    <Outlet></Outlet>
 </div>
+
 </div>
   )
 }

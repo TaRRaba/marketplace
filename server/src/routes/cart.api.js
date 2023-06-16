@@ -11,6 +11,7 @@ cartApi.get('/', async (req, res) => {
     const cart = (await Carts.findOne({ where: { user_id: 1 } })).get({ plain: true });
     const data = (await Entries.findAll({ include: Goods, where: { cart_id: cart.id }, order: [['id', 'ASC']] }))
       .map((el) => el.get({ plain: true }));
+      console.log(data);
     res.json({ status: 200, data });
   } catch (error) {
     res.json(error);
