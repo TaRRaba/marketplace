@@ -3,6 +3,7 @@ import { RootState } from "./store";
 import { IInitialState, Imodallog, IuserInfo } from "../../types/user/authTypes";
 import { patchUserData } from "../thunks/userThunks/patchUserData.thunk";
 import { putUserPassword } from "../thunks/userThunks/putUserPassword.thunk";
+import { delUser } from "../thunks/userThunks/delUser.thunk";
 
 const initialState: IInitialState = {
     users: {},

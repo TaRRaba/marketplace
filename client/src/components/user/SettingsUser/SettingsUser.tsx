@@ -3,9 +3,14 @@ import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks'
 import { RootState } from '../../../redux/store/store'
 import { patchUserData } from '../../../redux/thunks/userThunks/patchUserData.thunk'
 import { putUserPassword } from '../../../redux/thunks/userThunks/putUserPassword.thunk'
+import { deleteUser, resetCheckUser } from '../../../redux/store/userSlice'
+import { delUser } from '../../../redux/thunks/userThunks/delUser.thunk'
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Settings() {
+
+  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const userData = useAppSelector((state: RootState) => state.users.users);
   const [userEditProfile, setUserEditProfile] = useState(false);
@@ -31,13 +36,10 @@ export default function Settings() {
   const saveUserPassword = () => {
     if(inputValuePassword.password === ''){
       setUserChangePassword(false)
-    } else{
-     
+    } else{     
       setUserChangePassword(false)
-      const data = {id: userData.id,
-        
+      const data = {id: userData.id,        
       password: inputValuePassword.password}
-
       dispatch(putUserPassword(data))
     }
   }
@@ -47,7 +49,6 @@ export default function Settings() {
     const data = {id: userData.id,
       name:inputValueUser.name,
     email: inputValueUser.email}
-
     dispatch(patchUserData(data))
   }
 
@@ -56,6 +57,14 @@ export default function Settings() {
   }
   const changeUserPassword = (e) => {
     setInputValuePassword((prevState) => ({...prevState, [e.target.name]: e.target.value}))
+  }
+
+  const delUserHandler = () => {
+   const data = { id: userData.id}
+    dispatch(delUser(data))
+    dispatch(resetCheckUser(false))
+    dispatch(deleteUser({}))
+    navigate("/")
   }
   
   
@@ -125,16 +134,9 @@ export default function Settings() {
         </div>
       </>
       }
-        {/* <h2>Пароль: •••••••••••</h2>
         <div className='flex justify-center'>
         <button
-            type="button"
-            className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-            Изменить
-        </button>
-        </div> */}
-        <div className='flex justify-center'>
-        <button
+            onClick={delUserHandler}
             type="button"
             className="rounded-md bg-red-400 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500">
             Удалить профиль
