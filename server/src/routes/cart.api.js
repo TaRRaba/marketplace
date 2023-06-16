@@ -31,7 +31,7 @@ cartApi.post('/addAmountCart', async (req, res) => {
       );
       res.json({ status: 200 });
     } else {
-      const data = await Entries.create({ cart_id: cart.id, good_id: goodID, quantity: amount })
+      const data = (await Entries.create({ cart_id: cart.id, good_id: goodID, quantity: amount }))
         .get({ plain: true });
       res.json({ status: 201, data });
     }

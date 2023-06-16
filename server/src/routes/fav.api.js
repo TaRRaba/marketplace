@@ -2,7 +2,9 @@ const express = require('express');
 // const bcrypt = require('bcrypt');
 
 const favApi = express.Router();
-const { Favourites, Entries, Goods } = require('../../db/models');
+const {
+  Favourites, Categories, SubCategories, Entries, Goods,
+} = require('../../db/models');
 // const isAuth = require('../middleware/isAuth');
 
 favApi.get('/', async (req, res) => {
@@ -18,12 +20,21 @@ favApi.get('/', async (req, res) => {
 });
 
 // Для отображения всех товаров
-favApi.get('/goods', async (req, res) => {
+favApi.get('/category/:id', async (req, res) => {
+  const { id } = req.params;
   try {
-    const data = (await Goods.findAll({ order: [['id', 'ASC']] })).map((el) => el.get({ plain: true }));
-    res.json({ status: 200, data });
+    const catName = (await Categories.findOne({ where: { id } })).get({ plain: true }).fullName;
+    const subCat = [];
+    (await SubCategories.findAll({ where: { category_id: id } }))
+      .map((el) => el.get({ plain: true }))
+      .map((el) => subCat.push({ name: el.fullName, id: el.id }));
+    const data = (await Goods.findAll({ include: { model: SubCategories, as: 'SubCategory' }, where: { '$SubCategory.category_id$': id }, order: [['id', 'ASC']] }))
+      .map((el) => el.get({ plain: true }));
+    res.json({
+      status: 200, data, subCat, catName,
+    });
   } catch (error) {
-    res.json(error);
+    console.log(error);
   }
 });
 
