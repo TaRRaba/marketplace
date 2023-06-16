@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 export default function GoodsCard() {
- const { id } = useParams()
+ const { id } = useParams()  //id товара
 
   const [card, setCard] = useState({})
   const [count, setCount] = useState(1)

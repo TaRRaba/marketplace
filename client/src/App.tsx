@@ -114,7 +114,6 @@ function App() {
 
       <DetailOrder></DetailOrder>
 
-
       <FooterFinal/>
 
     </>
