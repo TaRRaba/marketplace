@@ -77,7 +77,7 @@ function App() {
 
   return (
     <> 
-      {/* <UserNavBar/> */}
+      <UserNavBar/>
 
       {/* <Routes>
       <Route path="/cart" element={<Cart />}/>
