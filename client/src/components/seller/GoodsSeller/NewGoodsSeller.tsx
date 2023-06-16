@@ -1,31 +1,24 @@
 import { FileInput, Label } from 'flowbite-react'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAppSelector } from '../../../redux/store/hooks'
+import { RootState } from '../../../redux/store/store'
 
 export function NewGoodsSeller() {
      
      const navigate = useNavigate()
-     const [allCategor, setAllCategor] = useState([])
+     const category = useAppSelector((state: RootState) => state.good.category)
+
+     const [allCategory, setAllCategory] = useState([])
      const [categoryValue, setCategoryValue] = useState('')
 
      useEffect(()=> {
-        (async function() {
-            try {
-                const response = await fetch('http://localhost:3001/api/seller/categories', {
-                    credentials: 'include',
-                })
-                const result = await response.json();
-                
-                setAllCategor(result)
-                setCategoryValue('1')
-              } catch (error) {
-                  console.log(error);
-              }
-        })()
-      }, [])
+      setAllCategory(category)
+      setCategoryValue('1')
+      }, [category])
 
       const subCategory = () => {
-        return allCategor.filter((el) => el.id === Number(categoryValue))
+        return allCategory.filter((el) => el.id === Number(categoryValue))
       }
 
       const handSummit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -60,7 +53,7 @@ export function NewGoodsSeller() {
       <label className=""> Категория товара </label>
       <div className="relative w-64 mt-2 bg-gray-100 rounded-lg">
         <select value={categoryValue}  onChange={(e)=> setCategoryValue(e.target.value)} name="categories" className="relative w-64 bg-gray-100 rounded-lg">
-            {allCategor && allCategor.map((el)=> (
+            {allCategory && allCategory.map((el)=> (
                 <option key={el?.id} value={el?.id}>{el?.fullName}</option>
             ))}
         </select>
