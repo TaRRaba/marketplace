@@ -32,6 +32,7 @@ import { useEffect } from 'react'
 import { checkUser, setUser } from './redux/store/userSlice'
 import { checkSeller, setSeller } from './redux/store/sellerSlice'
 import Reports from './components/seller/Reports/Reports'
+import { EditGoods } from './components/seller/GoodsSeller/EditGoods'
 
 function App() {
 
@@ -89,7 +90,7 @@ function App() {
           <Route path='settings' element={<SettingsSeller/>}></Route>
           <Route path='goods' element={<GoodsSeller></GoodsSeller>}></Route>
           <Route path='new_goods' element={<NewGoodsSeller></NewGoodsSeller>}></Route>
-          <Route path='edit_goods/:id' element={<p>edit goods</p>}></Route>   
+          <Route path='edit_goods/:id' element={<EditGoods></EditGoods>}></Route>   
           <Route path='reports' element={<Reports></Reports>}></Route>     
       </Route>
       </Routes> 
@@ -103,7 +104,7 @@ function App() {
       {/* <Cart /> */}
       {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
-      <GoodsList />
+      {/* <GoodsList /> */}
       {/* <CardInList></CardInList> */}
       {/* <GoodsCard></GoodsCard> */}
       {/* <InfoSeller></InfoSeller> */}
@@ -111,18 +112,6 @@ function App() {
       {/* <DefaultFooter/> */}
       
       <FooterFinal/>
-
-    {/* рабочая версия роута кабинета продавца */}
-      {/* <Route path="/profileSeller" element={<ProfileSeller/>}> 
-          <Route path='settings' element={<SettingsSeller/>}></Route>
-          <Route path='goods' element={<GoodsSeller></GoodsSeller>}></Route>
-          <Route path='reports' element={<p>orders</p>}></Route>  
-          <Route path='new_goods' element={<NewGoodsSeller></NewGoodsSeller>}></Route>
-          <Route path='edit_goods/:id' element={<p>edit goods</p>}></Route>   
-      </Route>
-       */}
-
-      {/* <FooterFinal/> */}
 
     </>
   )
