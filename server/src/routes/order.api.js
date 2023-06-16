@@ -1,23 +1,30 @@
 const express = require('express');
 // const bcrypt = require('bcrypt');
 
-const cartApi = express.Router();
-const { Carts, Entries, Goods } = require('../../db/models');
+const orderApi = express.Router();
+const {
+  Carts, Entries, Goods, Orders,
+} = require('../../db/models');
 // const isAuth = require('../middleware/isAuth');
 
-cartApi.get('/', async (req, res) => {
+orderApi.get('/', async (req, res) => {
   const userID = req.session.user.id;
   try {
-    const cart = (await Carts.findOne({ where: { user_id: userID } })).get({ plain: true });
-    const data = (await Entries.findAll({ include: Goods, where: { cart_id: cart.id }, order: [['id', 'ASC']] }))
-      .map((el) => el.get({ plain: true }));
+    const orders = (await Orders.findAll({ where: { user_id: userID } }))
+      .map((el) => el.get({ plain: true })).map((el) => el.id);
+    const result = (await Entries.findAll({
+      include: Goods,
+      where: { order_id: orders },
+    })).map((el) => el.get({ plain: true }));
+    const data = orders.map((e) => result.filter((el) => el.order_id === e));
+    console.log(data);
     res.json({ status: 200, data });
   } catch (error) {
     res.json(error);
   }
 });
 
-cartApi.post('/addAmountCart', async (req, res) => {
+orderApi.post('/addAmountCart', async (req, res) => {
   const { goodID, amount } = req.body;
   const userID = req.session.user.id;
   try {
@@ -41,7 +48,7 @@ cartApi.post('/addAmountCart', async (req, res) => {
   }
 });
 
-cartApi.patch('/newAmount', async (req, res) => {
+orderApi.patch('/newAmount', async (req, res) => {
   const { entryID, goodID, amount } = req.body;
   try {
     if (goodID) {
@@ -61,7 +68,7 @@ cartApi.patch('/newAmount', async (req, res) => {
   }
 });
 
-cartApi.delete('/', async (req, res) => {
+orderApi.delete('/', async (req, res) => {
   const { entryID } = req.body;
   try {
     await Entries.destroy({ where: { id: entryID } });
@@ -71,4 +78,4 @@ cartApi.delete('/', async (req, res) => {
   }
 });
 
-module.exports = cartApi;
+module.exports = orderApi;

@@ -33,6 +33,7 @@ import { checkUser, setUser } from './redux/store/userSlice'
 import { checkSeller, setSeller } from './redux/store/sellerSlice'
 import Reports from './components/seller/Reports/Reports'
 import { EditGoods } from './components/seller/GoodsSeller/EditGoods'
+import { Orders } from './components/orders/Orders'
 
 function App() {
 
@@ -102,6 +103,7 @@ function App() {
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
       {/* <Cart /> */}
+      <Orders />
       {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <GoodsList /> */}
