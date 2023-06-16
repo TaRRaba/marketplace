@@ -77,9 +77,9 @@ function App() {
 
   return (
     <> 
-      <UserNavBar/>
+      {/* <UserNavBar/> */}
 
-      <Routes>
+      {/* <Routes>
       <Route path="/cart" element={<Cart />}/>
       <Route path="/profile" element={<ProfileUser />}/>      
       <Route path="/infoSeller" element={<InfoSeller />}/>      
@@ -92,7 +92,7 @@ function App() {
           <Route path='edit_goods/:id' element={<p>edit goods</p>}></Route>   
           <Route path='reports' element={<Reports></Reports>}></Route>     
       </Route>
-      </Routes> 
+      </Routes>  */}
 
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
