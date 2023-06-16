@@ -66,9 +66,10 @@ function App() {
           })
           const result = await response.json()
           if(result){
-
+              console.log(result);
+              
             dispatch(checkSeller(true))     
-            dispatch(setSeller({id: result.id, name: result.name, email: result.email, inn: result.INN}))    
+            dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))    
           }
         } catch (error) {
           console.log(error);
@@ -81,7 +82,7 @@ function App() {
     <> 
       <UserNavBar/>
 
-      {/* <Routes>
+      <Routes>
       <Route path="/cart" element={<Cart />}/>
       <Route path="/profile" element={<ProfileUser />}/>      
       <Route path="/infoSeller" element={<InfoSeller />}/>      
@@ -94,7 +95,7 @@ function App() {
           <Route path='edit_goods/:id' element={<EditGoods></EditGoods>}></Route>   
           <Route path='reports' element={<Reports></Reports>}></Route>     
       </Route>
-      </Routes>  */}
+      </Routes> 
 
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}

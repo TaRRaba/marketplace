@@ -10,6 +10,7 @@ authApi.get('/checkSeller', async (req, res) => {
   if (req.session.seller) {
     // console.log(req.session.seller);
     const sellerCheck = req.session.seller;
+    
     res.json(sellerCheck);
   } else {
     const noSeller = false;
