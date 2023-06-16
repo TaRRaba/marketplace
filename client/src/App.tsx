@@ -32,6 +32,8 @@ import { useEffect } from 'react'
 import { checkUser, setUser } from './redux/store/userSlice'
 import { checkSeller, setSeller } from './redux/store/sellerSlice'
 import Reports from './components/seller/Reports/Reports'
+import Stripe from './components/stripe/Stripe'
+import Completion from './components/stripe/Completion'
 
 function App() {
 
@@ -80,7 +82,8 @@ function App() {
       <UserNavBar/>
 
       <Routes>
-      <Route path="/cart" element={<Cart />}/>
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/completion" element={<Completion />}></Route>
       <Route path="/profile" element={<ProfileUser />}/>      
       <Route path="/infoSeller" element={<InfoSeller />}/>      
       <Route path="/" element={<Main/>}/>
@@ -94,6 +97,7 @@ function App() {
       </Route>
       </Routes> 
 
+      {/* <Stripe></Stripe> */}
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
       {/* <RegistrationUser></RegistrationUser> */}
@@ -103,14 +107,14 @@ function App() {
       {/* <Cart /> */}
       {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
-      <GoodsList />
+      {/* <GoodsList /> */}
       {/* <CardInList></CardInList> */}
       {/* <GoodsCard></GoodsCard> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <DefaultFooter/> */}
       
-      <FooterFinal/>
+      {/* <FooterFinal/> */}
 
     {/* рабочая версия роута кабинета продавца */}
       {/* <Route path="/profileSeller" element={<ProfileSeller/>}> 

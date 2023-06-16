@@ -6,12 +6,12 @@ const { Carts, Entries, Goods } = require('../../db/models');
 // const isAuth = require('../middleware/isAuth');
 
 cartApi.get('/', async (req, res) => {
-//   const userID = req.session.user.id;
+  const userID = req.session.user.id;
   try {
-    const cart = (await Carts.findOne({ where: { user_id: 1 } })).get({ plain: true });
+    const cart = (await Carts.findOne({ where: { user_id: userID } })).get({ plain: true });
     const data = (await Entries.findAll({ include: Goods, where: { cart_id: cart.id }, order: [['id', 'ASC']] }))
       .map((el) => el.get({ plain: true }));
-      console.log(data);
+    // console.log(data);
     res.json({ status: 200, data });
   } catch (error) {
     res.json(error);
