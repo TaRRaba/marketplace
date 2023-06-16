@@ -8,7 +8,8 @@ const {
 
 authApi.get('/checkSeller', async (req, res) => {
   if (req.session.seller) {
-    const sellerCheck = true;
+    // console.log(req.session.seller);
+    const sellerCheck = req.session.seller;
     res.json(sellerCheck);
   } else {
     const noSeller = false;
@@ -18,7 +19,8 @@ authApi.get('/checkSeller', async (req, res) => {
 
 authApi.get('/checkUser', async (req, res) => {
   if (req.session.user) {
-    const userCheck = true;
+   
+    const userCheck = req.session.user;
     res.json(userCheck);
   } else {
     const noUser = false;

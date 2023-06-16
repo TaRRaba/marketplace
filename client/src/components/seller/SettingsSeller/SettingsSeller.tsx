@@ -1,11 +1,15 @@
 import React from 'react'
+import { useAppSelector } from '../../../redux/store/hooks'
+import { RootState } from '../../../redux/store/store'
 
 export default function SettingsSeller() {
+
+  const sellerData = useAppSelector((state: RootState) => state.sellers.seller)
   return (
     <div className='grid gap-8'>
-        <h1>Имя:</h1>
-        <h2>Email:</h2>
-        <h2>ИНН:</h2>
+        <h1>Имя: {sellerData.name}</h1>
+        <h2>Email: {sellerData.email}</h2>
+        <h2>ИНН: {sellerData.inn}</h2>
         <div className='flex justify-center'>
         <button
             type="button"
