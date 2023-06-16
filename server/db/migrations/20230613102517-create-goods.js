@@ -32,7 +32,6 @@ module.exports = {
           model: 'Sellers',
           key: 'id',
         },
-        onDelete: 'cascade',
         allowNull: false,
       },
       subcategory_id: {

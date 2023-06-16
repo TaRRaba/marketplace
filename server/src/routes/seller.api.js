@@ -1,5 +1,6 @@
-const express = require("express");
-const fileMiddleware = require("../middlewares/file");
+const express = require('express');
+const bcrypt = require('bcrypt');
+const fileMiddleware = require('../middlewares/file');
 
 const sellerApi = express.Router();
 const {
@@ -7,16 +8,17 @@ const {
   Categories,
   SubCategories,
   Entries,
-} = require("../../db/models");
+  Sellers,
+} = require('../../db/models');
 
-sellerApi.get("/goods", async (req, res) => {
+sellerApi.get('/goods', async (req, res) => {
   //   const { id } = req.session.seller;
   const id = 1;
   try {
     const allGoods = (
       await Goods.findAll({
         where: { seller_id: id },
-        order: [["updatedAt", "DESC"]],
+        order: [['updatedAt', 'DESC']],
       })
     ).map((el) => el.get({ plain: true }));
     res.json(allGoods);
@@ -25,7 +27,7 @@ sellerApi.get("/goods", async (req, res) => {
   }
 });
 
-sellerApi.patch("/goods", fileMiddleware.single("img"), async (req, res) => {
+sellerApi.patch('/goods', fileMiddleware.single('img'), async (req, res) => {
   //   const { id } = req.session.seller;
   const id = 1;
   const {
@@ -58,12 +60,12 @@ sellerApi.patch("/goods", fileMiddleware.single("img"), async (req, res) => {
         amount: Number(amount),
         subcategory_id: Number(subcategories),
       },
-      { where: { id: Number(idProduct), seller_id: id } }
+      { where: { id: Number(idProduct), seller_id: id } },
     );
     if (req.file !== undefined) {
       const editImageGoods = await Goods.update(
         { img_url: `/${req.file.path}` },
-        { where: { id: Number(idProduct), seller_id: id } }
+        { where: { id: Number(idProduct), seller_id: id } },
       );
     }
     res.json({ status: 200 });
@@ -72,7 +74,7 @@ sellerApi.patch("/goods", fileMiddleware.single("img"), async (req, res) => {
   }
 });
 
-sellerApi.delete("/goods", async (req, res) => {
+sellerApi.delete('/goods', async (req, res) => {
   const { goodsId } = req.body;
   //   const { id } = req.session.seller;
   const id = 1;
@@ -86,7 +88,7 @@ sellerApi.delete("/goods", async (req, res) => {
   }
 });
 
-sellerApi.get("/categories", async (req, res) => {
+sellerApi.get('/categories', async (req, res) => {
   try {
     const allCategories = (
       await Categories.findAll({ include: SubCategories })
@@ -97,7 +99,7 @@ sellerApi.get("/categories", async (req, res) => {
   }
 });
 
-sellerApi.post("/newgoods", fileMiddleware.single("img"), async (req, res) => {
+sellerApi.post('/newgoods', fileMiddleware.single('img'), async (req, res) => {
   //   const { id } = req.session.seller;
   const id = 1;
   const {
@@ -139,7 +141,7 @@ sellerApi.post("/newgoods", fileMiddleware.single("img"), async (req, res) => {
   }
 });
 
-sellerApi.get("/reports", async (req, res) => {
+sellerApi.get('/reports', async (req, res) => {
   // const { id } = req.session.seller;
   const id = 1;
   try {
@@ -156,4 +158,61 @@ sellerApi.get("/reports", async (req, res) => {
   }
 });
 
+//! start
+
+sellerApi.patch('/editData', async (req, res) => {
+  console.log(req.body);
+  const {
+    name, email, id, INN,
+  } = req.body;
+
+  try {
+    const updated = await Sellers.update({ name, email, INN }, { where: { id }, returning: true });
+
+    const data = updated[1][0].get({ plain: true });
+
+    console.log(data);
+    res.json({ status: 200, data });
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+sellerApi.put('/password', async (req, res) => {
+  const { id, password } = req.body;
+  console.log(req.body);
+  try {
+    const hashPass = await bcrypt.hash(password, 10);
+
+    const updated = await Sellers.update({ password: hashPass }, { where: { id }, returning: true });
+
+    const data = updated[1][0].get({ plain: true });
+    console.log(data);
+    res.json({ status: 200, data });
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+sellerApi.delete('/del', async (req, res) => {
+  const { id } = req.body;
+  try {
+    await Goods.update({ amount: 0 }, { where: { seller_id: id } });
+    console.log('start');
+    await Sellers.destroy({ where: { id } });
+    console.log('finish');
+    req.session.destroy((error) => {
+      if (error) console.log(error);
+      else {
+        res.clearCookie('MarketPlace');
+        res.json({ status: 200 });
+      }
+    });
+  } catch (error) {
+    res.send(error);
+  }
+});
+
 module.exports = sellerApi;
+
+

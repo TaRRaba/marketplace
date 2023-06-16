@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./RegistrationSeller.css";
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { changeModalreg, setSeller } from '../../../redux/store/sellerSlice';
+import { changeModalreg, checkSeller, setSeller } from '../../../redux/store/sellerSlice';
 import { RootState } from '../../../redux/store/store';
 
 export default function RegistrationSeller() {
@@ -40,6 +40,7 @@ export default function RegistrationSeller() {
       if (result.status === 201) {
         setRepeatSeller(false)
         dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))
+        dispatch(checkSeller(true)) 
         dispatch(changeModalreg(false))
         navigate('/') // указать куда перекидывать
       } else {
