@@ -20,7 +20,7 @@ interface IOrderInfo {
 }
 
 export function DetailOrder() {
-  // const { id } = useParams()  //id заказа (order)
+  const { id } = useParams() 
   const [orderInfo, setOrderInfo] = useState<IOrderInfo>({detailOrder: [], order: {}})
 
   const [open, setOpen] = useState(false)
@@ -28,7 +28,7 @@ export function DetailOrder() {
 
   useEffect(()=> {
     (async function () {
-     const response = await fetch(`http://localhost:3001/api/order/${1}`, {
+     const response = await fetch(`http://localhost:3001/api/order/${id}`, {
         credentials: 'include'
       })
       const result = await response.json()
@@ -36,7 +36,7 @@ export function DetailOrder() {
     })()
   }, [])
   
-  console.log("orderInfo-------", orderInfo);
+  // console.log("orderInfo-------", orderInfo);
   
 
   return (

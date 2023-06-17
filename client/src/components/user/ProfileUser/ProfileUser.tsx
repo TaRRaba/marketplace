@@ -1,10 +1,10 @@
 import React from 'react'
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import { Sidebar } from 'flowbite-react';
-import { HiArrowSmRight, HiInbox, HiShoppingBag } from 'react-icons/hi';
+import { HiArrowSmRight, HiUser, HiShoppingBag, HiInbox } from 'react-icons/hi';
 import Settings from '../SettingsUser/SettingsUser';
 import { useAppDispatch } from '../../../redux/store/hooks';
-import { useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { deleteUser, resetCheckUser } from '../../../redux/store/userSlice';
 
 export default function ProfileUser() {
@@ -39,15 +39,17 @@ export default function ProfileUser() {
           >
 
           </Sidebar.Item>
+          <Link to="/profile/settings">
           <Sidebar.Item
-            href="#"
+          icon={HiUser}
           >
             <p>
-            Изменить
+            Учетные данные
             </p>
           </Sidebar.Item>
+          </Link>
+          <Link to="/profile/favourites">
           <Sidebar.Item
-            href="#"
             icon={HiInbox}
             label="3"
           >
@@ -55,15 +57,16 @@ export default function ProfileUser() {
               Избранное
             </p>
           </Sidebar.Item>
-        
+          </Link>
+          <Link to="/profile/orders">
           <Sidebar.Item
-            href="#"
             icon={HiShoppingBag}
           >
             <p>
                 Заказы
             </p>
           </Sidebar.Item>
+          </Link>
           <Sidebar.Item
             onClick={signOut}
             icon={HiArrowSmRight}>
@@ -74,9 +77,10 @@ export default function ProfileUser() {
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>
+    <Link to="/profile/orders/:id" />
         </div>
     <div className='col-span-2'>
-        <Settings></Settings>
+        <Outlet />
     </div>
     </div>
   )

@@ -4,6 +4,7 @@ import { RootState } from '../../redux/store/store';
 import { removeFromFav } from '../../redux/thunks/favThunks/removeFromFav.thunk';
 import { addToFav } from '../../redux/thunks/favThunks/addToFav.thunk';
 import { addAmountCart } from '../../redux/thunks/cartThunks/addAmountCart.thunk';
+import { Link } from 'react-router-dom';
 
 export const SearchCard = () => {
 
@@ -43,15 +44,15 @@ function checkCart(id: number) {
                   :
                   null
                 }
+                      <Link to={`/goods/${name}`}>
                 <div className="mb-4">
                   <div className="relative overflow-hidden rounded-xl">
-                    <a href={`/goods/${name}`}>
-                      <img className="p-2 mb-1" src={`http://localhost:3001${img_url}`} alt="preview" />
-                    </a>
+                      <img className="cursor-pointer p-2 mb-1" src={`http://localhost:3001${img_url}`} alt="preview" />
                   </div>
-                    <h2 className="text-slate-700 line-clamp-3">{name}</h2>
+                    <h2 className="cursor-pointer text-slate-700 hover:text-slate-500 line-clamp-3">{name}</h2>
     
                 </div>
+                </Link>
                   <p className="mt-1 text-sm text-green-700">В наличии</p>
                   <div className="mt-3 flex items-center justify-between">
                   <p className="text-lg font-bold text-teal-800">

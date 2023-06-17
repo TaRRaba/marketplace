@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import { Sidebar } from 'flowbite-react';
-import { HiArrowSmRight, HiTable, HiChartPie, HiAdjustments } from 'react-icons/hi';
+import { HiArrowSmRight, HiTable, HiShoppingBag, HiUser, HiChartPie } from 'react-icons/hi';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../redux/store/hooks';
 import { deleteSeller, resetCheckSeller } from '../../../redux/store/sellerSlice';
@@ -46,23 +46,30 @@ export default function ProfileSeller() {
 
       <Link to="/profileSeller/settings">
       <Sidebar.Item
-      icon={HiAdjustments}>
-        <p>Настройки</p>
+      icon={HiUser}>
+        <p>Учетные данные</p>
       </Sidebar.Item>
       </Link>
 
       <Link to="/profileSeller/goods">
       <Sidebar.Item
-        icon={HiTable}
+      icon={HiShoppingBag}
         label={goods.length}>
         <p>Товары</p>
+      </Sidebar.Item>
+      </Link>
+
+      <Link to="/profileSeller/orders">
+      <Sidebar.Item
+        icon={HiTable}>
+        <p>Заказы</p>
       </Sidebar.Item>
       </Link>
     
       <Link to="/profileSeller/reports">
       <Sidebar.Item
         icon={HiChartPie}>
-        <p>Отчет</p>
+        <p>Отчеты</p>
       </Sidebar.Item>
       </Link>
 

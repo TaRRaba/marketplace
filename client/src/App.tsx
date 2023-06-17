@@ -26,7 +26,7 @@ import { Main } from './components/main/Main'
 import { NewGoodsSeller } from './components/seller/GoodsSeller/NewGoodsSeller'
 
 import { SearchCard } from './components/Search/SearchCard'
-import { useAppDispatch } from './redux/store/hooks'
+import { useAppDispatch, useAppSelector } from './redux/store/hooks'
 import { useEffect } from 'react'
 import { checkUser, setUser } from './redux/store/userSlice'
 import { checkSeller, setSeller } from './redux/store/sellerSlice'
@@ -43,9 +43,12 @@ import { DetailOrder } from './components/user/Orders/DetailOrder'
 
 import { Maps } from './components/map/Maps'
 import { SellerOrders } from './components/sellerOrders/sellerOrders'
+import { RootState } from './redux/store/store'
+import SettingsUser from './components/user/SettingsUser/SettingsUser'
 
 function App() {
-
+  const category = useAppSelector((state: RootState) => state.good.category)
+  const good = useAppSelector((state: RootState) => state.good.allgood)
   const dispatch = useAppDispatch()
 
   useEffect( () => {
@@ -54,7 +57,6 @@ function App() {
         credentials: "include",
         })
         const result = await response.json()
-        console.log(result);
         if (result){
 
           dispatch(checkUser(true))
@@ -75,8 +77,6 @@ function App() {
           })
           const result = await response.json()
           if(result){
-              console.log(result);
-              
             dispatch(checkSeller(true))     
             dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))    
           }
@@ -101,18 +101,31 @@ function App() {
       {/* <Routes>
       <Route path="/cart" element={<Cart />}/>
       {/* <Route path="/Bannerpromotion" element={<BannerPromotion />}/> */}
-      <Route path="/profile" element={<ProfileUser />}/>      
+      <Route path="/profile" element={<ProfileUser />}/>
+      {category && category.map((el) => (
+        <Route key={`cat_${el.id}`} path={`/${el.name}`} element={<GoodsList CatId={el.id} />}/>  
+      ))}     
+      {good && good.map((el) => (
+        <Route key={`good_${el.id}`} path={`/goods/${el.name}`} element={<GoodsCard GoodID={el.id} />}/>  
+      ))}    
       <Route path="/infoSeller" element={<InfoSeller />}/>      
       <Route path="/" element={<Main/>}/>
       <Route path="/search" element={<SearchCard/>}/>
       <Route path="/profileSeller" element={<ProfileSeller/>}> 
           <Route path='settings' element={<SettingsSeller/>}></Route>
-          <Route path='goods' element={<GoodsSeller></GoodsSeller>}></Route>
-          <Route path='new_goods' element={<NewGoodsSeller></NewGoodsSeller>}></Route>
-          <Route path='edit_goods/:id' element={<EditGoods></EditGoods>}></Route>   
-          <Route path='reports' element={<Reports></Reports>}></Route>     
+          <Route path='goods' element={<GoodsSeller />}></Route>
+          <Route path='new_goods' element={<NewGoodsSeller />}></Route>
+          <Route path='edit_goods/:id' element={<EditGoods />}></Route>   
+          <Route path='orders' element={<SellerOrders />}></Route>  
+          <Route path='reports' element={<Reports />}></Route>     
       </Route>
-      </Routes>  */}
+      <Route path="/profile" element={<ProfileUser/>}> 
+          <Route path='settings' element={<SettingsUser/>}></Route>
+          <Route path='favourites' element={<Favourites />}></Route>
+          <Route path='orders' element={<Orders />}></Route>    
+          <Route path='orders/:id' element={<DetailOrder />}></Route>   
+      </Route>
+      </Routes>
 
       {/* <Stripe></Stripe> */}
       {/* <RegistrationSeller></RegistrationSeller> */}
@@ -136,7 +149,7 @@ function App() {
 
       {/* <DetailOrder></DetailOrder> */}
 
-      <Maps></Maps>
+      {/* <Maps></Maps> */}
       <FooterFinal/>
 
     </>

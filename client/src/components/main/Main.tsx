@@ -13,7 +13,7 @@ export const Main = () => {
     <a href='/#'>
     <video autoPlay loop controlsList='nodownload' className="n8o9J" muted data-testid="main-banner-video" playsInline ><source src="https://cdn2.static1-sima-land.com/share/16809.mp4"/></video>
     </a>
-    <nav className="flex bg-gray-100 text-gray-700  px-5" aria-label="Breadcrumb">
+    {/* <nav className="flex bg-gray-100 text-gray-700  px-5" aria-label="Breadcrumb">
         <ol className="inline-flex items-center space-x-1 md:space-x-3">
           <li className="inline-flex items-center">
             <a href="/" className="text-gray-500 hover:text-black text-sm inline-flex font-medium items-center">
@@ -22,7 +22,7 @@ export const Main = () => {
             </a>
           </li>
         </ol>
-      </nav>
+      </nav> */}
     <CardsPopular/>
     </>
   )
