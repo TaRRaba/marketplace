@@ -81,14 +81,20 @@ export const Cart = () => {
                 <div key={Good.id} id={String(id)} className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                   <img src={`http://localhost:3001${Good.img_url}`} alt="" className="rounded-lg w-40" />
                   <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
-                    <div className="mt-5 w-80 sm:mt-0">
-                      <a href={`/goods/${Good.name}`}><h2 className="text-left text-lg font-bold text-gray-900 hover:text-gray-500">{Good.name}</h2></a>
-                      <p className="text-left mt-1 text-sm text-gray-700">
-                        {Good.price}
-                        {' '}
-                        ₽
-                      </p>
-                    </div>
+                  <div className="mt-5 w-80 sm:mt-0">
+                <a href={`/goods/${Good.name}`}><h2 className="line-clamp-3 text-left text-lg font-bold text-gray-900 hover:text-gray-500">{Good.name}</h2></a>
+                {Good.amount === 0 ? 
+                <p className="text-left mt-3 text-md text-red-600">Нет в наличии</p>
+                : Good.amount > 10 ?
+                <p className="text-left mt-3 text-md text-green-700">В наличии</p>
+                :
+                <p className="text-left mt-3 text-md text-yellow-500">Осталось мало</p>
+                }
+                <div className="flex mt-5 w-80 sm:mt-0">
+                <p className="text-left mt-5 text-xs text-gray-500">Страна: {Good.country}</p>
+                <p className="ml-5 text-left mt-5 text-xs text-gray-500">Производитель: {Good.specs.brand}</p>
+              </div>
+              </div>
                     <div className="flex flex-col mt-0">
                       <svg onClick={() => (dispatch(delPos({entryId: id})))} className="delPos h-5 w-5 self-end cursor-pointer duration-150 hover:text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
                         <path className="delPos" strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -110,7 +116,6 @@ export const Cart = () => {
                 </div>
               ))}
             </div>
-
             <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
               <div className="flex justify-between">
                 <p className="text-lg font-bold">Итого:</p>
@@ -137,13 +142,6 @@ export const Cart = () => {
           <div className="text-2xl my-40 justify-center text-gray-700 m-auto">Ваша корзина пуста!</div>
         </section>
       )}
-      <section id="emptyCart" className="visibility: hidden py-10 flex bg-gray-100">
-        <div className="text-2xl my-40 justify-center text-gray-700 m-auto">Ваша корзина пуста!</div>
-      </section>
-      <section id="newOrder" className="visibility: hidden py-10 flex flex-col bg-gray-100">
-        <div className="text-2xl mt-40 justify-center text-gray-700 m-auto">Ваш заказ сформирован!</div>
-        <p className="text-md mt-10 mb-40 justify-center text-gray-700 m-auto">Наш менеджер скоро свяжется с Вами.</p>
-      </section>
         </>
       );
 }

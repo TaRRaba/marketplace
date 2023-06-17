@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
 import { RootState } from '../../redux/store/store';
 import { getCart } from '../../redux/thunks/cartThunks/getCart.thunk';
@@ -12,7 +12,6 @@ import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
 import { IGoodData } from '../../types/cart/cartTypes';
-import { useNavigate } from 'react-router-dom';
 
 interface ISubCat {
     name: string;
@@ -33,8 +32,8 @@ interface IFilters {
 
 
 export const GoodsList = () => {
-    const navigate = useNavigate();
     const dispatch = useAppDispatch();
+    const prices: NodeListOf<HTMLElement> = document.getElementsByName("price");
     const cart = useAppSelector((state: RootState) => state.cart.cart);
     const favourites = useAppSelector((state: RootState) => state.favourites.favourites);
     let [goods, setGoods] = useState<IGoodData[]>([]);
@@ -43,12 +42,11 @@ export const GoodsList = () => {
     const [catName, setCatName] = useState('');
     const [maxPrice, setMaxPrice] = useState(0);
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-    const [filterState, setFilterState] = useState(true);
     const [sortOptions, setSortOptions] = useState([
-        { name: 'Популярные', current: false },
-        { name: 'Новинки', current: false },
-        { name: 'Сначала дешевые', current: false },
-        { name: 'Сначала дорогие', current: false },
+        { name: 'Популярные', type: 'popular', current: false },
+        { name: 'Новинки', type: 'newest', current: false },
+        { name: 'Сначала дешевые', type: 'cheapest', current: false },
+        { name: 'Сначала дорогие', type: 'expensive', current: false },
     ]);
     const [filters, setFilters] = useState<IFilters[]>([
           {
@@ -62,8 +60,10 @@ export const GoodsList = () => {
             options: [],
           }
     ]);
+    const [filtersBackup, setFiltersBackup] = useState<IFilters[]>([...filters]);
 
     function initFilters() {
+        if (goods.length > 0) {
           const uniqueCountryValues = [...new Set(goods.map(good => good.country))];
           const uniqueBrandValues = [...new Set(goods.map(good => good.specs.brand))];
           const countryFilters = uniqueCountryValues.map(country => {
@@ -82,9 +82,14 @@ export const GoodsList = () => {
           });
         filters[0].options = countryFilters;
         filters[1].options = brandsFilters;
+        setFiltersBackup(filters);
+        } else {
+        setFilters(filtersBackup);
+        }
     }
 
     function getMaxPrice(data:IGoodData[]) {
+
         const maxPriceProduct = data.reduce((maxPriceProduct, currentProduct) => {
             if (currentProduct.price > maxPriceProduct.price) {
               return currentProduct;
@@ -92,10 +97,11 @@ export const GoodsList = () => {
               return maxPriceProduct;
             }
         });
-        setMaxPrice(maxPriceProduct.price);
+        setMaxPrice(maxPriceProduct.price);   
     }
 
     const filterHandler = (event: React.FormEvent<HTMLFormElement>) => {
+        
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         const regData = {
@@ -106,9 +112,8 @@ export const GoodsList = () => {
         const filterCountry = regData.country.length > 0 ? regData.country : null;
         const filterBrand = regData.brand.length > 0 ? regData.brand : null;
         const filterPrice = regData.price.length > 0 ? regData.price : null;
-        console.log(regData);
 
-        function filterProducts(products:IGoodData[], countries:string[] | null, brands:string[] | null, priceRange:number[] | null) {
+        function filterProducts(products:IGoodData[], countries:FormDataEntryValue[] | null, brands:FormDataEntryValue[] | null, priceRange:number[] | null) {
             const filteredProducts = products.filter((product) => {
               const isCountryMatch = countries ? countries.includes(product.country) : true;
               const isBrandMatch = brands ? brands.includes(product.specs.brand) : true;
@@ -117,12 +122,19 @@ export const GoodsList = () => {
                 : true;
                 
               return isCountryMatch && isBrandMatch && isPriceMatch;
-            });
-    
+            });    
             return filteredProducts;
           }
 
-        setGoods(filterProducts(goods, filterCountry, filterBrand, filterPrice));
+          if (goods.length > 0) {
+              setGoods(filterProducts(goods, filterCountry, filterBrand, filterPrice));
+            } else {
+              setGoods(filterProducts(initGoods, filterCountry, filterBrand, filterPrice));
+          }
+        
+        if (prices.length > 0) {
+            prices[1].value = maxPrice;
+        }
       }
 
       function SubCatFilter(id: number) {
@@ -130,18 +142,56 @@ export const GoodsList = () => {
         const filteredProducts = goods.filter((good) => good.subcategory_id === id);
         setGoods(filteredProducts);
       }
-      
 
     function restoreGoods() {
-        setGoods(initGoods);
+        setGoods([...initGoods]);
+        const countries: NodeListOf<HTMLElement> = document.getElementsByName("country");
+        const brands: NodeListOf<HTMLElement> = document.getElementsByName("brand");
+        
+        if (countries.length > 0) {
+            for(let i = 0; i < countries.length; i++) {
+                countries[i].checked = false;
+            }
+        }
+        if (brands.length > 0) {
+        for(let i = 0; i < brands.length; i++) {
+            brands[i].checked = false;
+        }
     }
-    
+        if (prices.length > 0) {
+            prices[0].value = 0;
+            prices[1].value = maxPrice;
+        }
+    }
 
-    function classNames(...classes) {
+    function SortGoods(type: string) {
+        sortOptions.forEach((el) => el.current = false);
+        if (type === "popular") {
+            setGoods([...goods.sort((a, b) => b.rating - a.rating)]);
+        }
+        if (type === "cheapest") {
+            setGoods([...goods.sort((a, b) => a.price - b.price)]);
+        }
+        if (type === 'expensive') {
+            setGoods([...goods.sort((a, b) => b.price - a.price)]);
+        }
+        if (type === 'newest') {
+            setGoods([...goods.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))]);            
+        }
+        setSortOptions([...sortOptions.map((option) => {
+            if (option.type === type) {
+                option.current = true;
+            }
+            return option;
+        })])
+    }
+
+
+    function classNames(...classes: string[]) {
         return classes.filter(Boolean).join(' ')
       }
 
-    function checkCart(id: number) {
+    function checkCart(id: number) {   
         return cart.some((el) => el.good_id === id);
     }
 
@@ -149,14 +199,11 @@ export const GoodsList = () => {
         return favourites.some((el) => el.good_id === id);
     }
 
-    // const eventHandler = (e: ChangeEvent<HTMLInputElement>): void => {
-    //   setValue(Number(e.target.value));
-    // }
 
     useEffect(() => {
         (async function () {
                 try {
-                    const response = await fetch('http://localhost:3001/api/fav/category/1', {
+                    const response = await fetch('http://localhost:3001/api/fav/category/3', {
                         credentials: 'include',
                     })
                     const result = await response.json();
@@ -176,8 +223,19 @@ export const GoodsList = () => {
     }, [])
 
     useEffect(() => {
+        if (goods.length > 0) {
+        getMaxPrice(goods);
+        }
         initFilters();
     }, [goods])
+
+    useEffect(() => {
+        if (prices.length > 0) {
+            prices[1].value = maxPrice;
+        }
+    }, [maxPrice])
+
+
 
     return (
         <div className="bg-white">
@@ -258,7 +316,6 @@ export const GoodsList = () => {
                                         name={section.id}
                                         defaultValue={option.value}
                                         type="checkbox"
-                                        defaultChecked={option.checked}
                                         className="h-4 w-4 rounded border-gray-300 focus:ring-teal-600"
                                       />
                                       <label
@@ -312,16 +369,16 @@ export const GoodsList = () => {
                         {sortOptions.map((option) => (
                           <Menu.Item key={option.name}>
                             {({ active }) => (
-                              <a
-                                href='#'
+                              <div
+                                onClick={() => SortGoods(option.type)}
                                 className={classNames(
                                   option.current ? 'font-medium text-gray-900' : 'text-gray-500',
                                   active ? 'bg-gray-100' : '',
-                                  'block px-4 py-2 text-sm'
+                                  'block px-4 py-2 text-sm cursor-pointer'
                                 )}
                               >
                                 {option.name}
-                              </a>
+                              </div>
                             )}
                           </Menu.Item>
                         ))}
@@ -383,7 +440,6 @@ export const GoodsList = () => {
                                     name={section.id}
                                     defaultValue={option.value}
                                     type="checkbox"
-                                    defaultChecked={option.checked}
                                     className="h-4 w-4 rounded border-gray-300 text-teal-600 focus:ring-teal-600"
                                   />
                                   <label
@@ -417,24 +473,6 @@ export const GoodsList = () => {
                           </h3>
                           <Disclosure.Panel className="pt-6">
                             <div className="space-y-4">
-                              {/* {section.options.map((option, optionIdx) => (
-                                <div key={option.value} className="flex items-center">
-                                  <input
-                                    id={`filter-${section.id}-${optionIdx}`}
-                                    name={`${section.id}[]`}
-                                    defaultValue={option.value}
-                                    type="checkbox"
-                                    // defaultChecked={option.checked}
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                  />
-                                  <label
-                                    htmlFor={`filter-${section.id}-${optionIdx}`}
-                                    className="ml-3 text-sm text-gray-600"
-                                  >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))} */}
                                <input
                                     id={`filter-price-min`}
                                     name='price'
@@ -466,10 +504,10 @@ export const GoodsList = () => {
                 </form>
   
                 {/* Product grid */}
-                <div style={{height: '1100px'}} className="overflow-y-scroll lg:col-span-3">
+                <div style={{maxHeight: '1100px'}} className="overflow-y-scroll lg:col-span-3">
                 <>
 {goods.length > 0 ? (
-  <div id="Cart" className="visibility: visible bg-gray-100 mb-44 min-h-96 pt-10">
+  <div id="Cart" className="visibility: visible bg-gray-100 py-10 min-h-96">
     <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
       <div id="amount" className="rounded-lg">
         {goods && goods.map(({ id, name, img_url, specs, amount, country, price }) => (

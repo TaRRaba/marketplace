@@ -27,6 +27,16 @@ export default function RegistrationUser() {
         email: data.get('email'),
         password: data.get('password')
       }
+
+      function regEmail(email, name) {
+        Email.send({
+          SecureToken: '05d9b908-aa85-4450-ba05-6198dbda47d7',
+          To: email,
+          From: 'localmarket.elbrus@gmail.com',
+          Subject: 'Добро пожаловать в LocalMarket!',
+          Body: `Уважаемый(ая) ${name}! Благодарим Вас за регистрацию! Очень надеемся в ближашее время получить от Вас ваш первый заказ!`,
+        }).then();
+      }
       
       try {
         const response: Response = await fetch('http://localhost:3001/api/auth/registration', {
@@ -41,7 +51,8 @@ export default function RegistrationUser() {
         setRepeatUser(false)
         dispatch(setUser({id: result.id, name: result.name, email: result.email}))
         dispatch(changeModalreg(false))
-        dispatch(checkUser(true))  
+        dispatch(checkUser(true))
+        regEmail(result.email, result.name);
         navigate('/') // указать куда перекидывать
         } else {
           setRepeatUser(true);

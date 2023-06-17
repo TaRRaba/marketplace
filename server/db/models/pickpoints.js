@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   PickPoints.init({
     address: DataTypes.STRING,
+    coords: DataTypes.JSON,
   }, {
     sequelize,
     modelName: 'PickPoints',

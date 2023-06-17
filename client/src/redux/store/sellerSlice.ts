@@ -1,6 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { RootState } from "./store";
 import { IsellerInfo } from "../../types/user/authTypes";
+import { patchSellerData } from "../thunks/SellerThunks/patchSellerData.thunk";
+import { putSellerPassword } from "../thunks/SellerThunks/putSellerPassword.thunk";
 
 const initialState = {
     seller: {},
@@ -31,6 +33,15 @@ export const SellerSlice = createSlice({
          checkSeller: (state, action)=> {
             state.check = action.payload;
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(patchSellerData.fulfilled, (state, action) => {
+            state.seller = action.payload;
+        }),
+        builder.addCase(putSellerPassword.fulfilled, (state, action) => {
+            state.seller = action.payload;
+        })
+     
     }
 })
 

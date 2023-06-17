@@ -3,10 +3,12 @@ export interface IGoodData {
     name: string;
     country: string;
     price: number;
+    rating: number;
     subcategory_id: number;
     amount: number;
     img_url: string;
-    specs: ISpecs
+    specs: ISpecs,
+    createdAt: Date,
 }
 
 interface ISpecs {
@@ -22,6 +24,8 @@ export interface ICartData {
 
 export interface IFavData {
     good_id: number;
+    id:  number;
+    Good: IGoodData;
 }
 
 export interface IActPayload {

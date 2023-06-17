@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { UserCircleIcon } from '@heroicons/react/24/solid'
 import { Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiTable, HiChartPie, HiAdjustments } from 'react-icons/hi';
@@ -7,12 +7,17 @@ import { useAppDispatch } from '../../../redux/store/hooks';
 import { deleteSeller, resetCheckSeller } from '../../../redux/store/sellerSlice';
 import { useAppSelector } from '../../../redux/store/hooks';
 import { RootState } from '../../../redux/store/store';
+import { getGoodsSeller } from '../../../redux/thunks/goodsSellerThunks/getGoodsSeller.thunk';
 
 export default function ProfileSeller() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
-  
-   const goods = useAppSelector((state: RootState) => state.goodsSeller.goodsSeller);
+  const goods = useAppSelector((state: RootState) => state.goodsSeller.goodsSeller);
+
+  useEffect(()=> {
+    dispatch(getGoodsSeller())
+  }, [])
+
   
   const signOut = () => {
     fetch('http://localhost:3001/api/auth/logout', {
