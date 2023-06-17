@@ -203,7 +203,7 @@ export const GoodsList = () => {
     useEffect(() => {
         (async function () {
                 try {
-                    const response = await fetch('http://localhost:3001/api/fav/category/2', {
+                    const response = await fetch('http://localhost:3001/api/fav/category/3', {
                         credentials: 'include',
                     })
                     const result = await response.json();
