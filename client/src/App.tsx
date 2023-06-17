@@ -110,12 +110,12 @@ function App() {
       {/* <ProfileUser></ProfileUser> */}
       {/* <GoodsList /> */}
       {/* <CardInList></CardInList> */}
-      <GoodsCard></GoodsCard>
+      {/* <GoodsCard></GoodsCard> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <DefaultFooter/> */}
 
-      <DetailOrder></DetailOrder>
+      {/* <DetailOrder></DetailOrder> */}
 
       <FooterFinal/>
 
