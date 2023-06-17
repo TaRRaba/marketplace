@@ -1,4 +1,3 @@
-
 import './App.css'
 import { Cart } from './components/cart/Cart'
 import LoginSeller from './components/seller/LoginSeller/LoginSeller'

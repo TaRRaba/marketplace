@@ -2,7 +2,9 @@ const express = require('express');
 // const bcrypt = require('bcrypt');
 
 const cartApi = express.Router();
-const { Carts, Entries, Goods } = require('../../db/models');
+const {
+  Carts, Entries, Goods, Orders,
+} = require('../../db/models');
 // const isAuth = require('../middleware/isAuth');
 
 cartApi.get('/', async (req, res) => {
@@ -68,6 +70,43 @@ cartApi.delete('/', async (req, res) => {
     res.json({ status: 200 });
   } catch (error) {
     res.json(error);
+  }
+});
+
+cartApi.post('/payment', async (req, res) => {
+  const { id } = req.session.user;
+  const promises = [];
+  const promisesAmount = [];
+  try {
+    const userCart = (await Carts.findOne({ where: { user_id: id } })).get({ plain: true });
+    const allOrder = (await Entries.findAll({
+      include: Goods,
+      where: { cart_id: userCart.id },
+    }))
+      .map((el) => el.get({ plain: true }));
+    const newOrder = (await Orders.create({
+      user_id: id, status: true, delivery: true, delivery_address: 'msk',
+    })).get({ plain: true });
+
+    for (let i = 0; i < allOrder.length; i += 1) {
+      promises.push(Entries.create({
+        order_id: newOrder.id,
+        good_id: allOrder[i].good_id,
+        quantity: allOrder[i].quantity,
+        seller_id: allOrder[i].Good.seller_id,
+      }));
+      promisesAmount.push(Goods.update(
+        { amount: allOrder[i].Good.amount - allOrder[i].quantity },
+        { where: { id: allOrder[i].good_id } },
+      ));
+    }
+    await Promise.all(promises);
+    await Promise.all(promisesAmount);
+    await Entries.destroy({ where: { cart_id: userCart.id } });
+
+    res.json({ status: '200' });
+  } catch (error) {
+    console.log(error);
   }
 });
 
