@@ -17,4 +17,14 @@ goodApi.get('/', async (req, res) => {
   }
 });
 
+goodApi.get('/all', async (req, res) => {
+  //   const userID = req.session.user.id;
+  try {
+    const data = await Goods.findAll();
+    res.json({ status: 200, data });
+  } catch (error) {
+    res.json(error);
+  }
+});
+
 module.exports = goodApi;

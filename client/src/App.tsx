@@ -33,6 +33,8 @@ import { checkUser, setUser } from './redux/store/userSlice'
 import { checkSeller, setSeller } from './redux/store/sellerSlice'
 import Reports from './components/seller/Reports/Reports'
 import { EditGoods } from './components/seller/GoodsSeller/EditGoods'
+import { BannerPromotion } from './components/goods/BannerPromotion'
+import { getAllGood } from './redux/thunks/goodThunks/gatAllGoods.thunk'
 
 function App() {
 
@@ -77,12 +79,17 @@ function App() {
         })()
       }, [])
 
+      useEffect(() => {
+        dispatch(getAllGood())
+    }, [])
+
   return (
     <> 
       <UserNavBar/>
 
       <Routes>
       <Route path="/cart" element={<Cart />}/>
+      {/* <Route path="/Bannerpromotion" element={<BannerPromotion />}/> */}
       <Route path="/profile" element={<ProfileUser />}/>      
       <Route path="/infoSeller" element={<InfoSeller />}/>      
       <Route path="/" element={<Main/>}/>
