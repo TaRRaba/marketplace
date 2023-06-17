@@ -17,6 +17,7 @@ const goodApi = require('./src/routes/good.main');
 const catalogApi = require('./src/routes/catalog.api');
 const userApi = require('./src/routes/user.api');
 const orderApi = require('./src/routes/order.api');
+const mapsApi = require('./src/routes/maps.api');
 
 // const isAuth = require('./src/middlewares/isAuth');
 
@@ -60,5 +61,6 @@ app.use('/api/seller', sellerApi);
 app.use('/good', goodApi);
 app.use('/catalog', catalogApi);
 app.use('/api/user', userApi);
+app.use('/api/maps', mapsApi);
 
 app.listen(PORT, () => console.log(`Сервер крутится на ${PORT} порту!`));
