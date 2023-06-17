@@ -35,6 +35,7 @@ import Reports from './components/seller/Reports/Reports'
 import { EditGoods } from './components/seller/GoodsSeller/EditGoods'
 import { Orders } from './components/orders/Orders'
 import { DetailOrder } from './components/user/Orders/DetailOrder'
+import { Maps } from './components/map/Maps'
 
 function App() {
 
@@ -83,7 +84,7 @@ function App() {
     <> 
       <UserNavBar/>
 
-      <Routes>
+      {/* <Routes>
       <Route path="/cart" element={<Cart />}/>
       <Route path="/profile" element={<ProfileUser />}/>      
       <Route path="/infoSeller" element={<InfoSeller />}/>      
@@ -96,7 +97,7 @@ function App() {
           <Route path='edit_goods/:id' element={<EditGoods></EditGoods>}></Route>   
           <Route path='reports' element={<Reports></Reports>}></Route>     
       </Route>
-      </Routes> 
+      </Routes>  */}
 
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
@@ -117,6 +118,7 @@ function App() {
 
       {/* <DetailOrder></DetailOrder> */}
 
+      <Maps></Maps>
       <FooterFinal/>
 
     </>
