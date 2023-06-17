@@ -8,9 +8,9 @@ const {
 // const isAuth = require('../middleware/isAuth');
 
 favApi.get('/', async (req, res) => {
-//   const userID = req.session.user.id;
+  const userID = req.session.user.id;
   try {
-    const fav = (await Favourites.findOne({ where: { user_id: 1 } })).get({ plain: true });
+    const fav = (await Favourites.findOne({ where: { user_id: userID } })).get({ plain: true });
     const data = (await Entries.findAll({ include: Goods, where: { favourite_id: fav.id }, order: [['id', 'ASC']] }))
       .map((el) => el.get({ plain: true }));
     res.json({ status: 200, data });
@@ -63,9 +63,9 @@ favApi.get('/category/:id', async (req, res) => {
 
 favApi.post('/addToFav', async (req, res) => {
   const { goodID } = req.body;
-  //   const userID = req.session.user.id;
+  const userID = req.session.user.id;
   try {
-    const fav = (await Favourites.findOne({ where: { user_id: 1 } })).get({ plain: true });
+    const fav = (await Favourites.findOne({ where: { user_id: userID } })).get({ plain: true });
     const data = (await Entries.create({ favourite_id: fav.id, good_id: goodID }))
       .get({ plain: true });
     res.json({ status: 201, data });
@@ -76,9 +76,9 @@ favApi.post('/addToFav', async (req, res) => {
 
 favApi.delete('/removeFromFav', async (req, res) => {
   const { goodID } = req.body;
-  //   const userID = req.session.user.id;
+  const userID = req.session.user.id;
   try {
-    const fav = (await Favourites.findOne({ where: { user_id: 1 } })).get({ plain: true });
+    const fav = (await Favourites.findOne({ where: { user_id: userID } })).get({ plain: true });
     await Entries.destroy({ where: { favourite_id: fav.id, good_id: goodID } });
     res.json({ status: 200 });
   } catch (error) {

@@ -11,6 +11,9 @@ module.exports = {
       address: {
         type: Sequelize.STRING,
       },
+      coords: {
+        type: Sequelize.JSON,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

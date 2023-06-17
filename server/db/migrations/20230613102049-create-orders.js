@@ -17,6 +17,9 @@ module.exports = {
         onDelete: 'cascade',
         allowNull: false,
       },
+      status: {
+        type: Sequelize.BOOLEAN,
+      },
       delivery: {
         type: Sequelize.BOOLEAN,
       },

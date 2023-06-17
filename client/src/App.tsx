@@ -33,8 +33,16 @@ import { checkUser, setUser } from './redux/store/userSlice'
 import { checkSeller, setSeller } from './redux/store/sellerSlice'
 import Reports from './components/seller/Reports/Reports'
 import { EditGoods } from './components/seller/GoodsSeller/EditGoods'
+
 import { BannerPromotion } from './components/goods/BannerPromotion'
 import { getAllGood } from './redux/thunks/goodThunks/gatAllGoods.thunk'
+
+import { Orders } from './components/orders/Orders'
+import { DetailOrder } from './components/user/Orders/DetailOrder'
+
+import { Maps } from './components/map/Maps'
+import { SellerOrders } from './components/sellerOrders/sellerOrders'
+
 
 function App() {
 
@@ -87,7 +95,7 @@ function App() {
     <> 
       <UserNavBar/>
 
-      <Routes>
+      {/* <Routes>
       <Route path="/cart" element={<Cart />}/>
       {/* <Route path="/Bannerpromotion" element={<BannerPromotion />}/> */}
       <Route path="/profile" element={<ProfileUser />}/>      
@@ -101,24 +109,29 @@ function App() {
           <Route path='edit_goods/:id' element={<EditGoods></EditGoods>}></Route>   
           <Route path='reports' element={<Reports></Reports>}></Route>     
       </Route>
-      </Routes> 
+      </Routes>  */}
 
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
-      {/* <RegistrationUser></RegistrationUser> */}
-      {/* <LoginUser></LoginUser> */}
+      {/* <RegistrationUser></RegistrationUser>
+      <LoginUser></LoginUser> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <ProfileSeller></ProfileSeller> */}
       {/* <Cart /> */}
+      {/* <Orders /> */}
       {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <GoodsList /> */}
+      {/* <SellerOrders></SellerOrders> */}
       {/* <CardInList></CardInList> */}
       {/* <GoodsCard></GoodsCard> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <DefaultFooter/> */}
-      
+
+      {/* <DetailOrder></DetailOrder> */}
+
+      <Maps></Maps>
       <FooterFinal/>
 
     </>
