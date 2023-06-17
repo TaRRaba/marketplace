@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
 import { RootState } from '../../redux/store/store';
 import { getCart } from '../../redux/thunks/cartThunks/getCart.thunk';
@@ -6,7 +6,12 @@ import { incrAmount } from '../../redux/thunks/cartThunks/incrAmount.thunk';
 import { decrAmount } from '../../redux/thunks/cartThunks/decrAmount.thunk';
 import { delPos } from '../../redux/thunks/cartThunks/delPos.thunk';
 
+import { loadStripe } from '@stripe/stripe-js';
+import {Elements} from '@stripe/react-stripe-js';
+import CheckoutForm from '../stripe/CheckoutForm';
+
 export const Cart = () => {
+    const userData = useAppSelector((state: RootState) => state.users.users)
     const cart = useAppSelector((state: RootState) => state.cart.cart);
     const dispatch = useAppDispatch();
 
@@ -20,7 +25,34 @@ export const Cart = () => {
 
     useEffect(() => {
         dispatch(getCart())
+    }, [])    
+
+    const [stripePromise, setStripePromise] = useState(null);
+    const [clientSecret, setClientSecret] = useState();
+
+     useEffect(() => {
+        fetch("http://localhost:3001/config").then(async (r)=> {
+            const { publishableKey } = await r.json();
+
+            setStripePromise(loadStripe(publishableKey))
+        })
     }, [])
+
+    useEffect(() => {
+      if (userData.id){
+        fetch("http://localhost:3001/create-payment-internet", {
+          method: "POST",
+          headers: {'Content-Type' : 'application/json'},
+          credentials: 'include',
+          body: JSON.stringify(userData)
+      }).then(async (r)=> {
+          const { clientSecret } = await r.json();
+          
+          setClientSecret(clientSecret)
+      })
+      }
+    }, [userData])
+
 
     return (
         <>
@@ -96,7 +128,12 @@ export const Cart = () => {
                   <p className="text-sm text-gray-700">в т.ч. НДС 20%</p>
                 </div>
               </div>
-              <button id="orderBtn" data-userid='{user.id}' type="button" className="mt-6 w-full rounded-md py-1.5 font-medium text-blue-50 bg-[#4520aa] hover:bg-[#4520aa]/80">Оформить заказ</button>
+              {/* <button id="orderBtn" data-userid='{user.id}' type="button" className="mt-6 w-full rounded-md py-1.5 font-medium text-blue-50 bg-[#4520aa] hover:bg-[#4520aa]/80">Оформить заказ</button> */}
+                {stripePromise && clientSecret && (
+                <Elements stripe={stripePromise} options={{ clientSecret }}>
+                <CheckoutForm />
+                </Elements>
+                )}
             </div>
           </div>
         </div>

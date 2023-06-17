@@ -1,4 +1,3 @@
-
 import './App.css'
 import { Cart } from './components/cart/Cart'
 import LoginSeller from './components/seller/LoginSeller/LoginSeller'
@@ -32,6 +31,8 @@ import { useEffect } from 'react'
 import { checkUser, setUser } from './redux/store/userSlice'
 import { checkSeller, setSeller } from './redux/store/sellerSlice'
 import Reports from './components/seller/Reports/Reports'
+import Stripe from './components/stripe/Stripe'
+import Completion from './components/stripe/Completion'
 import { EditGoods } from './components/seller/GoodsSeller/EditGoods'
 
 import { BannerPromotion } from './components/goods/BannerPromotion'
@@ -42,7 +43,6 @@ import { DetailOrder } from './components/user/Orders/DetailOrder'
 
 import { Maps } from './components/map/Maps'
 import { SellerOrders } from './components/sellerOrders/sellerOrders'
-
 
 function App() {
 
@@ -95,6 +95,9 @@ function App() {
     <> 
       <UserNavBar/>
 
+      <Routes>
+      <Route path="/cart" element={<Cart />} />
+      <Route path="/completion" element={<Completion />}></Route>
       {/* <Routes>
       <Route path="/cart" element={<Cart />}/>
       {/* <Route path="/Bannerpromotion" element={<BannerPromotion />}/> */}
@@ -111,6 +114,7 @@ function App() {
       </Route>
       </Routes>  */}
 
+      {/* <Stripe></Stripe> */}
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
       {/* <RegistrationUser></RegistrationUser>
@@ -128,6 +132,7 @@ function App() {
       {/* <InfoSeller></InfoSeller> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <DefaultFooter/> */}
+      {/* <FooterFinal/> */}
 
       {/* <DetailOrder></DetailOrder> */}
 
