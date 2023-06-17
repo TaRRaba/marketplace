@@ -1,7 +1,9 @@
-const express = require("express");
+const express = require('express');
 
 const orderApi = express.Router();
-const { Carts, Goods, Entries, Orders, PickPoints } = require("../../db/models");
+const {
+  Carts, Goods, Entries, Orders, PickPoints,
+} = require('../../db/models');
 
 // const bcrypt = require('bcrypt');
 // const isAuth = require('../middleware/isAuth');
@@ -23,14 +25,14 @@ orderApi.get('/', async (req, res) => {
 });
 
 orderApi.get('/seller', async (req, res) => {
-  // const userID = req.session.user.id;
+  const sellerID = req.session.seller.id;
   try {
-    const allEntries = (await Entries.findAll({ where: { seller_id: 1 } }))
+    const allEntries = (await Entries.findAll({ where: { seller_id: sellerID } }))
       .map((el) => el.get({ plain: true }));
     const orders = [...new Set(allEntries.map((entry) => entry.order_id))];
     const result = (await Entries.findAll({
       include: [Goods, Orders],
-      where: { order_id: orders, seller_id: 1 },
+      where: { order_id: orders, seller_id: sellerID },
     })).map((el) => el.get({ plain: true }));
     const data = orders.map((e) => result.filter((el) => el.order_id === e));
     res.json({ status: 200, data });
@@ -93,7 +95,7 @@ orderApi.get('/seller', async (req, res) => {
 //   }
 // });
 
-orderApi.get("/:id", async (req, res) => {
+orderApi.get('/:id', async (req, res) => {
   //   const { id } = req.session.user;
   const id = 1;
   try {
@@ -109,11 +111,11 @@ orderApi.get("/:id", async (req, res) => {
         where: { order_id: req.params.id },
       })
     ).map((el) => el.get({ plain: true }));
-    
+
     res.json({ detailOrder: orderEntriesAll, order: orderOne });
   } catch (error) {
     console.log(error);
-      }
+  }
 });
 
 module.exports = orderApi;

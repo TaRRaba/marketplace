@@ -25,7 +25,7 @@ const authApi = require('./src/routes/auth.api');
 const sellerApi = require('./src/routes/seller.api');
 const goodApi = require('./src/routes/good.main');
 const catalogApi = require('./src/routes/catalog.api');
-const stripeApi = require('./src/routes/stripe.api');
+// const stripeApi = require('./src/routes/stripe.api');
 const userApi = require('./src/routes/user.api');
 const orderApi = require('./src/routes/order.api');
 const mapsApi = require('./src/routes/maps.api');
@@ -64,7 +64,7 @@ app.use(express.static(path.join(__dirname, 'pics')));
 app.use('/pics', express.static('pics'));
 
 app.use('/api/cart', cartApi);
-app.use('/api/stripe', stripeApi);
+// app.use('/api/stripe', stripeApi);
 app.use('/api/order', orderApi);
 app.use('/api/card', cardApi);
 app.use('/api/fav', favApi);

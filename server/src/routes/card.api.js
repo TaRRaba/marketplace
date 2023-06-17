@@ -14,7 +14,7 @@ cardApi.get('/category/:id', async (req, res) => {
       where: { category_id: id },
     })).map((el) => el.get({ plain: true }));
 
-    console.log(cardsCategory);
+    // console.log(cardsCategory);
     res.json(cardsCategory);
   } catch (error) {
     res.json(error);
@@ -28,7 +28,7 @@ cardApi.get('/subcategory/:id', async (req, res) => {
     const cardSubcategory = (await Goods.findAll({ where: { subcategory_id: id } }))
       .map((el) => el.get({ plain: true }));
 
-    console.log(cardSubcategory);
+    // console.log(cardSubcategory);
     res.json(cardSubcategory);
   } catch (error) {
     res.json(error);
@@ -40,7 +40,7 @@ cardApi.get('/subcategory/goods/:id', async (req, res) => {
   const { id } = req.params;
   try {
     const cardGood = (await Goods.findOne({ where: { id } })).get({ plain: true });
-    console.log(cardGood);
+    // console.log(cardGood);
     res.json(cardGood);
   } catch (error) {
     res.json(error);

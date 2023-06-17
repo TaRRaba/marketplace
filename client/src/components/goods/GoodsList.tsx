@@ -31,12 +31,13 @@ interface IFilters {
 }
 
 
-export const GoodsList = () => {
+export const GoodsList = ({CatId}: {CatId: number}) => {
     const dispatch = useAppDispatch();
+    const user = useAppSelector((state: RootState) => state.users.check);
     const prices: NodeListOf<HTMLElement> = document.getElementsByName("price");
     const cart = useAppSelector((state: RootState) => state.cart.cart);
     const favourites = useAppSelector((state: RootState) => state.favourites.favourites);
-    let [goods, setGoods] = useState<IGoodData[]>([]);
+    const [goods, setGoods] = useState<IGoodData[]>([]);
     const [initGoods, setInitGoods] = useState<IGoodData[]>([])
     const [subCat, setSubCat] = useState<ISubCat[]>([]);
     const [catName, setCatName] = useState('');
@@ -138,13 +139,12 @@ export const GoodsList = () => {
       }
 
       function SubCatFilter(id: number) {
-        goods = initGoods;
-        const filteredProducts = goods.filter((good) => good.subcategory_id === id);
+        const filteredProducts = [...initGoods.filter((good) => good.subcategory_id === id)];
         setGoods(filteredProducts);
       }
 
     function restoreGoods() {
-        setGoods([...initGoods]);
+        // console.log('START GOODS', goods);
         const countries: NodeListOf<HTMLElement> = document.getElementsByName("country");
         const brands: NodeListOf<HTMLElement> = document.getElementsByName("brand");
         
@@ -154,15 +154,23 @@ export const GoodsList = () => {
             }
         }
         if (brands.length > 0) {
-        for(let i = 0; i < brands.length; i++) {
-            brands[i].checked = false;
+            for(let i = 0; i < brands.length; i++) {
+                brands[i].checked = false;
+            }
         }
-    }
         if (prices.length > 0) {
             prices[0].value = 0;
             prices[1].value = maxPrice;
         }
+        // sortOptions.forEach((el) => el.current = false);
+        // console.log(initGoods);
+        // const data = [...initGoods.map((good) => good = good)]
+        // console.log(data);
+        setGoods([...initGoods]);
+        // console.log('FINISH GOODS', goods);
     }
+
+    console.log('INIT', initGoods);
 
     function SortGoods(type: string) {
         sortOptions.forEach((el) => el.current = false);
@@ -185,6 +193,7 @@ export const GoodsList = () => {
             return option;
         })])
     }
+    
 
 
     function classNames(...classes: string[]) {
@@ -203,7 +212,7 @@ export const GoodsList = () => {
     useEffect(() => {
         (async function () {
                 try {
-                    const response = await fetch('http://localhost:3001/api/fav/category/3', {
+                    const response = await fetch(`http://localhost:3001/api/fav/category/${CatId}`, {
                         credentials: 'include',
                     })
                     const result = await response.json();
@@ -218,9 +227,11 @@ export const GoodsList = () => {
                       console.log(error);
                   }
         })();
-        dispatch(getFav());
-        dispatch(getCart());
-    }, [])
+        if (user) {
+            dispatch(getFav());
+            dispatch(getCart());
+        }
+    }, [CatId])
 
     useEffect(() => {
         if (goods.length > 0) {
@@ -529,6 +540,8 @@ export const GoodsList = () => {
               </div>
               </div>
               <div className="flex flex-col mt-0">
+                {user ? 
+                <>
                 {checkFav(id) ?
                  <svg onClick={() => dispatch(removeFromFav(id))} className="addFav h-5 w-5 self-end cursor-pointer duration-150 text-red-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" >
                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
@@ -538,6 +551,8 @@ export const GoodsList = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                 </svg>
                 }
+                </>
+                : null }
                 <div className="flex mt-16 mb-4 mr-1 self-end items-center space-x-4">
                   <p className="totalPrice text-lg font-bold text-teal-800">
                     {price}
@@ -545,6 +560,8 @@ export const GoodsList = () => {
                     ₽
                   </p>
                 </div>
+                {user ? 
+                <>
                 {amount > 0 ?
                 <>
                 {checkCart(id) ?
@@ -559,6 +576,8 @@ export const GoodsList = () => {
               В корзину
            </div>
               }
+              </>
+              : null }
               </>
               : null }
               </div>

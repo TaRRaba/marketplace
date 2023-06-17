@@ -6,6 +6,8 @@ import { getPopularGood } from '../../redux/thunks/goodThunks/getPopularGood.thu
 import { removeFromFav } from '../../redux/thunks/favThunks/removeFromFav.thunk';
 import { addToFav } from '../../redux/thunks/favThunks/addToFav.thunk';
 import { addAmountCart } from '../../redux/thunks/cartThunks/addAmountCart.thunk';
+import { Link } from 'react-router-dom';
+import { getFav } from '../../redux/thunks/favThunks/getFav.thunk';
 
 export const CardsPopular = () => {
   const card = useAppSelector((state: RootState) => state.good.good)
@@ -26,13 +28,20 @@ function checkCart(id: number) {
       dispatch(getPopularGood())
   }, [])
 
+  useEffect(() => {
+    if (userIsActive) {
+      dispatch(getFav());
+      dispatch(getCart());
+    }
+}, [userIsActive])
+
   return (
   
-    <div className=''>
+    <div className='mt-10'>
      <div className="font-bold text-2xl  text-center bg-gray-100">Лидеры продаж</div>
     <section className="py-10 bg-gray-100">
     <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {card && card.map(({ id, name, price, img_url }) => (
+      {card && card.map(({ id, name, price, amount, img_url }) => (
         <article key={id} id={id} className="grid grid-cols-1 article content-between rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
                  {userIsActive ? 
                   <>
@@ -48,15 +57,22 @@ function checkCart(id: number) {
                 </>:
                 null
                  }
-          <div className="mb-4">
-            <div className="relative overflow-hidden rounded-xl">
-              <a href={`/goods/${name}`}>
-                <img className="p-2 mb-1" src={`http://localhost:3001${img_url}`} alt="preview" />
-              </a>
-            </div>
-            <h2 className="text-slate-700 line-clamp-3">{name}</h2>
-          </div>
-          <p className="mt-1 text-sm text-green-700">В наличии</p>
+          <Link to={`/goods/${name}`}>
+                <div className="mb-4">
+                  <div className="relative overflow-hidden rounded-xl">
+                      <img className="cursor-pointer p-2 mb-1" src={`http://localhost:3001${img_url}`} alt="preview" />
+                  </div>
+                    <h2 className="cursor-pointer text-slate-700 hover:text-slate-500 line-clamp-3">{name}</h2>
+    
+                </div>
+                </Link>
+          {amount === 0 ? 
+                <p className="text-left mt-3 text-md text-red-600">Нет в наличии</p>
+                : amount > 10 ?
+                <p className="text-left mt-3 text-md text-green-700">В наличии</p>
+                :
+                <p className="text-left mt-3 text-md text-yellow-500">Осталось мало</p>
+                }
 
           <div className="mt-3 flex items-center justify-between">
             <p className="text-lg font-bold text-teal-800">

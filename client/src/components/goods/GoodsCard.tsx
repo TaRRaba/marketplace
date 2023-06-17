@@ -26,13 +26,14 @@ interface ISpecs {
   type: string;
 }
 
-export default function GoodsCard() {
+export default function GoodsCard({GoodID}: {GoodID: number}) {
 
- const { id } = useParams()
+//  const { id } = useParams()
  const cart = useAppSelector((state: RootState) => state.cart.cart);
  const favourites = useAppSelector((state: RootState) => state.favourites.favourites);
  const user = useAppSelector((state: RootState) => state.users.check);
   const [card, setCard] = useState<ICard>({});
+  const [inCart, setInCart] = useState(false);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(1)
   const dispatch = useDispatch();
@@ -40,15 +41,17 @@ export default function GoodsCard() {
 
   useEffect(()=> {
     (async function () {
-     const response = await fetch(`http://localhost:3001/api/card/subcategory/goods/${26}`, {
+     const response = await fetch(`http://localhost:3001/api/card/subcategory/goods/${GoodID}`, {
         credentials: 'include'
       })
       const result = await response.json()
       setCard(result)
       setLoading(true);
     })()
-    dispatch(getFav());
-    dispatch(getCart());
+    if (user) {
+      dispatch(getFav());
+      dispatch(getCart());
+    }
   }, [])
 
   console.log('CARD', card);
@@ -59,6 +62,11 @@ export default function GoodsCard() {
 
 function checkFav(id: number) {
     return favourites.some((el) => el.good_id === id);
+}
+
+function addCart (id: number, count: number) {
+  setInCart(true);
+  dispatch(addAmountCart({goodID: id, amount: Number(count)}))
 }
 
   const decrCount = (maxCount: number) => {
@@ -75,14 +83,8 @@ function checkFav(id: number) {
   <div className="container mx-auto px-4">
 
     <div className="lg:col-gap-12 xl:col-gap-16 mb-8 grid grid-cols-1 gap-12 lg:mt-12 lg:grid-cols-5 lg:gap-16">
-      <div className="lg:col-span-3 lg:row-end-1">
-        <div className="lg:flex lg:items-start">
-          <div className="lg:order-2 lg:ml-5">
-            <div className="max-w-xl overflow-hidden rounded-lg">
-              <img className="h-full w-full max-w-full object-cover" src={`http://localhost:3001${card.img_url}`} alt="" />
-            </div>
-          </div>
-        </div>
+      <div className="lg:col-span-3 flex justify-center lg:row-end-1">
+              <img className="h-full w-96 rounded-lg max-w-full object-cover" src={`http://localhost:3001${card.img_url}`} alt="" />
       </div>
 
       <div className="lg:col-span-2 lg:row-span-2 lg:row-end-2">
@@ -104,13 +106,16 @@ function checkFav(id: number) {
       </div>
 
         <h1 className="sm: text-2xl font-bold text-gray-900 sm:text-3xl">{card.name}</h1>
+        {user ?
+        <>
         <h2 className="mt-8 text-base text-gray-900">{card.price} ₸ / 1 шт</h2>
           <div className="mt-3 flex select-none flex-wrap items-center justify-center gap-1">
               <svg onClick={incrCount} className="amountDecr cursor-pointer text-gray-500 focus:outline-none focus:text-gray-600 h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor"><path className="amountDecr" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   <span className="quantity text-gray-700 text-lg mx-2">{count}</span>
               <svg onClick={() => decrCount(card.amount)} className="amountIncr text-gray-500 cursor-pointer focus:outline-none focus:text-gray-600 h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor"><path className="amountIncr" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
           </div>
-
+          </>
+          : null }
 
         <div className="mt-8 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
           <div className="flex items-end">
@@ -118,12 +123,12 @@ function checkFav(id: number) {
           </div>
                  { user ?
                  <>
-                  {checkCart(card.id) ?
+                  {inCart ?
                   <div className="text-sm items-center cursor-pointer space-x-1.5 rounded bg-teal-600 px-8 py-2 text-white duration-100">
                     В корзине
                   </div>
                   :
-                  <div onClick={() => dispatch(addAmountCart({goodID: card.id, amount: 1}))} className="flex text-sm items-center cursor-pointer space-x-1.5 rounded bg-[#4520aa] px-8 py-2 text-white duration-100 hover:bg-[#4520aa]/80">
+                  <div onClick={() => addCart(card.id, count)} className="flex text-sm items-center cursor-pointer space-x-1.5 rounded bg-[#4520aa] px-8 py-2 text-white duration-100 hover:bg-[#4520aa]/80">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="mr-2 h-5 w-5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
                   </svg>

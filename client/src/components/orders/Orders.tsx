@@ -54,33 +54,37 @@ export const Orders = () => {
                           {' '}
                           {new Date(order[0].createdAt).toLocaleDateString('RU-ru') + ' г.'}
                         </p>
-                        <hr className="mb-5" />
+                        <hr className="mb-2" />
+                      <Link to={`/profile/orders/${order[0].order_id}`}>
+                        <div className="text-sm text-gray-900 hover:text-gray-500">Детали заказа</div>
+                        </Link>
                         {order.map((good) => {
                           total += good.Good.price * good.quantity;
                           return (
-                            <div className='flex items-center mb-5'>
-                            <img src={`http://localhost:3001${good.Good.img_url}`} alt="" className="w-32 rounded-lg" />
-                            <div className='flex-col ml-10 item-center'>
-                                <Link to={`/goods/${good.Good.id}`}>
-                              <p className="cursor-pointer hover:text-gray-900 line-clamp-3 mt-1 text-md text-gray-700">
-                                {good.Good.name}
-                                {' '}
-                              </p>
-                              </Link>
-                              <p className="mb-3 mt-3 text-xs text-gray-500">
-                                Цена:
-                                {' '}
-                                {good.Good.price}
-                                {' '}
-                                ₽ ,
-                                {' '}
-                                Количество:
-                                {' '}
-                                {good.quantity}
+                            <div />
+                            // <div className='flex items-center mb-5'>
+                            // <img src={`http://localhost:3001${good.Good.img_url}`} alt="" className="w-32 rounded-lg" />
+                            // <div className='flex-col ml-10 item-center'>
+                            //     <Link to={`/goods/${good.Good.id}`}>
+                            //   <p className="cursor-pointer hover:text-gray-900 line-clamp-3 mt-1 text-md text-gray-700">
+                            //     {good.Good.name}
+                            //     {' '}
+                            //   </p>
+                            //   </Link>
+                            //   <p className="mb-3 mt-3 text-xs text-gray-500">
+                            //     Цена:
+                            //     {' '}
+                            //     {good.Good.price}
+                            //     {' '}
+                            //     ₽ ,
+                            //     {' '}
+                            //     Количество:
+                            //     {' '}
+                            //     {good.quantity}
 
-                              </p>
-                              </div>
-                            </div>
+                            //   </p>
+                            //   </div>
+                            // </div>
                           );
                         })}
                       </div>

@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from '../../../redux/store/hooks'
 import { RootState } from '../../../redux/store/store'
+import { useDispatch } from 'react-redux'
+import { getAllGood } from '../../../redux/thunks/goodThunks/gatAllGoods.thunk'
 
 export function NewGoodsSeller() {
-     
+     const dispatch = useDispatch();
      const navigate = useNavigate()
      const category = useAppSelector((state: RootState) => state.good.category)
 
@@ -32,6 +34,7 @@ export function NewGoodsSeller() {
                 credentials: 'include',
             })
             const result = await response.json();
+            dispatch(getAllGood())
             // console.log("result====>", result);
             navigate('/profileSeller/goods')
             

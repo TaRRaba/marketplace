@@ -13,6 +13,8 @@ import CheckoutForm from '../stripe/CheckoutForm';
 export const Cart = () => {
     const userData = useAppSelector((state: RootState) => state.users.users)
     const cart = useAppSelector((state: RootState) => state.cart.cart);
+    const [stripePromise, setStripePromise] = useState(null);
+    const [clientSecret, setClientSecret] = useState();
     const dispatch = useAppDispatch();
 
     function getTotal () {
@@ -22,20 +24,14 @@ export const Cart = () => {
         }
         return total;
     }
-
-    useEffect(() => {
-        dispatch(getCart())
-    }, [])    
-
-    const [stripePromise, setStripePromise] = useState(null);
-    const [clientSecret, setClientSecret] = useState();
-
+  
      useEffect(() => {
         fetch("http://localhost:3001/config").then(async (r)=> {
             const { publishableKey } = await r.json();
 
             setStripePromise(loadStripe(publishableKey))
         })
+        dispatch(getCart())
     }, [])
 
     useEffect(() => {

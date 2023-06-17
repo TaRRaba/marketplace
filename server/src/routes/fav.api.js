@@ -22,6 +22,7 @@ favApi.get('/', async (req, res) => {
 // Для отображения всех товаров
 favApi.get('/category/:id', async (req, res) => {
   const { id } = req.params;
+  console.log('FAV REQPARAMS ID', id);
   try {
     const catName = (await Categories.findOne({ where: { id } })).get({ plain: true }).fullName;
     const subCat = [];

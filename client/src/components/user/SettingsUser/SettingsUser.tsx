@@ -8,7 +8,7 @@ import { delUser } from '../../../redux/thunks/userThunks/delUser.thunk'
 import { useNavigate } from 'react-router-dom'
 
 
-export default function Settings() {
+export default function SettingsUser() {
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()

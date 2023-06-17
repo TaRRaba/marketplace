@@ -86,11 +86,11 @@ export const UserNavBar = () => {
         
         <EntriesMenu/>
        </div>
-       <Link to='/profile/favorites' className='w-1/12 ml-4'>
-        <div>Favorites</div>
+       <Link to='/profile/favourites' className='w-1/12 ml-4'>
+        <div>Избранное</div>
         </Link>
         <Link to='/cart' className='w-1/12'>
-        <div >Cart</div>
+        <div >Корзина</div>
         </Link>
        </> :
        sellerIsActive ?

@@ -13,7 +13,6 @@ cartApi.get('/', async (req, res) => {
     const cart = (await Carts.findOne({ where: { user_id: userID } })).get({ plain: true });
     const data = (await Entries.findAll({ include: Goods, where: { cart_id: cart.id }, order: [['id', 'ASC']] }))
       .map((el) => el.get({ plain: true }));
-    
     res.json({ status: 200, data });
   } catch (error) {
     res.json(error);
@@ -28,9 +27,16 @@ cartApi.post('/addAmountCart', async (req, res) => {
       .get({ plain: true });
     const cartPos = (await Entries.findAll({ where: { cart_id: cart.id, good_id: goodID } }))
       .map((el) => el.get({ plain: true }));
+    const goodAmount = (await Goods.findOne({ where: { id: goodID } })).amount;
     if (cartPos.length > 0) {
+      let newAmount;
+      if (cartPos[0].quantity + amount <= goodAmount) {
+        newAmount = cartPos[0].quantity + amount;
+      } else {
+        newAmount = goodAmount;
+      }
       await Entries.update(
-        { quantity: cartPos[0].quantity + amount },
+        { quantity: newAmount },
         { where: { id: cartPos[0].id } },
       );
       res.json({ status: 200 });
