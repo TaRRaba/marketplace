@@ -35,6 +35,7 @@ import Reports from './components/seller/Reports/Reports'
 import { EditGoods } from './components/seller/GoodsSeller/EditGoods'
 import { Orders } from './components/orders/Orders'
 import { DetailOrder } from './components/user/Orders/DetailOrder'
+import { SellerOrders } from './components/sellerOrders/sellerOrders'
 
 function App() {
 
@@ -109,13 +110,14 @@ function App() {
       {/* <Favourites /> */}
       {/* <ProfileUser></ProfileUser> */}
       {/* <GoodsList /> */}
+      {/* <SellerOrders></SellerOrders> */}
       {/* <CardInList></CardInList> */}
-      <GoodsCard></GoodsCard>
+      {/* <GoodsCard></GoodsCard> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <InfoSeller></InfoSeller> */}
       {/* <DefaultFooter/> */}
 
-      <DetailOrder></DetailOrder>
+      {/* <DetailOrder></DetailOrder> */}
 
       <FooterFinal/>
 
