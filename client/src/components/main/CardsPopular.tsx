@@ -63,7 +63,6 @@ function checkCart(id: number) {
                       <img className="cursor-pointer p-2 mb-1" src={`http://localhost:3001${img_url}`} alt="preview" />
                   </div>
                     <h2 className="cursor-pointer text-slate-700 hover:text-slate-500 line-clamp-3">{name}</h2>
-    
                 </div>
                 </Link>
           {amount === 0 ? 
@@ -82,6 +81,8 @@ function checkCart(id: number) {
             </p>
             {userIsActive ?
             <>
+            {amount > 0 ?
+            <> 
             {checkCart(id) ?
   <div className="addedCart flex text-sm items-center cursor-pointer space-x-1.5 rounded-lg bg-teal-600 px-4 py-1.5 text-white duration-100">
   В корзине
@@ -93,12 +94,12 @@ function checkCart(id: number) {
  </svg>
   В корзину
 </div>
-
-  }
-  </>
-  :
-  null
             }
+            </>
+            : null }
+           </>
+           :
+            null }
 
           </div>
         </article>

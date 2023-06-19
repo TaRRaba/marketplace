@@ -123,6 +123,8 @@ function addCart (id: number, count: number) {
           </div>
                  { user ?
                  <>
+                 {card.amount > 0 ?
+                 <>
                   {inCart ?
                   <div className="text-sm items-center cursor-pointer space-x-1.5 rounded bg-teal-600 px-8 py-2 text-white duration-100">
                     В корзине
@@ -134,6 +136,8 @@ function addCart (id: number, count: number) {
                   </svg>
                   В корзину
                 </div> }
+                </>
+                : null }
                 </>
                 : null }
         </div>
