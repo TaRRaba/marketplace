@@ -1,10 +1,16 @@
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
+import { IDeliveryState } from "./typesStripe";
+import { useAppSelector } from "../../redux/store/hooks";
+import { RootState } from "../../redux/store/store";
 
-export default function CheckoutForm() {
+export default function CheckoutForm({deliveryState}: IDeliveryState) {
   const stripe = useStripe();
   const elements = useElements();
+  const selectDeliveryAddress = useAppSelector((state: RootState) => state.cart.deliveryAddress)
+  console.log('deliveryState', deliveryState);
+  console.log('selectDeliveryAddress', selectDeliveryAddress);
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -16,7 +22,7 @@ export default function CheckoutForm() {
       method: "POST",
       headers: {'Content-Type' : 'application/json'},
       credentials: 'include',
-      body: JSON.stringify({status: "ok"})
+      body: JSON.stringify({selectDeliveryAddress, deliveryState})
     })
     const result = await response.json()
     console.log('result======>', result);

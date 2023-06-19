@@ -85,8 +85,12 @@ cartApi.delete('/', async (req, res) => {
 
 cartApi.post('/payment', async (req, res) => {
   const { id } = req.session.user;
+  const { deliveryState } = req.body;
+  const { selectDeliveryAddress } = req.body;
+
   const promises = [];
   const promisesAmount = [];
+
   try {
     const userCart = (await Carts.findOne({ where: { user_id: id } })).get({ plain: true });
     const allOrder = (await Entries.findAll({
@@ -95,7 +99,7 @@ cartApi.post('/payment', async (req, res) => {
     }))
       .map((el) => el.get({ plain: true }));
     const newOrder = (await Orders.create({
-      user_id: id, status: true, delivery: true, delivery_address: 'msk',
+      user_id: id, status: true, delivery: deliveryState, delivery_address: selectDeliveryAddress,
     })).get({ plain: true });
 
     for (let i = 0; i < allOrder.length; i += 1) {

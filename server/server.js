@@ -90,7 +90,8 @@ app.get('/config', (req, res) => {
 });
 
 app.post('/create-payment-internet', async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.body.userData;
+  const { deliveryState } = req.body;
   try {
     const cart = await Entries.findAll({ include: Goods, where: { cart_id: id } });
     const clearCart = cart.map((el) => el.get({ plain: true }));
@@ -115,11 +116,18 @@ app.post('/create-payment-internet', async (req, res) => {
       return sum;
     };
 
-    const total = sumArrays(resultArray);
+    let total;
+
+    if (deliveryState) {
+      total = sumArrays(resultArray) + 500;
+    } else {
+      total = sumArrays(resultArray);
+    }
     const totalInEuro = total / 91.63;
     const roundedTotalInEuro = Number(totalInEuro.toFixed(2));
     const totalForStripe = roundedTotalInEuro * 100;
     const roundeTotalForStripe = Number(totalForStripe.toFixed(2));
+
     // console.log('====================================');
     // console.log('roundedTotalInEuro========>', totalInEuro, roundedTotalInEuro, typeof roundedTotalInEuro, totalForStripe, roundeTotalForStripe);
     // console.log('clearCart=======>', clearCart);
@@ -127,6 +135,7 @@ app.post('/create-payment-internet', async (req, res) => {
     // console.log(summerQuantityFunction(clearCart, 1));
     // console.log(profitFunction(clearCart, 1, summerQuantityFunction(clearCart, 1)));
     // console.log('total=======>', total);
+    // console.log('roundeTotalForStripe=====)', roundeTotalForStripe);
     // console.log('====================================');
 
     const paymentIntent = await stripe.paymentIntents.create({
