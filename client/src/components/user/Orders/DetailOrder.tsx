@@ -1,7 +1,7 @@
 import { Fragment, useRef, useState, useEffect} from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 interface IOrder {
   PickPoint: {},
@@ -35,65 +35,81 @@ export function DetailOrder() {
       setOrderInfo(result)
     })()
   }, [])
-  
-  // console.log("orderInfo-------", orderInfo);
-  
+   
 
   return (
-    <div>
- 
-        <main className=" mt-8 mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-       
-        <div className=" bg-white flex flex-col mx-auto max-w-2xl justify-center px-4 md:flex md:space-x-6 xl:px-0 mt-6 rounded-lg pb-6 pt-3 shadow-md sm:flex sm:justify-start">
-        <div className=' flex justify-between'>
-          <h2 className=" ml-40 mb-2 text-center  text-2xl font-bold text-gray-900">Заказ № {orderInfo?.order?.id}</h2>
-          <button onClick={() => setOpen(true)} className="mr-2 mb-4 flex cursor-pointer items-center justify-center rounded-md border py-2 px-8 text-center text-gray-500 transition duration-150 ease-in-out hover:translate-y-1 hover:bg-rose-500 hover:text-white">
-            <p>Отменить заказ</p>
-          </button>
-        </div>    
-        <div>
-           <p className=" text-left text-lg ">Дата оформления: <span className='font-bold'>{new Date(orderInfo?.order?.createdAt).toLocaleDateString('RU-ru')}</span> </p> 
-        </div>
-        <div>
-           <p className=" text-left text-lg ">Доставка до пункта выдачи: <span className='font-bold'>{orderInfo?.order?.delivery ? "нет": orderInfo?.order?.PickPoint?.address}</span> </p> 
-        </div>
-       
-        { (orderInfo?.order?.delivery )? (
-          <div>
-            <p className=" text-left text-lg ">Адрес доставки: <span className='font-bold'>{orderInfo?.order?.delivery_address}</span></p> 
-         </div>
-        ) : (
-          <></>
-        )}
-        <div>
-           <p className=" text-left text-lg ">Общая сумма заказа: <span className='font-bold text-red-700'>{orderInfo?.detailOrder?.reduce((acc, el) => acc + ((el.quantity) * (el?.Good.price)), 0)} ₽</span> </p> 
-        </div>
-    </div>
+    <>
+                  <div className="rounded-lg md:w-2/3">
+                  <div className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
+                    <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
+                      <div className="mt-5 w-8/12 sm:mt-0">
+                        <h2 className="mb-2 text-lg mb-0 font-bold text-gray-900">
+                          Заказ №
+                          {' '}
+                          {orderInfo?.order?.id}
+                        </h2>
+                        <p className="mb-2 text-xs text-gray-700">
+                          Дата оформления:
+                          {' '}
+                          {new Date(orderInfo?.order?.createdAt).toLocaleDateString('RU-ru') + ' г.'}
+                        </p>
+                        <p className="mb-2 text-xs text-gray-700">
+                          Доставка до пункта выдачи:
+                          {' '}
+                          <span className='font-bold'>{orderInfo?.order?.delivery ? "нет": orderInfo?.order?.PickPoint?.address}</span>
+                        </p>
+                        {orderInfo?.order?.delivery && <p className="mb-2 text-xs text-gray-700">
+                          Адрес доставки:
+                          {' '}
+                          <span className='font-bold'>{orderInfo?.order?.delivery_address}</span>
+                        </p>}
+                    
+                        <hr className="mb-2" />
+                        {orderInfo?.detailOrder && orderInfo?.detailOrder.map((el) => {
+                          return (
+                            <div key={el?.id} className='flex items-center mb-5'>
+                              <img src={`http://localhost:3001${el?.Good.img_url}`} alt="" className="w-32 rounded-lg" />
+                              <div className='flex-col ml-10 item-center'>
+                                  <Link to={`/goods/${el?.Good.name}`}>
+                                <p className="cursor-pointer hover:text-gray-900 line-clamp-3 mt-1 text-md text-gray-700">
+                                  {el?.Good.name}
+                                  {' '}
+                                </p>
+                                </Link>
+                                <p className="mb-3 mt-3 text-xs text-gray-500">
+                                  Цена:
+                                  {' '}
+                                  {el?.Good.price}
+                                  {' '}
+                                  ₽ ,
+                                  {' '}
+                                  Количество:
+                                  {' '}
+                                  {el?.quantity}
 
-    <div style={{maxHeight: '600px'}} className=" mt-4 mb-6 overflow-y-scroll lg:col-span-3 ">
-  <>
-  <div id="Cart" className="visibility: visible bg-gray-100 py-6 min-h-96">
-    <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
-      <div id="amount" className="rounded-lg">
-        {orderInfo?.detailOrder && orderInfo?.detailOrder.map((el) => (
-          <div key={el?.id} className="justify-between mb-4 rounded-lg bg-white p-3 shadow-md sm:flex sm:justify-start">
-            <img src={`http://localhost:3001${el?.Good.img_url}`} alt="" className="rounded-lg w-32" />
-            <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
-              <div className="mt-5 w-80 sm:mt-0">
-                <h2 className="line-clamp-3 text-left text-sm font-bold text-gray-900 hover:text-gray-500">{el?.Good.name}</h2>
-                <h2 className=" mt-4 text-left text-sm text-gray-600">Количество: {el?.quantity}</h2>
-                <h2 className=" text-left text-sm text-gray-600">Стоимость: {(el?.quantity)* (el?.Good.price)} ₽ <span className="text-red-800">({(el?.Good.price)} ₽/шт)</span></h2>
-              </div>
-
-            </div>
-          </div>
-         ))}
-      </div>
-    </div>
-  </div>
-  </>
-    </div>
-    </main>
+                                </p>
+                                </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      <div className="flex flex-col self-start mt-0">
+                        <div className="flex mr-1 self-end items-center space-x-4 whitespace-nowrap">
+                          <p className="totalPrice text-lg font-bold text-teal-800">
+                          {orderInfo?.detailOrder?.reduce((acc, el) => acc + ((el.quantity) * (el?.Good.price)), 0)}
+                            {' '}
+                            ₽
+                          </p>
+                        </div>
+                      </div>
+                      <div className=" ml-5 flex flex-col self-start mt-0 whitespace-nowrap">
+                      <button onClick={() => setOpen(true)} className="mr-2 mb-4 flex cursor-pointer items-center justify-center rounded-md border py-2 px-8 text-center text-gray-500 transition duration-150 ease-in-out hover:translate-y-1 hover:bg-rose-500 hover:text-white">
+                        <p>Отменить заказ</p>
+                      </button>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
 
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
@@ -162,6 +178,6 @@ export function DetailOrder() {
       </Dialog>
     </Transition.Root>
 
-     </div>
+     </>
   )
 }
