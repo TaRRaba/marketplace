@@ -116,7 +116,9 @@ app.post('/create-payment-internet', async (req, res) => {
     };
 
     const total = sumArrays(resultArray);
-
+    const totalInEuro = total / 91.63;
+    const roundedTotalInEuro = totalInEuro.toFixed(2);
+    const totalForStripe = roundedTotalInEuro * 100;
     // console.log('====================================');
     // console.log('clearCart=======>', clearCart);
     // console.log('uniqueArr=======>', uniqueArr);
@@ -127,7 +129,7 @@ app.post('/create-payment-internet', async (req, res) => {
 
     const paymentIntent = await stripe.paymentIntents.create({
       currency: 'eur',
-      amount: total,
+      amount: totalForStripe,
       automatic_payment_methods: {
         enabled: true,
       },
