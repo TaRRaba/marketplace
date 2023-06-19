@@ -18,6 +18,7 @@ import NewCatalog from './NewCatalog'
 import { useEffect, useState } from 'react'
 import { getCart } from '../../redux/thunks/cartThunks/getCart.thunk'
 import { getFav } from '../../redux/thunks/favThunks/getFav.thunk'
+import { NewEntriesMenu } from './NewEntriesMenu'
 
 
 export const UserNavBar = () => {
@@ -126,7 +127,8 @@ export const UserNavBar = () => {
         </div>
         {userIsActive ? <> <div className='w-2/12'>
         
-        <EntriesMenu/>
+        {/* <EntriesMenu/> */}
+        <NewEntriesMenu/>
        </div>
        {/* <Link to='/profile/favourites' className='w-1/12 ml-4'>
         <div>Избранное</div>
@@ -168,8 +170,8 @@ export const UserNavBar = () => {
        sellerIsActive ?
        <>
        <div className='w-2/12'>
-        
-        <EntriesMenu/>
+       <NewEntriesMenu/>
+        {/* <EntriesMenu/> */}
        </div>
        </> :
        <>
