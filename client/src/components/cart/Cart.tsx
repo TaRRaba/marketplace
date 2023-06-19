@@ -5,22 +5,30 @@ import { getCart } from '../../redux/thunks/cartThunks/getCart.thunk';
 import { incrAmount } from '../../redux/thunks/cartThunks/incrAmount.thunk';
 import { decrAmount } from '../../redux/thunks/cartThunks/decrAmount.thunk';
 import { delPos } from '../../redux/thunks/cartThunks/delPos.thunk';
+import { ToggleSwitch } from 'flowbite-react';
 
 import { loadStripe } from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 import CheckoutForm from '../stripe/CheckoutForm';
+import { setDeliveryAddress } from '../../redux/store/cartSlice';
 
 export const Cart = () => {
     const userData = useAppSelector((state: RootState) => state.users.users)
     const cart = useAppSelector((state: RootState) => state.cart.cart);
     const [stripePromise, setStripePromise] = useState(null);
     const [clientSecret, setClientSecret] = useState();
+    const [billData, setBillData] = useState(false);
+    const [deliveryState, setDeliveryState] = useState(false);
+
     const dispatch = useAppDispatch();
 
     function getTotal () {
         let total = 0;
         for (let i = 0; i < cart.length; i++) {
           total += cart[i].quantity * cart[i].Good.price;
+        }
+        if (deliveryState) {
+          return total + 500
         }
         return total;
     }
@@ -34,21 +42,30 @@ export const Cart = () => {
         dispatch(getCart())
     }, [])
 
-    useEffect(() => {
+    const handleBill = () => {
+      setBillData(!billData)
       if (userData.id){
-        fetch("http://localhost:3001/create-payment-internet", {
-          method: "POST",
-          headers: {'Content-Type' : 'application/json'},
-          credentials: 'include',
-          body: JSON.stringify(userData)
-      }).then(async (r)=> {
-          const { clientSecret } = await r.json();
-          
-          setClientSecret(clientSecret)
-      })
-      }
-    }, [userData])
+            fetch("http://localhost:3001/create-payment-internet", {
+              method: "POST",
+              headers: {'Content-Type' : 'application/json'},
+              credentials: 'include',
+              body: JSON.stringify({userData, deliveryState})
+          }).then(async (r)=> {
+              const { clientSecret } = await r.json();
+              
+              setClientSecret(clientSecret)
+          })
+          }
+    }
 
+    const changeDeliveryState = () => {
+      setDeliveryState(!deliveryState)
+      dispatch(setDeliveryAddress(''))
+    }
+
+    const changeInputAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch(setDeliveryAddress(e.target.value))
+    }
 
     return (
         <>
@@ -71,8 +88,11 @@ export const Cart = () => {
       {cart.length > 0 ? (
         <div id="Cart" className="visibility: visible bg-gray-100 mb-44 min-h-96 pt-10">
           <h1 className="mb-10 text-center text-2xl font-bold">Корзина</h1>
-          <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
-            <div id="amount" className="rounded-lg md:w-2/3">
+          <div className="mx-auto max-w-7xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+
+            {
+              billData ? <></> : 
+              <div id="amount" className="rounded-lg md:w-2/3">
               {cart && cart.map(({ id, quantity, Good }) => (
                 <div key={Good.id} id={String(id)} className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                   <img src={`http://localhost:3001${Good.img_url}`} alt="" className="rounded-lg w-40" />
@@ -112,7 +132,20 @@ export const Cart = () => {
                 </div>
               ))}
             </div>
-            <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+            }
+
+            <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3"> 
+            {billData ? <></> :
+              <div className="flex max-w-md flex-col gap-4" id="toggle">
+                <ToggleSwitch
+                  checked = {deliveryState}
+                  label="Доставка"
+                  onChange={changeDeliveryState}/>
+                {deliveryState ? <input onChange={changeInputAddress} name='text' className='w-11/12 py-1.5 px-1 border-2 border-gray-500 rounded-lg text-start'></input> 
+                : <></>
+                }
+
+              </div>}
               <div className="flex justify-between">
                 <p className="text-lg font-bold">Итого:</p>
                 <div className="">
@@ -124,10 +157,11 @@ export const Cart = () => {
                   <p className="text-sm text-gray-700">в т.ч. НДС 20%</p>
                 </div>
               </div>
-              {/* <button id="orderBtn" data-userid='{user.id}' type="button" className="mt-6 w-full rounded-md py-1.5 font-medium text-blue-50 bg-[#4520aa] hover:bg-[#4520aa]/80">Оформить заказ</button> */}
+              {billData ? <></> :
+              <button id="orderBtn" data-userid='{user.id}' onClick={handleBill} type="button" className="mt-6 w-full rounded-md py-1.5 font-medium text-blue-50 bg-[#4520aa] hover:bg-[#4520aa]/80">Перейти к оплате</button>}
                 {stripePromise && clientSecret && (
                 <Elements stripe={stripePromise} options={{ clientSecret }}>
-                <CheckoutForm />
+                <CheckoutForm deliveryState={deliveryState}/>
                 </Elements>
                 )}
             </div>
