@@ -11,9 +11,7 @@ interface IOrderData {
 }
 
 export const Orders = () => {
-    const [orders, setOrders] = useState<IOrderData[][]>([]);
-    console.log(orders);
-    
+    const [orders, setOrders] = useState<IOrderData[][]>([]);    
 
     useEffect(() => {
         (async function () {
@@ -61,7 +59,7 @@ export const Orders = () => {
                         {order.map((good) => {
                           total += good.Good.price * good.quantity;
                           return (
-                            <div />
+                            <div key={good.id}/>
                             // <div className='flex items-center mb-5'>
                             // <img src={`http://localhost:3001${good.Good.img_url}`} alt="" className="w-32 rounded-lg" />
                             // <div className='flex-col ml-10 item-center'>
