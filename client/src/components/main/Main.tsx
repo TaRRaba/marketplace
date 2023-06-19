@@ -10,7 +10,7 @@ export const Main = () => {
   return (
     <>
 
-    <a href='/#'>
+    <a href='/sport'>
     <video autoPlay loop controlsList='nodownload' className="n8o9J" muted data-testid="main-banner-video" playsInline ><source src="https://cdn2.static1-sima-land.com/share/16809.mp4"/></video>
     </a>
     {/* <nav className="flex bg-gray-100 text-gray-700  px-5" aria-label="Breadcrumb">
