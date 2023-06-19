@@ -13,6 +13,7 @@ export function NewGoodsSeller() {
 
      const [allCategory, setAllCategory] = useState([])
      const [categoryValue, setCategoryValue] = useState('')
+     const [nameCheck, setNameCheck] = useState('')
 
      useEffect(()=> {
       setAllCategory(category)
@@ -23,10 +24,12 @@ export function NewGoodsSeller() {
         return allCategory.filter((el) => el.id === Number(categoryValue))
       }
 
+      const checkNameProduct = nameCheck.split('').some((el) => el === "." || el === "%") 
+
       const handSummit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         const data = new FormData(e.currentTarget)
- 
+  
         try {
             const response = await fetch('http://localhost:3001/api/seller/newgoods', {
                 method: "POST",
@@ -35,13 +38,12 @@ export function NewGoodsSeller() {
             })
             const result = await response.json();
             dispatch(getAllGood())
-            // console.log("result====>", result);
             navigate('/profileSeller/goods')
             
           } catch (error) {
               console.log(error);
           }
-      }
+      }  
 
   return (
     <section className="pb-10 flex bg-gray-100">
@@ -77,7 +79,8 @@ export function NewGoodsSeller() {
   </div>
   <div>
     <label className=""> Наименование товара </label>
-    <input required name='name' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+    <p className=' text-red-700 text-xs'> Важно! Наименование товара не должно содержать символы « . » и « % »</p>
+    <input defaultValue={nameCheck} onChange={(e)=> setNameCheck(e.target.value)} required name='name' type="text" className={`mt-2 h-10 w-full rounded-md bg-gray-100 px-3 ${ checkNameProduct && " border-red-600" }`} />
   </div>
   <div>
     <label className=""> Страна производитель</label>
@@ -130,7 +133,7 @@ export function NewGoodsSeller() {
     </div>
  
   <div className=' flex justify-around mt-10'>
-    <button type='submit' className="mt-5 w-48 rounded-md bg-green-500 p-2 text-center font-semibold text-white">Сохранить</button>
+    <button disabled={checkNameProduct} type='submit' className="mt-5 w-48 rounded-md bg-green-500 p-2 text-center font-semibold text-white">Сохранить</button>
     <button onClick={()=> navigate('/profileSeller/goods')} type="button" className="mt-5 w-48 rounded-md bg-blue-500 p-2 text-center font-semibold text-white">Отменить</button>
   </div>
 </form>
