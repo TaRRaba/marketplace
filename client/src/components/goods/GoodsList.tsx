@@ -538,7 +538,7 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
                 <p className="ml-5 text-left mt-5 text-xs text-gray-500">Производитель: {specs.brand}</p>
               </div>
               </div>
-              <div className="flex flex-col mt-0">
+              <div className="flex flex-col justify-between">
                 {user ? 
                 <>
                 {checkFav(id) ?
@@ -550,25 +550,21 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                 </svg>
                 }
-                </>
-                : null }
-                <div className="flex mt-16 mb-4 mr-1 self-end items-center space-x-4">
+                <div className="flex mt-16 mr-1 self-end items-center space-x-4">
                   <p className="totalPrice text-lg font-bold text-teal-800">
                     {price}
                     {' '}
                     ₽
                   </p>
                 </div>
-                {user ? 
-                <>
                 {amount > 0 ?
                 <>
                 {checkCart(id) ?
-              <div className="addedCart flex text-sm items-center cursor-pointer space-x-1.5 rounded-lg bg-teal-600 px-4 py-1.5 text-white duration-100">
+              <div className="addedCart flex mt-4 text-sm items-center cursor-pointer space-x-1.5 rounded-lg bg-teal-600 px-4 py-1.5 text-white duration-100">
               В корзине
             </div>
               :
-             <div onClick={() => dispatch(addAmountCart({goodID: id, amount: 1}))} className="addToCart flex text-sm items-center cursor-pointer space-x-1.5 rounded-lg bg-[#4520aa] px-4 py-1.5 text-white duration-100 hover:bg-[#4520aa]/80">
+             <div onClick={() => dispatch(addAmountCart({goodID: id, amount: 1}))} className="addToCart mt-4 flex text-sm items-center cursor-pointer space-x-1.5 rounded-lg bg-[#4520aa] px-4 py-1.5 text-white duration-100 hover:bg-[#4520aa]/80">
              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="addToCart mr-2 h-4 w-4">
                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
              </svg>
@@ -578,7 +574,18 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
               </>
               : null }
               </>
-              : null }
+              :
+              <>
+              <div />
+              <div className="flex-col mr-1 space-x-4">
+                <p className="text-lg font-bold text-teal-800">
+                {price}
+                {' '}
+                ₽
+                </p>
+            </div>
+            </>
+              }
               </div>
             </div>
           </div>
