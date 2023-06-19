@@ -117,9 +117,11 @@ app.post('/create-payment-internet', async (req, res) => {
 
     const total = sumArrays(resultArray);
     const totalInEuro = total / 91.63;
-    const roundedTotalInEuro = totalInEuro.toFixed(2);
+    const roundedTotalInEuro = Number(totalInEuro.toFixed(2));
     const totalForStripe = roundedTotalInEuro * 100;
+    const roundeTotalForStripe = Number(totalForStripe.toFixed(2));
     // console.log('====================================');
+    // console.log('roundedTotalInEuro========>', totalInEuro, roundedTotalInEuro, typeof roundedTotalInEuro, totalForStripe, roundeTotalForStripe);
     // console.log('clearCart=======>', clearCart);
     // console.log('uniqueArr=======>', uniqueArr);
     // console.log(summerQuantityFunction(clearCart, 1));
@@ -129,7 +131,7 @@ app.post('/create-payment-internet', async (req, res) => {
 
     const paymentIntent = await stripe.paymentIntents.create({
       currency: 'eur',
-      amount: totalForStripe,
+      amount: roundeTotalForStripe,
       automatic_payment_methods: {
         enabled: true,
       },
