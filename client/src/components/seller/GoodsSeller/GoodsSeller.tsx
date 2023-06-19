@@ -36,7 +36,7 @@ export default function GoodsSeller() {
                     <div className="mt-5 ml-3 w-80 sm:mt-0 flex flex-col justify-between">
                         <h2 className=" line-clamp-2 text-left text-l font-bold text-gray-900 hover:text-gray-500">{el.name}</h2>
                         <h2 className=" mt-3 text-left text-l text-gray-900">Количество: {el.amount} шт</h2>
-                        <h2 className=" text-left text-l text-red-800">Цена: {el.price}  ₸/шт</h2>
+                        <h2 className=" text-left text-l text-red-800">Цена: {el.price}  ₽/шт</h2>
                     <div className="mt-6 ml-5 flex flex-col sm:flex-row">
                     <Link to={`/profileSeller/edit_goods/${el?.id}`}>
                     <button className="mr-2 mb-4 flex cursor-pointer items-center justify-center rounded-md bg-emerald-400 py-2 px-8 text-center text-white transition duration-150 ease-in-out hover:translate-y-1 hover:bg-emerald-500">
