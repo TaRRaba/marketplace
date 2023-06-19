@@ -71,7 +71,7 @@ export const FooterFinal = () => {
         <div className='flex flex-col items-center w-4/12 border-x-2 border-x-gray-200'>
           <div>Клиентам</div>
           <a>Как оформить заказ</a>
-          <a>Получение товара</a>
+          <a href='/delivery_points' className="ml-3 text-gray-500 cursor-pointer hover:text-sky-600">Получение товара</a>
           <a>Оплата товара</a>
         </div>
         <div className='text-center w-4/12'>
