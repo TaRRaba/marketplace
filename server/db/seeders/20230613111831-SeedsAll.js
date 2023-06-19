@@ -272,14 +272,14 @@ module.exports = {
           img_url: "/pics/goods/телевизор-Xiaomi.jpg",
         },
         {
-          name: 'Смартфон Realme 8, 6.4", SAmoled, 2 sim, 6Гб, 128Гб, 64Мп, 16Мп, 5000 мАч, NFC, серебристый',
+          name: 'Смартфон Realme 8, SAmoled, 2 sim, 6Гб, 128Гб, 64Мп, 16Мп, 5000 мАч, NFC, серебристый',
           country: "Китай",
           specs: JSON.stringify({
             brand: "Realme",
             code: "9293438",
             size: "17,5 см х 9 см х 7 см",
             weight: "493 г",
-            type: "MediaTek Helio G95",
+            type: 'MediaTek Helio G95, 6.4"',
           }),
           price: 23990,
           rating: Math.round(Math.random() * 100),
@@ -289,14 +289,14 @@ module.exports = {
           img_url: "/pics/goods/смартфон-Realme.jpg",
         },
         {
-          name: 'Смартфон Xiaomi POCO F4 GT NFC RU, 6.67", Amoled, 8 Гб, 128 Гб, 64 Мп, 4700 мАч, серый',
+          name: 'Смартфон Xiaomi POCO F4 GT NFC RU, Amoled, 8 Гб, 128 Гб, 64 Мп, 4700 мАч, серый',
           country: "Китай",
           specs: JSON.stringify({
             brand: "XIAOMI",
             code: "9262939",
             size: "19,5 см х 10 см х 7 см",
             weight: "751 г",
-            type: "Qualcomm Snapdragon 8 Gen 1",
+            type: 'Qualcomm Snapdragon 8 Gen 1, 6.67"',
           }),
           price: 65990,
           rating: Math.round(Math.random() * 100),
@@ -306,14 +306,14 @@ module.exports = {
           img_url: "/pics/goods/смартфон-Xiaomi.jpg",
         },
         {
-          name: 'Смартфон BQ 6051G Soul, 6.09", IPS, 2 sim, 1Гб, 16Гб, 5 Мп, microSD, 3000 мАч, черный',
+          name: 'Смартфон BQ 6051G Soul, IPS, 2 sim, 1Гб, 16Гб, 5 Мп, microSD, 3000 мАч, черный',
           country: "Китай",
           specs: JSON.stringify({
             brand: "BQ",
             code: "7786978",
             size: "20,5 см х 12,5 см х 3,5 см",
             weight: "400 г",
-            type: "Spreadtrum SC7731E",
+            type: 'Spreadtrum SC7731E, 6.09"',
           }),
           price: 4090,
           rating: Math.round(Math.random() * 100),
@@ -428,14 +428,14 @@ module.exports = {
           img_url: "/pics/goods/холодильник-HAIER.jpg",
         },
         {
-          name: "Пылесос KELLI KL-8014, 2200/360 Вт, 1.5 л, шнур 4 м, зелёный",
+          name: "Пылесос KELLI KL-8014, 2200/360 Вт, шнур 4 м, зелёный",
           country: "Китай",
           specs: JSON.stringify({
             brand: "Kelli",
             code: "3325716",
             size: "27 см х 23 см х 41 см",
             weight: "3.9 кг",
-            type: "360 Вт",
+            type: "360 Вт, 1.5 л",
           }),
           price: 3869,
           rating: Math.round(Math.random() * 100),
@@ -445,14 +445,14 @@ module.exports = {
           img_url: "/pics/goods/пылесос-KELLI.jpg",
         },
         {
-          name: "Пылесос Centek CT-2563, 2000/380 Вт, 3.5 л, чёрно-зелёный",
+          name: "Пылесос Centek CT-2563, 2000/380 Вт, чёрно-зелёный",
           country: "Китай",
           specs: JSON.stringify({
             brand: "Centek",
             code: "5394870",
             size: "41 см х 28 см х 32 см",
             weight: "5.6 кг",
-            type: "380 Вт",
+            type: "380 Вт, 3.5 л",
           }),
           price: 4810,
           rating: Math.round(Math.random() * 100),
@@ -462,14 +462,14 @@ module.exports = {
           img_url: "/pics/goods/пылесос-Centek.jpg",
         },
         {
-          name: "Пылесос LG VC5420NNTS, 2000/380 Вт, 1.3 л, 3 насадки, 5.3 м, чёрно-серебристый",
+          name: "Пылесос LG VC5420NNTS, 2000/380 Вт, 3 насадки, чёрно-серебристый",
           country: "Вьетнам",
           specs: JSON.stringify({
             brand: "LG",
             code: "6385595",
             size: "40 см х 27 см х 23,4 см",
             weight: "7.5 кг",
-            type: "380 Вт",
+            type: "380 Вт, 1.3 л",
           }),
           price: 8399,
           rating: Math.round(Math.random() * 100),
@@ -632,7 +632,7 @@ module.exports = {
           img_url: "/pics/goods/турник.jpg",
         },
         {
-          name: "Газетчик. Молчанов А.В.",
+          name: "Газетчик, Молчанов Александр",
           country: "Россия",
           specs: JSON.stringify({
             brand: "Эксмо",
@@ -649,7 +649,7 @@ module.exports = {
           img_url: "/pics/goods/газетчик.jpg",
         },
         {
-          name: "Пир во время чумы. Пушкин А.",
+          name: "Пир во время чумы, Пушкин Александр",
           country: "Россия",
           specs: JSON.stringify({
             brand: "Проспект",
@@ -666,7 +666,7 @@ module.exports = {
           img_url: "/pics/goods/Пир.jpg",
         },
         {
-          name: "Бедная Лиза. Карамзин Н.",
+          name: "Бедная Лиза, Карамзин Николай",
           country: "Россия",
           specs: JSON.stringify({
             brand: "Проспект",
@@ -683,14 +683,14 @@ module.exports = {
           img_url: "/pics/goods/бедная.jpg",
         },
         {
-          name: "Биоорганическая химия. Ринейская О.Н. и др.",
+          name: "Биоорганическая химия",
           country: "Россия",
           specs: JSON.stringify({
             brand: "Новое знание",
             code: "9274520",
             size: "25 см х 17 см х 2 см",
             weight: "479 г",
-            type: "Твёрдый переплёт",
+            type: "Твёрдый переплёт. Ринейская О.Н. и др.",
           }),
           price: 974,
           rating: Math.round(Math.random() * 100),
@@ -700,14 +700,14 @@ module.exports = {
           img_url: "/pics/goods/Биоорганическая.jpg",
         },
         {
-          name: "Правоведение. Тестовые и ситуационные задания. Подготовка к курсовому зачету",
+          name: "Правоведение",
           country: "Россия",
           specs: JSON.stringify({
             brand: "ГЭОТАР-Медиа",
             code: "9300550",
             size: "21,5 см х 14,5 см х 2 см",
             weight: "172 г",
-            type: "Мягкий переплёт",
+            type: "Мягкий переплёт. Тестовые и ситуационные задания. Подготовка к курсовому зачету",
           }),
           price: 483,
           rating: Math.round(Math.random() * 100),
@@ -717,14 +717,14 @@ module.exports = {
           img_url: "/pics/goods/Правоведение.jpg",
         },
         {
-          name: "Философия с иллюстрациями. Учебник. Миронов В.",
+          name: "Философия с иллюстрациями",
           country: "Россия",
           specs: JSON.stringify({
             brand: "Проспект",
             code: "7661697",
             size: "14 см х 10,4 см х 3 см",
             weight: "160 г",
-            type: "Мягкий переплёт",
+            type: "Мягкий переплёт. Учебник. Миронов В.",
           }),
           price: 4175,
           rating: Math.round(Math.random() * 100),
@@ -751,14 +751,14 @@ module.exports = {
           img_url: "/pics/goods/изучаем.jpg",
         },
         {
-          name: "Книга с заданиями «Найди пару», от 3 лет, 24 стр.",
+          name: "Книга с заданиями «Найди пару», от 3 лет",
           country: "Россия",
           specs: JSON.stringify({
             brand: "БУКВА-ЛЕНД",
             code: "7690070",
             size: "17 см х 12 см х 0,3 см",
             weight: "26 г",
-            type: "Мягкий переплёт",
+            type: "Мягкий переплёт. 24 стр.",
           }),
           price: 24,
           rating: Math.round(Math.random() * 100),
@@ -768,14 +768,14 @@ module.exports = {
           img_url: "/pics/goods/книга.jpg",
         },
         {
-          name: "Тренажер. Состав числа. ФГОС ДО. Чиркова С. В.",
+          name: "Тренажер",
           country: "Россия",
           specs: JSON.stringify({
             brand: "Издательство «Вакоша»",
             code: "9048936",
             size: "21 см х 13 см х 0,5 см",
             weight: "50 г",
-            type: "Мягкий переплёт",
+            type: "Мягкий переплёт. Состав числа. ФГОС ДО. Чиркова С. В.",
           }),
           price: 38,
           rating: Math.round(Math.random() * 100),
@@ -955,14 +955,14 @@ module.exports = {
           img_url: "/pics/goods/кисти.jpg",
         },
         {
-          name: "Бумага А4 500 л, Светокопи, 80 г/м2, белизна 146% CIE, класс C (цена за 500 листов)",
+          name: "Бумага А4 500 л, Светокопи (цена за 500 листов)",
           country: "Россия",
           specs: JSON.stringify({
             brand: "SvetoCopy",
             code: "1390397",
             size: "8 см х 21 см х 29,7 см",
             weight: "2.4 кг",
-            type: "Форматная белая",
+            type: "Форматная белая. 80 г/м2, белизна 146% CIE, класс C",
           }),
           price: 348,
           rating: Math.round(Math.random() * 100),
@@ -989,14 +989,14 @@ module.exports = {
           img_url: "/pics/goods/гуашь.jpg",
         },
         {
-          name: "Постельное бельё Этель Евро «Вечернее небо» 200х215, 220х240, 50х70-2 шт, 100% хлопок, бязь 125г/м2",
+          name: "Постельное бельё Этель Евро «Вечернее небо», бязь 125г/м2",
           country: "Россия",
           specs: JSON.stringify({
             brand: "Этель",
             code: "9046022",
             size: "7 см х 30 см х 30 см",
             weight: "1.9 кг",
-            type: "Хлопок 100%",
+            type: "Хлопок 100%. 200х215, 220х240, 50х70-2 шт",
           }),
           price: 2386,
           rating: Math.round(Math.random() * 100),
@@ -1006,7 +1006,7 @@ module.exports = {
           img_url: "/pics/goods/постель-этель.jpg",
         },
         {
-          name: 'Покрывало Love Life евро макси "Сканди" 240х220±5см, новосатин, 100% п/э',
+          name: 'Покрывало Love Life евро макси "Сканди" 240х220±5см, новосатин',
           country: "Россия",
           specs: JSON.stringify({
             brand: "LoveLife",
@@ -1023,14 +1023,14 @@ module.exports = {
           img_url: "/pics/goods/покрывало.jpg",
         },
         {
-          name: "Штора портьерная «Этель» 250×265 см, блэкаут, цвет розовый металл, пл. 210 г/м², 100% п/э",
+          name: "Штора портьерная «Этель» 250×265 см, блэкаут, цвет розовый металл",
           country: "Россия",
           specs: JSON.stringify({
             brand: "Этель",
             code: "4292712",
             size: "30 см х 27 см х 8 см",
             weight: "1.6 кг",
-            type: "Полиэстер 100%",
+            type: "Полиэстер 100%, пл. 210 г/м²",
           }),
           price: 1860,
           rating: Math.round(Math.random() * 100),
