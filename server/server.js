@@ -118,12 +118,11 @@ app.post('/create-payment-internet', async (req, res) => {
     const total = sumArrays(resultArray);
 
     // console.log('====================================');
-    // console.log(clearCart);
-    // console.log(uniqueArr);
+    // console.log('clearCart=======>', clearCart);
+    // console.log('uniqueArr=======>', uniqueArr);
     // console.log(summerQuantityFunction(clearCart, 1));
     // console.log(profitFunction(clearCart, 1, summerQuantityFunction(clearCart, 1)));
-    // console.log(result);
-    // console.log(total);
+    // console.log('total=======>', total);
     // console.log('====================================');
 
     const paymentIntent = await stripe.paymentIntents.create({

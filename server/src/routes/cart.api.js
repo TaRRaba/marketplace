@@ -103,7 +103,10 @@ cartApi.post('/payment', async (req, res) => {
         seller_id: allOrder[i].Good.seller_id,
       }));
       promisesAmount.push(Goods.update(
-        { amount: allOrder[i].Good.amount - allOrder[i].quantity },
+        {
+          amount: allOrder[i].Good.amount - allOrder[i].quantity,
+          rating: allOrder[i].Good.rating + allOrder[i].quantity,
+        },
         { where: { id: allOrder[i].good_id } },
       ));
     }
@@ -112,6 +115,17 @@ cartApi.post('/payment', async (req, res) => {
     await Entries.destroy({ where: { cart_id: userCart.id } });
 
     res.json({ status: '200' });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+cartApi.get('/numberoforder', async (req, res) => {
+  const user_id = req.session.user.id;
+  try {
+    const allOrders = (await Orders.findAll({ where: { user_id }, order: [['id', 'DESC']] })).map((el) => el.get({ plain: true }));
+    const lastOrder = allOrders[0];
+    res.json(lastOrder);
   } catch (error) {
     console.log(error);
   }
