@@ -54,7 +54,7 @@ export default function ProfileSeller() {
       <Link to="/profileSeller/goods">
       <Sidebar.Item
       icon={HiShoppingBag}
-        label={goods.length}>
+        label={goods.length > 0 ? goods.length : null}>
         <p>Товары</p>
       </Sidebar.Item>
       </Link>
