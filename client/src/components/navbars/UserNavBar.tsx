@@ -41,14 +41,14 @@ export const UserNavBar = () => {
     <RegistrationUser />
       <LoginSeller/>
       <div className='flex justify-between'>
-        <div>Location</div>
+        <div>Локация</div>
         <div className='flex items-center'>
           {sellerIsActive ? 
           <>
                
 
                 <Link to='/infoSeller'>
-                <div>Become a seller</div>
+                <div>Стать продавцом</div>
                 </Link>
           </>
           :
@@ -56,10 +56,10 @@ export const UserNavBar = () => {
           {userIsActive ? <>
           
           <Link to='/infoSeller'>
-            <div>Become a seller</div>
-            </Link></> : <><button onClick={setModalActiveLogSeller} className='mr-4 px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Selleer Sing in</button>
+            <div>Стать продавцом</div>
+            </Link></> : <><button onClick={setModalActiveLogSeller} className='mr-4 px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Войти как продавец</button>
             <Link to='/infoSeller'>
-            <div>Become a seller</div>
+            <div>Стать продавцом</div>
             </Link>
             </>}
           </>
@@ -113,8 +113,8 @@ export const UserNavBar = () => {
        </> :
        <>
          <div className='w-2/12'>
-        <button onClick={setModalActiveLog} className='px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Sing in</button>
-        <button onClick={setModalActiveReg} className='ml-2 px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Sing up</button>
+        <button onClick={setModalActiveLog} className='px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Войти</button>
+        <button onClick={setModalActiveReg} className='ml-2 px-1 py-1 rounded-lg border-2 border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Регистрация</button>
 
         </div>
        </>
