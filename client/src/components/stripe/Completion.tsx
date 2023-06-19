@@ -4,34 +4,7 @@ import { useAppSelector } from '../../redux/store/hooks';
 import { RootState } from '../../redux/store/store';
 
 export default function Completion() {
-  const [numberOrder, setNumberOrder] = useState(0)
-  const user = useAppSelector((state: RootState) => state.users.users);
-
-  function orderEmail(email, name, order) {
-    Email.send({
-      SecureToken: 'a3d45322-5353-477e-ae43-06b884d95821',
-      To: email,
-      From: 'localmarket.elbrus@gmail.com',
-      Subject: `Заказ № ${order}`,
-      Body: `Уважаемый(ая) ${name}! Благодарим Вас за заказ на нашем сайте! Подробности заказа вы можете посмотреть в личном кабинете.`,
-    }).then();
-  }
-
-  function orderSellerEmail(email, name, order) {
-    Email.send({
-      SecureToken: 'a3d45322-5353-477e-ae43-06b884d95821',
-      To: email,
-      From: 'localmarket.elbrus@gmail.com',
-      Subject: `Заказ № ${order}`,
-      Body: `${name}, у Вас новый заказ! Подробности заказа вы можете посмотреть в личном кабинете.`,
-    }).then();
-  }
-
-  function SellersEmailing(sellersArray, order) {
-    sellersArray.forEach((seller) => {
-      orderSellerEmail(seller.email, seller.name, order);
-    })
-  }
+  const [numberOrder, setNumberOrder] = useState(0);
 
   useEffect(() => {    
     (async function () {
@@ -41,13 +14,9 @@ export default function Completion() {
       const result = await response.json()
       const { order, sellers } = result;
       setNumberOrder(order.id);
-      SellersEmailing(sellers, order.id);
     })()
   }, [])
-
-  useEffect(() => {    
-    orderEmail(user.email, user.name, numberOrder);
-  }, [numberOrder])
+  
 
   return (
     <div className='flex flex-col gap-y-3 justify-center justify-items-center justify-self-center content-center self-center items-center min-h-screen' >

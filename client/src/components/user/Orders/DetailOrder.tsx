@@ -2,6 +2,8 @@ import { Fragment, useRef, useState, useEffect} from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import { Link, useParams } from 'react-router-dom'
+import { useAppSelector } from '../../../redux/store/hooks';
+import { RootState } from '../../../redux/store/store';
 
 interface IOrder {
   PickPoint: {},
@@ -20,11 +22,54 @@ interface IOrderInfo {
 }
 
 export function DetailOrder() {
-  const { id } = useParams() 
+  const { id } = useParams();
+  const user = useAppSelector((state: RootState) => state.users.users);
   const [orderInfo, setOrderInfo] = useState<IOrderInfo>({detailOrder: [], order: {}})
+  const [orderStatus, setOrderStatus] = useState(true);
+  const [open, setOpen] = useState(false);
+  const cancelButtonRef = useRef(null);
 
-  const [open, setOpen] = useState(false)
-  const cancelButtonRef = useRef(null)
+  function orderEmail(email, name, order) {
+    Email.send({
+      SecureToken: 'a3d45322-5353-477e-ae43-06b884d95821',
+      To: email,
+      From: 'localmarket.elbrus@gmail.com',
+      Subject: `Заказ № ${order} - Отменен!`,
+      Body: `Уважаемый(ая) ${name}! Вы отменили заказ на нашем сайте! Надеемся вскоре получить от Вас новый заказ.`,
+    }).then();
+  }
+
+  function orderSellerEmail(email, name, order) {
+    Email.send({
+      SecureToken: 'a3d45322-5353-477e-ae43-06b884d95821',
+      To: email,
+      From: 'localmarket.elbrus@gmail.com',
+      Subject: `Заказ № ${order} - Отменен!`,
+      Body: `${name}, покупатель отменил заказ! Подробности и состав заказа вы можете посмотреть в личном кабинете.`,
+    }).then();
+  }
+
+  function SellersEmailing(sellersArray, order) {
+    sellersArray.forEach((seller) => {
+      orderSellerEmail(seller.email, seller.name, order);
+    })
+  }
+
+  async function OrderCancel() {
+    const response = await fetch('http://localhost:3001/api/order/', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({orderID: id}),
+      credentials: 'include',
+      })
+      const result = await response.json();
+      if (result.status === 200) {
+        setOrderStatus(false);
+        SellersEmailing(result.sellers, id);
+        orderEmail(user.email, user.name, id);
+        setOpen(false);
+      }
+  }
 
   useEffect(()=> {
     (async function () {
@@ -32,10 +77,11 @@ export function DetailOrder() {
         credentials: 'include'
       })
       const result = await response.json()
-      setOrderInfo(result)
+      setOrderInfo(result)      
+      setOrderStatus(result.order.status)
     })()
   }, [])
-   
+  
 
   return (
     <>
@@ -43,11 +89,16 @@ export function DetailOrder() {
                   <div className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                     <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                       <div className="mt-5 w-8/12 sm:mt-0">
+                        <div className='flex justify-between'>
                         <h2 className="mb-2 text-lg mb-0 font-bold text-gray-900">
                           Заказ №
                           {' '}
                           {orderInfo?.order?.id}
                         </h2>
+                        {!orderStatus ?
+                        <div className='text-red-600'>Отменен</div>
+                        : null }
+                        </div>
                         <p className="mb-2 text-xs text-gray-700">
                           Дата оформления:
                           {' '}
@@ -101,11 +152,13 @@ export function DetailOrder() {
                             ₽
                           </p>
                         </div>
-                      </div>
-                      <div className=" ml-5 flex flex-col self-start mt-0 whitespace-nowrap">
-                      <button onClick={() => setOpen(true)} className="mr-2 mb-4 flex cursor-pointer items-center justify-center rounded-md border py-2 px-8 text-center text-gray-500 transition duration-150 ease-in-out hover:translate-y-1 hover:bg-rose-500 hover:text-white">
+                        {orderStatus ?
+                        <div className="flex flex-col self-start mt-0 whitespace-nowrap">
+                      <button onClick={() => setOpen(true)} className="mt-4 flex cursor-pointer items-center justify-center rounded-md border py-2 px-4 text-center text-gray-500 transition duration-150 ease-in-out hover:translate-y-1 hover:bg-rose-500 hover:text-white">
                         <p>Отменить заказ</p>
                       </button>
+                      </div>
+                      : null }
                       </div>
                     </div>
                   </div>
@@ -158,7 +211,7 @@ export function DetailOrder() {
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                    onClick={() => setOpen(false)}
+                    onClick={() => OrderCancel()}
                   >
                     Отменить
                   </button>
