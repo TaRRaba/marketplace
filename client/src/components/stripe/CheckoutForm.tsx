@@ -88,6 +88,8 @@ export default function CheckoutForm({deliveryState}: IDeliveryState) {
         body: JSON.stringify({selectDeliveryAddress, deliveryState, pickpointAddress})
       })
     const result = await response.json()
+    SellersEmailing(result.sellers, result.orderID);
+    orderEmail(user.email, user.name, result.orderID);
     console.log('result======>', result);
 
     if (!stripe || !elements) {
