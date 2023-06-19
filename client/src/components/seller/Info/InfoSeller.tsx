@@ -1,11 +1,12 @@
 import React from 'react'
-import { useAppDispatch } from '../../../redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import {  changeModallogSeller, changeModalreg } from '../../../redux/store/sellerSlice';
 import RegistrationSeller from '../RegistrationSeller/RegistrationSeller';
+import { RootState } from '../../../redux/store/store';
 
 export default function InfoSeller() {
     const dispatch = useAppDispatch();
-
+    const sellerIsActive = useAppSelector((state: RootState) => state.sellers.check)
 
 
     const setModalActiveReg = () => {
@@ -14,8 +15,16 @@ export default function InfoSeller() {
 
   return (
     <>
+    {sellerIsActive ?
+    
+    null
+    :
+    <>
     <RegistrationSeller/>
         <button onClick={setModalActiveReg} className='ml-96 py-2 px-10 border-2 rounded-lg  border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Seller Sing Up</button>
+    </>} 
+    {/* <RegistrationSeller/>
+        <button onClick={setModalActiveReg} className='ml-96 py-2 px-10 border-2 rounded-lg  border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Seller Sing Up</button> */}
     <div className='grid grid-cols-3 grid-rows-6'>
         <div className='row-start-1 col-span-2'>
             <div>
