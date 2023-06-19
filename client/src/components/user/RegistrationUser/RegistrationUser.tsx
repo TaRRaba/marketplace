@@ -30,7 +30,7 @@ export default function RegistrationUser() {
 
       function regEmail(email, name) {
         Email.send({
-          SecureToken: '05d9b908-aa85-4450-ba05-6198dbda47d7',
+          SecureToken: 'a3d45322-5353-477e-ae43-06b884d95821',
           To: email,
           From: 'localmarket.elbrus@gmail.com',
           Subject: 'Добро пожаловать в LocalMarket!',

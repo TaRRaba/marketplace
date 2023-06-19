@@ -57,12 +57,16 @@ export const UserNavBar = () => {
   useEffect(() => {
     if (favourites.length > 0) {
       setFavIcon(true);
+  } else if (favourites.length === 0) {
+    setFavIcon(false); 
   }
   }, [favourites])
 
   useEffect(() => {
     if (cart.length > 0) {
       setCartIcon(true);
+  } else if (cart.length === 0) {
+    setCartIcon(false); 
   }
   }, [cart])
     

@@ -131,7 +131,13 @@ cartApi.post('/payment', async (req, res) => {
     await Promise.all(promisesAmount);
     await Entries.destroy({ where: { cart_id: userCart.id } });
 
-    res.json({ status: '200' });
+    const OrderEntries = (await Entries.findAll({ where: { order_id: newOrder.id } }))
+      .map((el) => el.get({ plain: true }));
+    const sellers = [...new Set(OrderEntries.map((entry) => entry.seller_id))];
+    const sellersData = (await Sellers.findAll({ where: { id: sellers } }))
+      .map((el) => el.get({ plain: true }));
+
+    res.json({ status: '200', sellers: sellersData, orderID: newOrder.id });
   } catch (error) {
     console.log(error);
   }
@@ -142,14 +148,7 @@ cartApi.get('/numberoforder', async (req, res) => {
   try {
     const allOrders = (await Orders.findAll({ where: { user_id: userID }, order: [['id', 'DESC']] })).map((el) => el.get({ plain: true }));
     const lastOrder = allOrders[0];
-    const lastOrderEntries = (await Entries.findAll({ where: { order_id: lastOrder.id } }))
-      .map((el) => el.get({ plain: true }));
-    const sellers = [...new Set(lastOrderEntries.map((entry) => entry.seller_id))];
-    const sellersData = (await Sellers.findAll({ where: { id: sellers } }))
-      .map((el) => el.get({ plain: true }));
-    // const data = sellers.map((e) => sellersData.filter((el) => el.id === e));
-    // console.log(data);
-    res.json({ order: lastOrder, sellers: sellersData });
+    res.json({ order: lastOrder });
   } catch (error) {
     console.log(error);
   }

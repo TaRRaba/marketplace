@@ -3,13 +3,15 @@ import { UserCircleIcon } from '@heroicons/react/24/solid'
 import { Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiUser, HiShoppingBag, HiInbox } from 'react-icons/hi';
 import Settings from '../SettingsUser/SettingsUser';
-import { useAppDispatch } from '../../../redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { deleteUser, resetCheckUser } from '../../../redux/store/userSlice';
+import { RootState } from '../../../redux/store/store';
 
 export default function ProfileUser() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
+  const favourites = useAppSelector((state: RootState) => state.favourites.favourites);
   
   const signOut = () => {
     fetch('http://localhost:3001/api/auth/logout', {
@@ -51,7 +53,7 @@ export default function ProfileUser() {
           <Link to="/profile/favourites">
           <Sidebar.Item
             icon={HiInbox}
-            label="3"
+            label={favourites.length > 0 ? favourites.length : null}
           >
             <p>
               Избранное
