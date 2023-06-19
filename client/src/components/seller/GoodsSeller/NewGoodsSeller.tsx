@@ -37,7 +37,7 @@ export function NewGoodsSeller() {
                 credentials: 'include',
             })
             const result = await response.json();
-            dispatch(getAllGood())
+            // dispatch(getAllGood())
             navigate('/profileSeller/goods')
             
           } catch (error) {
