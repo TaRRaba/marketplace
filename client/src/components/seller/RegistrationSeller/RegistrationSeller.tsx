@@ -28,6 +28,17 @@ export default function RegistrationSeller() {
       password: data.get('password'),
       INN: data.get('INN')
     }
+
+    function regEmail(email, name) {
+      Email.send({
+        SecureToken: '05d9b908-aa85-4450-ba05-6198dbda47d7',
+        To: email,
+        From: 'localmarket.elbrus@gmail.com',
+        Subject: 'Добро пожаловать в LocalMarket!',
+        Body: `${name}, благодарим Вас за регистрацию! Рады, что Вы решили стать нашим партнером, желаем высоких продаж и развития!`,
+      }).then();
+    }
+
     try {
       const response: Response = await fetch('http://localhost:3001/api/auth/registration/seller', {
         method: 'POST',
@@ -36,12 +47,13 @@ export default function RegistrationSeller() {
         body: JSON.stringify(regData)
       })
       const result = await response.json();
-      
+
       if (result.status === 201) {
         setRepeatSeller(false)
         dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))
         dispatch(checkSeller(true)) 
         dispatch(changeModalreg(false))
+        regEmail(result.email, result.name);
         navigate('/') // указать куда перекидывать
       } else {
         setRepeatSeller(true)

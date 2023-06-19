@@ -24,7 +24,7 @@ export const Cart = () => {
         }
         return total;
     }
-  
+
      useEffect(() => {
         fetch("http://localhost:3001/config").then(async (r)=> {
             const { publishableKey } = await r.json();

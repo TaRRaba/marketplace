@@ -9,9 +9,9 @@ const {
 // const isAuth = require('../middleware/isAuth');
 
 orderApi.get('/', async (req, res) => {
-  // const userID = req.session.user.id;
+  const userID = req.session.user.id;
   try {
-    const orders = (await Orders.findAll({ where: { user_id: 1 } }))
+    const orders = (await Orders.findAll({ where: { user_id: userID } }))
       .map((el) => el.get({ plain: true })).map((el) => el.id);
     const result = (await Entries.findAll({
       include: Goods,
