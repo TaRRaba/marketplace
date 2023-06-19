@@ -54,7 +54,7 @@ export default function GoodsCard({GoodID}: {GoodID: number}) {
     }
   }, [])
 
-  console.log('CARD', card);
+  // console.log('CARD', card);
 
   function checkCart(id: number) {   
     return cart.some((el) => el.good_id === id);
@@ -108,7 +108,7 @@ function addCart (id: number, count: number) {
         <h1 className="sm: text-2xl font-bold text-gray-900 sm:text-3xl">{card.name}</h1>
         {user ?
         <>
-        <h2 className="mt-8 text-base text-gray-900">{card.price} ₸ / 1 шт</h2>
+        <h2 className="mt-8 text-base text-gray-900">{card.price} ₽ / 1 шт</h2>
           <div className="mt-3 flex select-none flex-wrap items-center justify-center gap-1">
               <svg onClick={incrCount} className="amountDecr cursor-pointer text-gray-500 focus:outline-none focus:text-gray-600 h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor"><path className="amountDecr" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                   <span className="quantity text-gray-700 text-lg mx-2">{count}</span>
@@ -119,7 +119,7 @@ function addCart (id: number, count: number) {
 
         <div className="mt-8 flex flex-col items-center justify-between space-y-4 border-t border-b py-4 sm:flex-row sm:space-y-0">
           <div className="flex items-end">
-            <h1 className="text-3xl font-bold">{card.price * count} ₸</h1>
+            <h1 className="text-3xl font-bold">{card.price * count} ₽</h1>
           </div>
                  { user ?
                  <>

@@ -98,6 +98,7 @@ orderApi.get('/seller', async (req, res) => {
 orderApi.get('/:id', async (req, res) => {
     const { id } = req.session.user;
   // const id = 1;
+  
   try {
     const orderOne = (
       await Orders.findOne({

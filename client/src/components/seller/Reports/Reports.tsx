@@ -34,7 +34,7 @@ export default function Reports() {
                 <div className="mt-5 w-80 sm:mt-0">
                     <h2 className="text-left text-lg font-bold text-gray-900 hover:text-gray-500">{nameFunction(reports, el)[0]}</h2>
                     <p>Продано: {summerQuantityFunction(reports, el)} шт.</p>
-                    <p>На сумму: {profitFunction(reports, el, summerQuantityFunction(reports, el))[0]} ₸</p>
+                    <p>На сумму: {profitFunction(reports, el, summerQuantityFunction(reports, el))[0]} ₽</p>
                 </div>
               </div>
             </div>
