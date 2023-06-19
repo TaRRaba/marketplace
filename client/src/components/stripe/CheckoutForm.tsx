@@ -9,8 +9,7 @@ export default function CheckoutForm({deliveryState}: IDeliveryState) {
   const stripe = useStripe();
   const elements = useElements();
   const selectDeliveryAddress = useAppSelector((state: RootState) => state.cart.deliveryAddress)
-  console.log('deliveryState', deliveryState);
-  console.log('selectDeliveryAddress', selectDeliveryAddress);
+  const pickpointAddress = useAppSelector((state: RootState) => state.cart.pickpointAddress);
 
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -18,12 +17,13 @@ export default function CheckoutForm({deliveryState}: IDeliveryState) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('http://localhost:3001/api/cart/payment', {
-      method: "POST",
-      headers: {'Content-Type' : 'application/json'},
-      credentials: 'include',
-      body: JSON.stringify({selectDeliveryAddress, deliveryState})
-    })
+    if(deliveryState){
+      const response = await fetch('http://localhost:3001/api/cart/payment', {
+        method: "POST",
+        headers: {'Content-Type' : 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({selectDeliveryAddress, deliveryState})
+      })
     const result = await response.json()
     console.log('result======>', result);
 
@@ -47,6 +47,36 @@ export default function CheckoutForm({deliveryState}: IDeliveryState) {
     }
 
     setIsProcessing(false);
+    } else {
+      const response = await fetch('http://localhost:3001/api/cart/payment', {
+        method: "POST",
+        headers: {'Content-Type' : 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({selectDeliveryAddress, deliveryState, pickpointAddress})
+      })
+    const result = await response.json()
+    console.log('result======>', result);
+
+    if (!stripe || !elements) {
+      return;
+    }
+
+    setIsProcessing(true);
+
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: `http://localhost:5173/completion`,
+      },
+    });
+
+    if (error.type === "card_error" || error.type === "validation_error") {
+      setMessage(error.message);
+    } else {
+      setMessage("An unexpected error occured.");
+    }
+    setIsProcessing(false);
+    }
   };
 
   return (

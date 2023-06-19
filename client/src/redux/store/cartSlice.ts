@@ -10,11 +10,13 @@ import { addAmountCart } from "../thunks/cartThunks/addAmountCart.thunk";
 interface ICartState {
     cart: ICartData[];
     deliveryAddress: string;
+    pickpointAddress: string;
 }
 
 const initialState: ICartState = {
     cart: [],
     deliveryAddress: '',
+    pickpointAddress: '1'
 }
 
 export const CartSlice = createSlice({
@@ -23,6 +25,9 @@ export const CartSlice = createSlice({
     reducers: {
         setDeliveryAddress: (state, action) => {
             state.deliveryAddress = action.payload
+        },
+        setPickpointAddress: (state, action) => {
+            state.pickpointAddress = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -64,7 +69,7 @@ export const CartSlice = createSlice({
     }
 })
 
-export const {setDeliveryAddress} = CartSlice.actions
+export const {setDeliveryAddress, setPickpointAddress} = CartSlice.actions
 
 export const selectUser = (state: RootState) => state.cart.cart
 

@@ -10,17 +10,24 @@ import { ToggleSwitch } from 'flowbite-react';
 import { loadStripe } from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 import CheckoutForm from '../stripe/CheckoutForm';
-import { setDeliveryAddress } from '../../redux/store/cartSlice';
+import { setDeliveryAddress, setPickpointAddress } from '../../redux/store/cartSlice';
+import { getMaps } from '../../redux/thunks/mapsThunks/getMapsThunks';
 
 export const Cart = () => {
     const userData = useAppSelector((state: RootState) => state.users.users)
     const cart = useAppSelector((state: RootState) => state.cart.cart);
+    const address = useAppSelector((state: RootState) => state.maps.maps);
+    const pickpointAddress = useAppSelector((state: RootState) => state.cart.pickpointAddress);
     const [stripePromise, setStripePromise] = useState(null);
     const [clientSecret, setClientSecret] = useState();
     const [billData, setBillData] = useState(false);
     const [deliveryState, setDeliveryState] = useState(false);
 
     const dispatch = useAppDispatch();
+    
+    useEffect(() => {
+      dispatch(getMaps())
+    },[])
 
     function getTotal () {
         let total = 0;
@@ -142,11 +149,19 @@ export const Cart = () => {
                   label="Доставка"
                   onChange={changeDeliveryState}/>
                 {deliveryState ? <input onChange={changeInputAddress} name='text' className='w-11/12 py-1.5 px-1 border-2 border-gray-500 rounded-lg text-start'></input> 
-                : <></>
+                :       <div className="relative w-64 mt-2 bg-gray-100 rounded-lg">
+                <select name="pickpoint" className="relative w-64 bg-gray-100 rounded-lg"
+                value={pickpointAddress}  onChange={(e) => dispatch(setPickpointAddress(e.target.value))} 
+                >
+                    {address && address.map((el)=> (
+                        <option key={el?.id} value={el?.id}>{el?.address}</option>
+                    ))}
+                </select>
+              </div>
                 }
 
               </div>}
-              <div className="flex justify-between">
+              <div className="flex justify-between mt-3">
                 <p className="text-lg font-bold">Итого:</p>
                 <div className="">
                   <p id="total" className="mb-1 text-lg font-bold">

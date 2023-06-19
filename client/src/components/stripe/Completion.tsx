@@ -44,7 +44,6 @@ export default function Completion() {
       setNumberOrder(order.id);
       orderEmail(user.email, user.name, order.id);
       sellersMailing(sellers, order.id);
-      console.log('USEEFFECT');
     })()
   }, [])
 
