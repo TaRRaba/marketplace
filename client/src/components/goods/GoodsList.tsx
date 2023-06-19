@@ -162,29 +162,28 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
             prices[0].value = 0;
             prices[1].value = maxPrice;
         }
-        // sortOptions.forEach((el) => el.current = false);
-        // console.log(initGoods);
-        // const data = [...initGoods.map((good) => good = good)]
-        // console.log(data);
+        sortOptions.forEach((el) => el.current = false);
         setGoods([...initGoods]);
-        // console.log('FINISH GOODS', goods);
     }
-
-    console.log('INIT', initGoods);
+    
 
     function SortGoods(type: string) {
         sortOptions.forEach((el) => el.current = false);
         if (type === "popular") {
-            setGoods([...goods.sort((a, b) => b.rating - a.rating)]);
+            const copy = [...goods];
+            setGoods(copy.sort((a, b) => b.rating - a.rating));
         }
         if (type === "cheapest") {
-            setGoods([...goods.sort((a, b) => a.price - b.price)]);
+            const copy = [...goods];
+            setGoods(copy.sort((a, b) => a.price - b.price));
         }
         if (type === 'expensive') {
-            setGoods([...goods.sort((a, b) => b.price - a.price)]);
+            const copy = [...goods];
+            setGoods(copy.sort((a, b) => b.price - a.price));
         }
         if (type === 'newest') {
-            setGoods([...goods.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))]);            
+            const copy = [...goods];
+            setGoods(copy.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));            
         }
         setSortOptions([...sortOptions.map((option) => {
             if (option.type === type) {
