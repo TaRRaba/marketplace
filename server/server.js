@@ -1,4 +1,3 @@
-
 require('dotenv').config();
 
 const express = require('express');
@@ -33,9 +32,9 @@ const mapsApi = require('./src/routes/maps.api');
 // const isAuth = require('./src/middlewares/isAuth');
 
 const sessionConfig = {
-  name: "MarketPlace",
+  name: 'MarketPlace',
   store: new FileStore(),
-  secret: process.env.COOKIE_SECRET || "sometext321",
+  secret: process.env.COOKIE_SECRET || 'sometext321',
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -48,14 +47,14 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ['http://localhost:5173'],
     credentials: true,
-  })
+  }),
 );
 
 app.use(expressSession(sessionConfig));
 
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // app.use(express.static(path.join(__dirname, 'public/')));
@@ -119,12 +118,11 @@ app.post('/create-payment-internet', async (req, res) => {
     const total = sumArrays(resultArray);
 
     // console.log('====================================');
-    // console.log(clearCart);
-    // console.log(uniqueArr);
+    // console.log('clearCart=======>', clearCart);
+    // console.log('uniqueArr=======>', uniqueArr);
     // console.log(summerQuantityFunction(clearCart, 1));
     // console.log(profitFunction(clearCart, 1, summerQuantityFunction(clearCart, 1)));
-    // console.log(result);
-    // console.log(total);
+    // console.log('total=======>', total);
     // console.log('====================================');
 
     const paymentIntent = await stripe.paymentIntents.create({
