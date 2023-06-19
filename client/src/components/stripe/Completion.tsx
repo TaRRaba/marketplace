@@ -9,7 +9,7 @@ export default function Completion() {
 
   function orderEmail(email, name, order) {
     Email.send({
-      SecureToken: '05d9b908-aa85-4450-ba05-6198dbda47d7',
+      SecureToken: 'a3d45322-5353-477e-ae43-06b884d95821',
       To: email,
       From: 'localmarket.elbrus@gmail.com',
       Subject: `Заказ № ${order}`,
@@ -19,7 +19,7 @@ export default function Completion() {
 
   function orderSellerEmail(email, name, order) {
     Email.send({
-      SecureToken: '05d9b908-aa85-4450-ba05-6198dbda47d7',
+      SecureToken: 'a3d45322-5353-477e-ae43-06b884d95821',
       To: email,
       From: 'localmarket.elbrus@gmail.com',
       Subject: `Заказ № ${order}`,
@@ -27,12 +27,11 @@ export default function Completion() {
     }).then();
   }
 
-  function sellersMailing(sellersArray, order) {
+  function SellersEmailing(sellersArray, order) {
     sellersArray.forEach((seller) => {
       orderSellerEmail(seller.email, seller.name, order);
     })
   }
-
 
   useEffect(() => {    
     (async function () {
@@ -42,11 +41,13 @@ export default function Completion() {
       const result = await response.json()
       const { order, sellers } = result;
       setNumberOrder(order.id);
-      orderEmail(user.email, user.name, order.id);
-      sellersMailing(sellers, order.id);
-      console.log('USEEFFECT');
+      SellersEmailing(sellers, order.id);
     })()
   }, [])
+
+  useEffect(() => {    
+    orderEmail(user.email, user.name, numberOrder);
+  }, [numberOrder])
 
   return (
     <div className='flex flex-col gap-y-3 justify-center justify-items-center justify-self-center content-center self-center items-center min-h-screen' >
