@@ -66,7 +66,7 @@ export function DetailOrder() {
           <></>
         )}
         <div>
-           <p className=" text-left text-lg ">Общая сумма заказа: <span className='font-bold text-red-700'>{orderInfo?.detailOrder?.reduce((acc, el) => acc + ((el.quantity) * (el?.Good.price)), 0)} ₸</span> </p> 
+           <p className=" text-left text-lg ">Общая сумма заказа: <span className='font-bold text-red-700'>{orderInfo?.detailOrder?.reduce((acc, el) => acc + ((el.quantity) * (el?.Good.price)), 0)} ₽</span> </p> 
         </div>
     </div>
 
@@ -82,7 +82,7 @@ export function DetailOrder() {
               <div className="mt-5 w-80 sm:mt-0">
                 <h2 className="line-clamp-3 text-left text-sm font-bold text-gray-900 hover:text-gray-500">{el?.Good.name}</h2>
                 <h2 className=" mt-4 text-left text-sm text-gray-600">Количество: {el?.quantity}</h2>
-                <h2 className=" text-left text-sm text-gray-600">Стоимость: {(el?.quantity)* (el?.Good.price)} ₸ <span className="text-red-800">({(el?.Good.price)} ₸/шт)</span></h2>
+                <h2 className=" text-left text-sm text-gray-600">Стоимость: {(el?.quantity)* (el?.Good.price)} ₽ <span className="text-red-800">({(el?.Good.price)} ₽/шт)</span></h2>
               </div>
 
             </div>
