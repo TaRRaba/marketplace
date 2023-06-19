@@ -8,12 +8,40 @@ import { RootState } from "../../redux/store/store";
 export default function CheckoutForm({deliveryState}: IDeliveryState) {
   const stripe = useStripe();
   const elements = useElements();
-  const selectDeliveryAddress = useAppSelector((state: RootState) => state.cart.deliveryAddress)
-  console.log('deliveryState', deliveryState);
-  console.log('selectDeliveryAddress', selectDeliveryAddress);
-
+  const selectDeliveryAddress = useAppSelector((state: RootState) => state.cart.deliveryAddress);
+  const user = useAppSelector((state: RootState) => state.users.users);
   const [message, setMessage] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  // console.log('deliveryState', deliveryState);
+  // console.log('selectDeliveryAddress', selectDeliveryAddress);
+
+  function orderEmail(email, name, order) {    
+    Email.send({
+      SecureToken: 'a3d45322-5353-477e-ae43-06b884d95821',
+      To: email,
+      From: 'localmarket.elbrus@gmail.com',
+      Subject: `Заказ № ${order}`,
+      Body: `Уважаемый(ая) ${name}! Благодарим Вас за заказ на нашем сайте! Подробности заказа вы можете посмотреть в личном кабинете.`,
+    }).then();
+    console.log('ORDER EMAIL');
+  }
+
+  function orderSellerEmail(email, name, order) {
+    Email.send({
+      SecureToken: 'a3d45322-5353-477e-ae43-06b884d95821',
+      To: email,
+      From: 'localmarket.elbrus@gmail.com',
+      Subject: `Заказ № ${order}`,
+      Body: `${name}, у Вас новый заказ! Подробности заказа вы можете посмотреть в личном кабинете.`,
+    }).then();
+    console.log('SELLERS EMAIL');
+  }
+
+  function SellersEmailing(sellersArray, order) {
+    sellersArray.forEach((seller) => {
+      orderSellerEmail(seller.email, seller.name, order);
+    })
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +53,9 @@ export default function CheckoutForm({deliveryState}: IDeliveryState) {
       body: JSON.stringify({selectDeliveryAddress, deliveryState})
     })
     const result = await response.json()
-    console.log('result======>', result);
+    SellersEmailing(result.sellers, result.orderID);
+    orderEmail(user.email, user.name, result.orderID);
+    // console.log('result======>', result);
 
     if (!stripe || !elements) {
       return;

@@ -2,7 +2,7 @@ const express = require('express');
 
 const orderApi = express.Router();
 const {
-  Carts, Goods, Entries, Orders, PickPoints,
+  Sellers, Goods, Entries, Orders, PickPoints,
 } = require('../../db/models');
 
 // const bcrypt = require('bcrypt');
@@ -65,25 +65,20 @@ orderApi.get('/seller', async (req, res) => {
 //   }
 // });
 
-// orderApi.patch('/newAmount', async (req, res) => {
-//   const { entryID, goodID, amount } = req.body;
-//   try {
-//     if (goodID) {
-//       const goodAmount = (await Goods.findOne({ where: { id: goodID } })).amount;
-//       if (amount <= goodAmount) {
-//         await Entries.update({ quantity: amount }, { where: { id: entryID } });
-//         res.json({ status: 200 });
-//       } else {
-//         res.json({ status: 403, goodAmount });
-//       }
-//     } else {
-//       await Entries.update({ quantity: amount }, { where: { id: entryID } });
-//       res.json({ status: 200 });
-//     }
-//   } catch (error) {
-//     res.json(error);
-//   }
-// });
+orderApi.patch('/', async (req, res) => {
+  const { orderID } = req.body;
+  try {
+    await Orders.update({ status: false }, { where: { id: orderID } });
+    const OrderEntries = (await Entries.findAll({ where: { order_id: orderID } }))
+      .map((el) => el.get({ plain: true }));
+    const sellers = [...new Set(OrderEntries.map((entry) => entry.seller_id))];
+    const sellersData = (await Sellers.findAll({ where: { id: sellers } }))
+      .map((el) => el.get({ plain: true }));
+    res.json({ status: 200, sellers: sellersData });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 // orderApi.delete('/', async (req, res) => {
 //   const { entryID } = req.body;
@@ -96,9 +91,9 @@ orderApi.get('/seller', async (req, res) => {
 // });
 
 orderApi.get('/:id', async (req, res) => {
-    const { id } = req.session.user;
+  const { id } = req.session.user;
   // const id = 1;
-  
+
   try {
     const orderOne = (
       await Orders.findOne({
