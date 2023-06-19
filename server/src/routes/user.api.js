@@ -12,7 +12,7 @@ userApi.patch('/editData', async (req, res) => {
     const updated = await Users.update({ name, email }, { where: { id }, returning: true });
 
     const data = updated[1][0].get({ plain: true });
-
+    req.session.user = data;
     res.json({ status: 200, data });
   } catch (error) {
     res.json(error);
@@ -27,6 +27,7 @@ userApi.put('/password', async (req, res) => {
     const updated = await Users.update({ password: hashPass }, { where: { id }, returning: true });
 
     const data = updated[1][0].get({ plain: true });
+    req.session.user = data;
     res.json({ status: 200, data });
   } catch (error) {
     res.json(error);
