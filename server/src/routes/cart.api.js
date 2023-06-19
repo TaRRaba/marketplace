@@ -3,7 +3,7 @@ const express = require('express');
 
 const cartApi = express.Router();
 const {
-  Carts, Entries, Goods, Orders,
+  Carts, Entries, Goods, Orders, Sellers,
 } = require('../../db/models');
 // const isAuth = require('../middleware/isAuth');
 
@@ -13,6 +13,7 @@ cartApi.get('/', async (req, res) => {
     const cart = (await Carts.findOne({ where: { user_id: userID } })).get({ plain: true });
     const data = (await Entries.findAll({ include: Goods, where: { cart_id: cart.id }, order: [['id', 'ASC']] }))
       .map((el) => el.get({ plain: true }));
+
     res.json({ status: 200, data });
   } catch (error) {
     res.json(error);
@@ -43,7 +44,9 @@ cartApi.post('/addAmountCart', async (req, res) => {
     } else {
       const data = (await Entries.create({ cart_id: cart.id, good_id: goodID, quantity: amount }))
         .get({ plain: true });
-      res.json({ status: 201, data });
+      const data1 = (await Entries.findOne({ include: Goods, where: { id: data.id } }))
+        .get({ plain: true });
+      res.json({ status: 201, data: data1 });
     }
   } catch (error) {
     res.json(error);
@@ -125,11 +128,18 @@ cartApi.post('/payment', async (req, res) => {
 });
 
 cartApi.get('/numberoforder', async (req, res) => {
-  const user_id = req.session.user.id;
+  const userID = req.session.user.id;
   try {
-    const allOrders = (await Orders.findAll({ where: { user_id }, order: [['id', 'DESC']] })).map((el) => el.get({ plain: true }));
+    const allOrders = (await Orders.findAll({ where: { user_id: userID }, order: [['id', 'DESC']] })).map((el) => el.get({ plain: true }));
     const lastOrder = allOrders[0];
-    res.json(lastOrder);
+    const lastOrderEntries = (await Entries.findAll({ where: { order_id: lastOrder.id } }))
+      .map((el) => el.get({ plain: true }));
+    const sellers = [...new Set(lastOrderEntries.map((entry) => entry.seller_id))];
+    const sellersData = (await Sellers.findAll({ where: { id: sellers } }))
+      .map((el) => el.get({ plain: true }));
+    // const data = sellers.map((e) => sellersData.filter((el) => el.id === e));
+    // console.log(data);
+    res.json({ order: lastOrder, sellers: sellersData });
   } catch (error) {
     console.log(error);
   }

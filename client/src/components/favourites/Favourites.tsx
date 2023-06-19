@@ -20,7 +20,7 @@ export const Favourites = () => {
         dispatch(getCart())
         dispatch(getFav())
     }
-    }, [])
+    }, [user])
 
     return (
         <>
