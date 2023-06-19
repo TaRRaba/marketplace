@@ -12,9 +12,13 @@ import { changeModallogSeller } from '../../redux/store/sellerSlice'
 import LoginSeller from '../seller/LoginSeller/LoginSeller'
 import LoginUser from '../user/LoginUser/LoginUser'
 import RegistrationUser from '../user/RegistrationUser/RegistrationUser'
+
+import NewCatalog from './NewCatalog'
+
 import { useEffect, useState } from 'react'
 import { getCart } from '../../redux/thunks/cartThunks/getCart.thunk'
 import { getFav } from '../../redux/thunks/favThunks/getFav.thunk'
+
 
 export const UserNavBar = () => {
 
@@ -115,7 +119,7 @@ export const UserNavBar = () => {
       </div>
     
         <div className='ml-4 w-1/12'>
-          <CatalogFinal/>
+          <NewCatalog/>
         </div>
         <div className='ml-3 w-6/12 flex'>
          <SearchBar/>

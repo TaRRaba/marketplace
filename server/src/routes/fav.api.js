@@ -13,6 +13,7 @@ favApi.get('/', async (req, res) => {
     const fav = (await Favourites.findOne({ where: { user_id: userID } })).get({ plain: true });
     const data = (await Entries.findAll({ include: Goods, where: { favourite_id: fav.id }, order: [['id', 'ASC']] }))
       .map((el) => el.get({ plain: true }));
+
     res.json({ status: 200, data });
   } catch (error) {
     res.json(error);
@@ -69,7 +70,10 @@ favApi.post('/addToFav', async (req, res) => {
     const fav = (await Favourites.findOne({ where: { user_id: userID } })).get({ plain: true });
     const data = (await Entries.create({ favourite_id: fav.id, good_id: goodID }))
       .get({ plain: true });
-    res.json({ status: 201, data });
+    const data1 = (await Entries.findOne({ include: Goods, where: { id: data.id } }))
+      .get({ plain: true });
+
+    res.json({ status: 201, data: data1 });
   } catch (error) {
     res.json(error);
   }

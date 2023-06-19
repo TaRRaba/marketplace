@@ -13,6 +13,7 @@ cartApi.get('/', async (req, res) => {
     const cart = (await Carts.findOne({ where: { user_id: userID } })).get({ plain: true });
     const data = (await Entries.findAll({ include: Goods, where: { cart_id: cart.id }, order: [['id', 'ASC']] }))
       .map((el) => el.get({ plain: true }));
+
     res.json({ status: 200, data });
   } catch (error) {
     res.json(error);
@@ -43,7 +44,9 @@ cartApi.post('/addAmountCart', async (req, res) => {
     } else {
       const data = (await Entries.create({ cart_id: cart.id, good_id: goodID, quantity: amount }))
         .get({ plain: true });
-      res.json({ status: 201, data });
+      const data1 = (await Entries.findOne({ include: Goods, where: { id: data.id } }))
+        .get({ plain: true });
+      res.json({ status: 201, data: data1 });
     }
   } catch (error) {
     res.json(error);
