@@ -1,17 +1,16 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { RootState } from "./store";
 
-import { IGoodData } from "../../types/goodTypes/goodTypes";
 import { getPopularGood } from "../thunks/goodThunks/getPopularGood.thunk";
 import { getAllCategory } from "../thunks/goodThunks/getAllCategory.thunk";
 import { getAllGood } from "../thunks/goodThunks/gatAllGoods.thunk";
-
+import { IGoodData } from "../../types/cart/cartTypes";
 
 interface IGoodState {
     good: IGoodData[];
     findGood: IGoodData[];
     category: [];
-    allgood: IGoodData[]
+    allgood: IGoodData[];
 }
 
 const initialState: IGoodState = {
@@ -45,34 +44,6 @@ export const GoodSlice = createSlice({
             state.allgood = action.payload;
             }
         })
-        // builder.addCase(incrAmount.fulfilled, (state, action) => {
-        //     console.log(action.payload);
-        //     if (action.payload !== null) {
-        //     state.good = state.good.map((entry: ICartData) => {
-        //         if (entry.id === action.payload?.id) {
-        //             entry.quantity = action.payload?.newAmount;
-        //         }
-        //         return entry;
-        //     })
-        //     }
-        // }),
-        // builder.addCase(decrAmount.fulfilled, (state, action) => {
-        //     console.log(action.payload);
-        //     if (action.payload !== null) {
-        //     state.good = state.good.map((entry: ICartData) => {
-        //         if (entry.id === action.payload?.id) {
-        //             entry.quantity = action.payload?.newAmount;
-        //         }
-        //         return entry;
-        //     })
-        //     }
-        // }),
-        // builder.addCase(delPos.fulfilled, (state, action) => {
-        //     console.log(action.payload);
-        //     if (action.payload !== null) {
-        //     state.good = state.good.filter(entry => entry.id !== action.payload)
-        //     }
-        // })
     }
 })
 
