@@ -2,63 +2,27 @@ import React, { useEffect, useState } from 'react'
 
 export function Maps() {
 
-  const[address, setAddress] = useState({})
-
+  // const[address, setAddress] = useState([])
 
   useEffect(() => {
-    (async function() {
-      try {
-        const response = await fetch('http://localhost:3001/api/maps', {
-            credentials: 'include',
-        })
-        const result = await response.json();
-        setAddress(result)
-
-      } catch (error) {
-          console.log(error);
-      }
-    })()
-
-    ymaps.ready(init)
+  //   (async function() {
+  //     try {
+  //       const response = await fetch('http://localhost:3001/api/maps', {
+  //           credentials: 'include',
+  //       })
+  //       const result = await response.json();
+  //       setAddress(result)
+          
+        ymaps.ready(init)
+  //     } catch (error) {
+  //         console.log(error);
+  //     }
+  //   })()
   },[])
 
-  console.log("address====>", address);
-  
+  // console.log("address====>", address);
 
-function init() {
-  const myMap = new ymaps.Map('map', {
-    center: [55.752507, 37.623150],
-    zoom: 11,
-  }, {
-    searchControlProvider: 'yandex#search',
-  });
-
-//   // Создаем геообъект с типом геометрии "Точка".
-//   const myGeoObject = new ymaps.GeoObject({
-//     // Описание геометрии.
-//     geometry: {
-//       type: 'Point',
-//       coordinates: [55.742245, 37.585035], 
-//     },
-//     // Свойства.
-//     properties: {
-//       // Контент метки.
-//       iconContent: 'Local Market',
-//       hintContent: 'Смоленский бульвар, 22/14, Москва',
-//     },
-//   }, {
-//     // Опции.
-//     // Иконка метки будет растягиваться под размер ее содержимого.
-//     preset: 'islands#blackStretchyIcon',
-//     // Метку можно перемещать.
-//     draggable: false,
-//   });
-  
-
-//   myMap.geoObjects
-//     .add(myGeoObject);
-// }
-//=====================================================================
+  //=====================================================================
 const coords = [
   [55.742245, 37.585035], //Смоленский бульвар, 22/14, Москва
   [55.758894, 37.609398], //Газетный переулок, 13, Москва
@@ -84,18 +48,17 @@ const adress = [
   "Ленинградский проспект, 5с7, Москва"
 ];
 
-// const myCollection = new ymaps.GeoObjectCollection();
-
-// coords.forEach((el) => myCollection.add(new ymaps.Placemark(el)))
-
-// myMap.geoObjects.add(myCollection);
-
+function init() {
+  const myMap = new ymaps.Map('map', {
+    center: [55.752507, 37.623150],
+    zoom: 11,
+  }, {
+    searchControlProvider: 'yandex#search',
+  });
 
 const myGeoObjects = [];
 
-
-
-for (let i = 0; i<coords.length; i++) {
+for (let i = 0; i< 10; i++) {
   myGeoObjects[i] = new ymaps.GeoObject({
     geometry: {
       type: "Point",
@@ -108,7 +71,6 @@ for (let i = 0; i<coords.length; i++) {
           },
   },
   {
-        // Опции.
         // Иконка метки будет растягиваться под размер ее содержимого.
         preset: 'islands#blackStretchyIcon',
         // Метку можно перемещать.
@@ -119,38 +81,20 @@ for (let i = 0; i<coords.length; i++) {
 const myClusterer = new ymaps.Clusterer();
 myClusterer.add(myGeoObjects);
 myMap.geoObjects.add(myClusterer);
-
 }
-
 
   return (
       // <div id="map" className="ml-3 mt-10 h-96 w-10/12" />
-
       <>
-          <div className="overflow-hidden bg-white py-24 sm:py-32">
+    <div className="overflow-hidden bg-white py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto grid max-w-4xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:pr-8 lg:pt-4">
-            <div className="lg:max-w-lg">
-              <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Пункты выдачи</p>
-              {/* <p className="mt-6 text-lg leading-8 text-gray-600">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque,
-                iste dolor cupiditate blanditiis ratione.
-              </p> */}
-              <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
-                {/* {features.map((feature) => ( */}
-                  <div  className="relative pl-9">
-                    <dt className="inline font-semibold text-gray-900">
-                      {/* <feature.icon className="absolute left-1 top-1 h-5 w-5 text-indigo-600" aria-hidden="true" /> */}
-                      {"feature.name"}
-                    </dt>{' '}
-                    <dd className="inline">{}</dd>
-                  </div>
-                {/* ))} */}
-              </dl>
-            </div>
+              <p className="mb-3 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Пункты выдачи</p>
+                {adress.map((el) => (
+                  <p key={el.length} className=' my-2'>{el}</p>
+                 ))} 
           </div>
-          {/* style={ {width: 800, height: 400} } */}
           <div style={{height: 450}} id="map" className="  max-w-2xl rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0" />          
         </div>
       </div>

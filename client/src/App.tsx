@@ -42,7 +42,7 @@ import { Orders } from './components/orders/Orders'
 import { DetailOrder } from './components/user/Orders/DetailOrder'
 
 import { Maps } from './components/map/Maps'
-import { SellerOrders } from './components/sellerOrders/sellerOrders'
+import { SellerOrders } from './components/sellerOrders/SellerOrders'
 import { RootState } from './redux/store/store'
 import SettingsUser from './components/user/SettingsUser/SettingsUser'
 
@@ -125,6 +125,7 @@ function App() {
           <Route path='orders' element={<Orders />}></Route>    
           <Route path='orders/:id' element={<DetailOrder />}></Route>   
       </Route>
+      <Route path="/delivery_points" element={<Maps/>}/>
       </Routes>
 
       {/* <Stripe></Stripe> */}
@@ -146,10 +147,8 @@ function App() {
       {/* <InfoSeller></InfoSeller> */}
       {/* <DefaultFooter/> */}
       {/* <FooterFinal/> */}
-
       {/* <DetailOrder></DetailOrder> */}
 
-      {/* <Maps></Maps> */}
       <FooterFinal/>
 
     </>
