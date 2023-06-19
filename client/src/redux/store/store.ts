@@ -5,6 +5,7 @@ import FavouriteSlice from "./favouriteSlice";
 import SellerSlice from './sellerSlice';
 import  GoodSlice  from "./goodSlice";
 import GoodsSellerSlice from "./goodsSellerSlice";
+import MapsSlice from "./mapsSlice";
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         sellers: SellerSlice,
         good: GoodSlice,
         goodsSeller: GoodsSellerSlice,
+        maps: MapsSlice,
     }
 })
 
