@@ -87,6 +87,12 @@ cartApi.post('/payment', async (req, res) => {
   const { id } = req.session.user;
   const { deliveryState } = req.body;
   const { selectDeliveryAddress } = req.body;
+  let pickpointAddress;
+  if (req.body.pickpointAddress) {
+    pickpointAddress = req.body?.pickpointAddress;
+  } else {
+    pickpointAddress = null;
+  }
 
   const promises = [];
   const promisesAmount = [];
@@ -99,7 +105,11 @@ cartApi.post('/payment', async (req, res) => {
     }))
       .map((el) => el.get({ plain: true }));
     const newOrder = (await Orders.create({
-      user_id: id, status: true, delivery: deliveryState, delivery_address: selectDeliveryAddress,
+      user_id: id,
+      status: true,
+      delivery: deliveryState,
+      delivery_address: selectDeliveryAddress,
+      pickpoint_id: pickpointAddress,
     })).get({ plain: true });
 
     for (let i = 0; i < allOrder.length; i += 1) {
