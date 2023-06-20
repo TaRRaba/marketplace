@@ -148,9 +148,14 @@ export const Cart = () => {
                   checked = {deliveryState}
                   label="Доставка"
                   onChange={changeDeliveryState}/>
-                {deliveryState ? <input onChange={changeInputAddress} name='text' className='w-11/12 py-1.5 px-1 border-2 border-gray-500 rounded-lg text-start'></input> 
-                :       <div className="relative w-64 mt-2 bg-gray-100 rounded-lg">
-                <select name="pickpoint" className="relative w-64 bg-gray-100 rounded-lg"
+                {deliveryState ? 
+                <>
+                <p>Стоимость доставки 500 рублей</p>
+                <input onChange={changeInputAddress} name='text' placeholder='Укажите адрес доставки' className='w-full py-1.5 px-1 border-2 border-gray-500 rounded-lg text-start'></input>
+                </> 
+                :       <div className="relative w-full mt-2 rounded-lg">
+                  <p>Выберите пункт выдачи</p>
+                <select name="pickpoint" className="relative w-full mt-4 bg-gray-100 rounded-lg"
                 value={pickpointAddress}  onChange={(e) => dispatch(setPickpointAddress(e.target.value))} 
                 >
                     {address && address.map((el)=> (
@@ -159,7 +164,6 @@ export const Cart = () => {
                 </select>
               </div>
                 }
-
               </div>}
               <div className="flex justify-between mt-3">
                 <p className="text-lg font-bold">Итого:</p>
