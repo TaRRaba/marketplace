@@ -1,8 +1,7 @@
 export interface IInitialState {
     users: object;
-    // users: IuserInfo;
-    modalreg: boolean;
-    modallog: boolean;
+    modalreg: string | undefined;
+    modallog: string | undefined;
     check: boolean
 }
 

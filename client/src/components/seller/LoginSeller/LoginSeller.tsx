@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
 import { changeModallogSeller, checkSeller, setSeller } from '../../../redux/store/sellerSlice';
 import { RootState } from '../../../redux/store/store';
+import { Button, Label, Modal, TextInput } from 'flowbite-react';
+import { HiMail, HiOutlineKey } from 'react-icons/hi';
 
 export default function LoginSeller() {
   const dispatch = useAppDispatch();
@@ -17,10 +19,9 @@ export default function LoginSeller() {
   const [wrongEmail, setWrongEmail] = useState(initWrongEmail)
   const [wrongPassword, setWrongPassword] = useState(initWrongPassword)
 
-      // Для активации модалки
-    // const setModalActive = () => {
-    //   dispatch(changeModallog(true))
-    // }
+    const setModalClose = () => {
+      dispatch(changeModallogSeller(undefined))
+    }
 
 const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
@@ -42,7 +43,7 @@ const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
       setWrongEmail(false)
       setWrongPassword(false)
       dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))
-      dispatch(changeModallogSeller(false))
+      setModalClose();
       dispatch(checkSeller(true))  
       navigate('/') // указать куда перекидывать
     } else if (result.status === 403){
@@ -58,21 +59,39 @@ const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
 }
 
   return (
-    <div 
-    className={selectSellerModalLog ? "modal active" : "modal"}>
-    <button type='button'
-    onClick={() => dispatch(changeModallogSeller(false))}
-    >X</button>
-    <h1>Авторизация</h1>
-    <div className='logContainer'>
-      <form className="logContainer" onSubmit={handleSubmit} action="#" method='POST'>
-        <input type="email" name='email' placeholder='Email' required/>
-        <input type='password' name='password' placeholder='Пароль' required/>
-        <button type="submit">Войти</button>
-      </form>
-      {wrongPassword && <h1 className='text-rose-500'>Неправильный email или пароль</h1>}
-      {wrongEmail && <h1 className='text-rose-500'>Необходимо ввести корректные данные в поле email</h1>}
-    </div>
-</div>
+
+    <Modal 
+    show={selectSellerModalLog === 'form-elements'} size="md" popup onClose={setModalClose}
+    >
+        <Modal.Header />
+        <Modal.Body>
+        <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit} action='#' method='POST'>
+          <div className="space-y-6">
+            <h3 className="flex text-xl font-medium text-gray-900 dark:text-white justify-center">Авторизация</h3>
+
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="email" value="Ваша почта" />
+              </div>
+              <TextInput icon={HiMail} type='email' id="email" name='email' placeholder="Email" required />
+            </div>
+
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="password" value="Ваш пароль" />
+              </div>
+              <TextInput icon={HiOutlineKey} id="password" type="password" name='password' placeholder="Пароль" required />
+            </div>
+
+            <div className="w-full">
+              <Button className="w-full mt-10" type="submit">Войти</Button>
+            </div>
+          </div>
+          {wrongPassword && <h1 className='text-rose-500'>Неправильный email или пароль</h1>}
+          {wrongEmail && <h1 className='text-rose-500'>Необходимо ввести корректные данные в поле email</h1>}
+          </form> 
+        </Modal.Body>
+      </Modal>
+
   )
 }

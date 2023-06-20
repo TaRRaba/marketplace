@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import "./RegistrationSeller.css";
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
 import { changeModalregSeller, checkSeller, setSeller } from '../../../redux/store/sellerSlice';
 import { RootState } from '../../../redux/store/store';
+import { Button, Label, Modal, TextInput } from 'flowbite-react';
+import { HiMail, HiUser, HiOutlineKey, HiOutlineClipboardList } from 'react-icons/hi';
 
 export default function RegistrationSeller() {
   const dispatch = useAppDispatch();
@@ -12,10 +13,9 @@ export default function RegistrationSeller() {
   const initRepeatSeller = false;
   const selectSellerModalReg = useAppSelector((state: RootState) => state.sellers.modalreg)
 
-    // Для активации модалки
-  // const setModalActive = () => {
-  //   dispatch(changeModalreg(true))
-  // }
+  const setModalClose = () => {
+    dispatch(changeModalregSeller(undefined))
+  }
 
   const [repeatSeller, setRepeatSeller] = useState(initRepeatSeller);
 
@@ -52,7 +52,7 @@ export default function RegistrationSeller() {
         setRepeatSeller(false)
         dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))
         dispatch(checkSeller(true)) 
-        dispatch(changeModalregSeller(false))
+        setModalClose()
         regEmail(result.email, result.name);
         navigate('/') // указать куда перекидывать
       } else {
@@ -64,22 +64,48 @@ export default function RegistrationSeller() {
   }
 
   return (
-    <div 
-    className={selectSellerModalReg ? "modal active" : "modal"}>
-    <button type='button'
-    onClick={() => dispatch(changeModalregSeller(false))}
-    >X</button>
-    <h1>Регистрация</h1>
-    <div className='regContainer'>
-      <form className='regContainer' onSubmit={handleSubmit} action='#' method='POST'>
-        <input type="text" name='name' placeholder='Имя' required/>
-        <input type="email" name='email' placeholder='Email' required/>
-        <input type="text" name='INN' placeholder='ИНН' required/>
-        <input type='password' name='password' placeholder='Пароль' required/>
-        <button type="submit">Зарегистрироваться</button>
-        </form>
-        {repeatSeller && <h1 className='text-rose-500'>Пользователь с такой электронной почтой уже существует</h1>}
-    </div>
-</div>
+    <Modal show={selectSellerModalReg === 'form-elements'} size="md" popup onClose={setModalClose}>
+        <Modal.Header />
+        <Modal.Body>
+        <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit} action='#' method='POST'>
+          <div className="space-y-6">
+            <h3 className="flex text-xl font-medium text-gray-900 dark:text-white justify-center">Регистрация</h3>
+
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="name" value="Ваше имя" />
+              </div>
+              <TextInput icon={HiUser} type='text' id="name" name='name' placeholder="Имя" required />
+            </div>
+
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="email" value="Ваша почта" />
+              </div>
+              <TextInput icon={HiMail} type='email' id="email" name='email' placeholder="Email" required />
+            </div>
+
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="email" value="Ваш ИНН" />
+              </div>
+              <TextInput icon={HiOutlineClipboardList} type='number' id="INN" name='INN' placeholder="ИНН" required />
+            </div>
+
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="password" value="Ваш пароль" />
+              </div>
+              <TextInput icon={HiOutlineKey} id="password" type="password" name='password' placeholder="Пароль" required />
+            </div>
+
+            <div className="w-full">
+              <Button className="w-full mt-10" type="submit">Зарегистрироваться</Button>
+            </div>
+          </div>
+          {repeatSeller && <h1 className='text-rose-500'>Пользователь с такой электронной почтой уже существует</h1>}
+          </form> 
+        </Modal.Body>
+      </Modal>
   )
 }
