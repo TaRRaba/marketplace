@@ -10,7 +10,6 @@ interface IOrder {
 interface IOrderData {
     id: number;
     order_id: number;
-    status: boolean;
     quantity: number;
     createdAt: Date;
     Good: IGoodData

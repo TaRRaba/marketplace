@@ -14,7 +14,7 @@ module.exports = {
           model: 'Orders',
           key: 'id',
         },
-        onDelete: 'cascade',
+        onDelete: 'set null',
       },
       good_id: {
         type: Sequelize.INTEGER,
@@ -22,7 +22,7 @@ module.exports = {
           model: 'Goods',
           key: 'id',
         },
-        onDelete: 'cascade',
+        onDelete: 'set null',
       },
       cart_id: {
         type: Sequelize.INTEGER,
@@ -46,7 +46,7 @@ module.exports = {
           model: 'Sellers',
           key: 'id',
         },
-        onDelete: 'cascade',
+        onDelete: 'set null',
       },
       quantity: {
         type: Sequelize.INTEGER,
