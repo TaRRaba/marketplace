@@ -95,8 +95,9 @@ function App() {
 
   return (
     <> 
+    <div className='min-h-full flex flex-col'>
       <UserNavBar/>
-
+      <div className='flex-grow '>
       <Routes>
       <Route path="/cart" element={<Cart />} />
       <Route path="/completion" element={<Completion />}></Route>
@@ -129,7 +130,7 @@ function App() {
       </Route>
       <Route path="/delivery_points" element={<Maps/>}/>
       </Routes>
-
+      </div>
       {/* <Stripe></Stripe> */}
       {/* <RegistrationSeller></RegistrationSeller> */}
       {/* <LoginSeller></LoginSeller> */}
@@ -152,7 +153,7 @@ function App() {
       {/* <DetailOrder></DetailOrder> */}
 
       <FooterFinal/>
-
+      </div>
     </>
   )
 }

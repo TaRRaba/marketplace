@@ -32,7 +32,7 @@ module.exports = {
           model: 'Sellers',
           key: 'id',
         },
-        allowNull: false,
+        onDelete: 'set null',
       },
       subcategory_id: {
         type: Sequelize.INTEGER,
@@ -40,8 +40,7 @@ module.exports = {
           model: 'SubCategories',
           key: 'id',
         },
-        onDelete: 'cascade',
-        allowNull: false,
+        onDelete: 'set null',
       },
       img_url: {
         type: Sequelize.STRING,

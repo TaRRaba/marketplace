@@ -26,6 +26,7 @@ export function DetailOrder() {
   const user = useAppSelector((state: RootState) => state.users.users);
   const [orderInfo, setOrderInfo] = useState<IOrderInfo>({detailOrder: [], order: {}})
   const [orderStatus, setOrderStatus] = useState(true);
+  const [orderDelivery, setOrderDelivery] = useState(false);
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
 
@@ -79,6 +80,7 @@ export function DetailOrder() {
       const result = await response.json()
       setOrderInfo(result)      
       setOrderStatus(result.order.status)
+      setOrderDelivery(result.order.delivery);
     })()
   }, [])
   
@@ -147,7 +149,15 @@ export function DetailOrder() {
                       <div className="flex flex-col self-start mt-0">
                         <div className="flex mr-1 self-end items-center space-x-4 whitespace-nowrap">
                           <p className="totalPrice text-lg font-bold text-teal-800">
+                            {orderDelivery ?
+                            <>
+                          {(500 + (orderInfo?.detailOrder?.reduce((acc, el) => acc + ((el.quantity) * (el?.Good.price)), 0)))}
+                          </>
+                          :
+                          <>
                           {orderInfo?.detailOrder?.reduce((acc, el) => acc + ((el.quantity) * (el?.Good.price)), 0)}
+                          </>
+                            }
                             {' '}
                             ₽
                           </p>
