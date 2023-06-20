@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
 import "./LoginUser.css";
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
-import { useNavigate } from 'react-router-dom';
-import { changeModallog, checkUser, setUser } from '../../../redux/store/userSlice';
+import { changeModallog, changeModalreg, checkUser, setUser } from '../../../redux/store/userSlice';
 import { RootState } from '../../../redux/store/store';
-import { checkSeller } from '../../../redux/store/sellerSlice';
 import { Button, Label, Modal, TextInput } from 'flowbite-react';
 import { HiMail, HiOutlineKey } from 'react-icons/hi';
 
 export default function LoginUser() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
 
   const selectUserModalLog = useAppSelector((state: RootState) => state.users.modallog)
 
@@ -22,6 +19,11 @@ export default function LoginUser() {
 
     const setModalClose = () => {
       dispatch(changeModallog(undefined))
+    }
+
+    const setModalRegOpen = () => {
+      dispatch(changeModallog(undefined))
+      dispatch(changeModalreg('form-elements'))
     }
   
   const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
@@ -45,7 +47,6 @@ export default function LoginUser() {
       dispatch(setUser({id: result.id, name: result.name, email: result.email}))
       setModalClose()
       dispatch(checkUser(true))
-      // navigate('/') // указать куда перекидывать
     } else if (result.status === 403){
       setWrongEmail(false)
       setWrongPassword(true)
@@ -83,12 +84,18 @@ export default function LoginUser() {
             </div>
 
             <div className="w-full">
-              <Button className="w-full mt-10" type="submit">Войти</Button>
+              <Button className="w-full my-10" type="submit">Войти</Button>
             </div>
           </div>
-          {wrongPassword && <h1 className='text-rose-500'>Неправильный email или пароль</h1>}
-          {wrongEmail && <h1 className='text-rose-500'>Необходимо ввести корректные данные в поле email</h1>}
           </form> 
+          <p onClick={setModalRegOpen} className='flex gap-2 font-semibold leading-6 text-cyan-700 hover:text-cyan-800 cursor-pointer'>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+            </svg>
+            Зарегистрироваться
+          </p>
+          {wrongPassword && <h1 className='text-rose-500 mt-4'>Неправильный email или пароль</h1>}
+          {wrongEmail && <h1 className='text-rose-500 mt-4'>Необходимо ввести корректные данные в поле email</h1>}
         </Modal.Body>
       </Modal>
   )
