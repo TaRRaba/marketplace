@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { changeModalreg, checkUser, setUser } from '../../../redux/store/userSlice';
+import { changeModalreg, changeModallog, checkUser, setUser } from '../../../redux/store/userSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { RootState } from '../../../redux/store/store';
 import { Button, Label, Modal, TextInput } from 'flowbite-react';
@@ -8,13 +7,17 @@ import { HiMail, HiUser, HiOutlineKey } from 'react-icons/hi';
 
 export default function RegistrationUser() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const initRepeatUser = false;
   const selectUserModalReg = useAppSelector((state: RootState) => state.users.modalreg)
 
   const setModalClose = () => {
     dispatch(changeModalreg(undefined))
+  }
+  
+  const setModalLogOpen = () => {
+    dispatch(changeModalreg(undefined))
+    dispatch(changeModallog('form-elements'))
   }
 
   const [repeatUser, setRepeatUser] = useState(initRepeatUser);
@@ -53,7 +56,6 @@ export default function RegistrationUser() {
         setModalClose();
         dispatch(checkUser(true))
         regEmail(result.email, result.name);
-        navigate('/') // указать куда перекидывать
         } else {
           setRepeatUser(true);
         }
@@ -92,11 +94,17 @@ export default function RegistrationUser() {
             </div>
 
             <div className="w-full">
-              <Button className="w-full mt-10" type="submit">Зарегистрироваться</Button>
+              <Button className="w-full my-10" type="submit">Зарегистрироваться</Button>
             </div>
           </div>
-          {repeatUser && <h1 className='text-rose-500'>Пользователь с такой электронной почтой уже существует</h1>}
           </form> 
+          <p onClick={setModalLogOpen} className='flex gap-2 font-semibold leading-6 text-cyan-700 hover:text-cyan-800 cursor-pointer'>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+            </svg>
+            Уже есть аккаунт
+          </p>
+          {repeatUser && <h1 className='text-rose-500 mt-4'>Пользователь с такой электронной почтой уже существует</h1>}
         </Modal.Body>
       </Modal>
   )

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { changeModalregSeller, checkSeller, setSeller } from '../../../redux/store/sellerSlice';
+import { changeModalregSeller, changeModallogSeller, checkSeller, setSeller } from '../../../redux/store/sellerSlice';
 import { RootState } from '../../../redux/store/store';
 import { Button, Label, Modal, TextInput } from 'flowbite-react';
 import { HiMail, HiUser, HiOutlineKey, HiOutlineClipboardList } from 'react-icons/hi';
@@ -15,6 +15,11 @@ export default function RegistrationSeller() {
 
   const setModalClose = () => {
     dispatch(changeModalregSeller(undefined))
+  }
+
+  const setModalLogOpen = () => {
+    dispatch(changeModalregSeller(undefined))
+    dispatch(changeModallogSeller('form-elements'))
   }
 
   const [repeatSeller, setRepeatSeller] = useState(initRepeatSeller);
@@ -103,7 +108,13 @@ export default function RegistrationSeller() {
               <Button className="w-full mt-10" type="submit">Зарегистрироваться</Button>
             </div>
           </div>
-          {repeatSeller && <h1 className='text-rose-500'>Пользователь с такой электронной почтой уже существует</h1>}
+          <p onClick={setModalLogOpen} className='flex gap-2 mt-4 font-semibold leading-6 text-cyan-700 hover:text-cyan-800 cursor-pointer'>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 ">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+            </svg>
+            Уже есть аккаунт
+          </p>
+          {repeatSeller && <h1 className='text-rose-500 mt-4'>Пользователь с такой электронной почтой уже существует</h1>}
           </form> 
         </Modal.Body>
       </Modal>
