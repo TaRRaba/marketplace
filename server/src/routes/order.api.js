@@ -14,7 +14,7 @@ orderApi.get('/', async (req, res) => {
     const orders = (await Orders.findAll({ where: { user_id: userID }, order: [['id', 'DESC']] }))
       .map((el) => el.get({ plain: true })).map((el) => el.id);
     const result = (await Entries.findAll({
-      include: Goods,
+      include: [Goods, Orders],
       where: { order_id: orders },
     })).map((el) => el.get({ plain: true }));
     const data = orders.map((e) => result.filter((el) => el.order_id === e));
