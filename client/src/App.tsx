@@ -91,7 +91,7 @@ function App() {
         dispatch(getAllGood())
     }, [])
 
-
+  console.log('Проверка связи');
 
   return (
     <> 
