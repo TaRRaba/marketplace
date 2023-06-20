@@ -32,17 +32,17 @@ export default function ProfileSeller() {
   }
   
   return (
-    <div className="grid grid-cols-3 mt-12" >
+    <div className="grid grid-cols-4 mt-12" >
 
     <div >
     <Sidebar aria-label="Default sidebar example">
       <div className="flex justify-center">
           <UserCircleIcon className="flex justify-center h-28 w-28 text-gray-300" aria-hidden="true" />
       </div>
-      <p className=' pb-9'>Name</p>
+      <p className=' pb-9 text-center'>Name</p>
 
   <Sidebar.Items>
-    <Sidebar.ItemGroup>
+    <Sidebar.ItemGroup className=' pl-3'>
 
       <Link to="/profileSeller/settings">
       <Sidebar.Item
@@ -89,7 +89,7 @@ export default function ProfileSeller() {
 </Sidebar>
     </div>
 
-<div className='col-span-2'>
+<div className='col-span-3'>
     <Outlet></Outlet>
 </div>
 
