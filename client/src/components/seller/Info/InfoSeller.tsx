@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
-import {  changeModallogSeller, changeModalreg } from '../../../redux/store/sellerSlice';
+import {  changeModallogSeller, changeModalregSeller } from '../../../redux/store/sellerSlice';
 import RegistrationSeller from '../RegistrationSeller/RegistrationSeller';
 import { RootState } from '../../../redux/store/store';
 
@@ -9,7 +9,7 @@ export default function InfoSeller() {
     const sellerIsActive = useAppSelector((state: RootState) => state.sellers.check)
 
 
-    const setModalActiveReg = () => {
+    const changeModalregSeller = () => {
   dispatch(changeModalreg(true))
 }
 
@@ -21,7 +21,7 @@ export default function InfoSeller() {
     :
     <>
     <RegistrationSeller/>
-        <button onClick={setModalActiveReg} className='ml-96 py-2 px-10 border-2 rounded-lg  border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Зарегистрируйтесь</button>
+        {/* <button onClick={setModalActiveReg} className='ml-96 py-2 px-10 border-2 rounded-lg  border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Зарегистрируйтесь</button> */}
     </>} 
     {/* <RegistrationSeller/>
         <button onClick={setModalActiveReg} className='ml-96 py-2 px-10 border-2 rounded-lg  border-gray-300 hover:border-gray-400 hover:bg-gray-300'>Seller Sing Up</button> */}

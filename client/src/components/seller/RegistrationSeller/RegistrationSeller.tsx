@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./RegistrationSeller.css";
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { changeModalreg, checkSeller, setSeller } from '../../../redux/store/sellerSlice';
+import { changeModalregSeller, checkSeller, setSeller } from '../../../redux/store/sellerSlice';
 import { RootState } from '../../../redux/store/store';
 
 export default function RegistrationSeller() {
@@ -52,7 +52,7 @@ export default function RegistrationSeller() {
         setRepeatSeller(false)
         dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))
         dispatch(checkSeller(true)) 
-        dispatch(changeModalreg(false))
+        dispatch(changeModalregSeller(false))
         regEmail(result.email, result.name);
         navigate('/') // указать куда перекидывать
       } else {
@@ -67,7 +67,7 @@ export default function RegistrationSeller() {
     <div 
     className={selectSellerModalReg ? "modal active" : "modal"}>
     <button type='button'
-    onClick={() => dispatch(changeModalreg(false))}
+    onClick={() => dispatch(changeModalregSeller(false))}
     >X</button>
     <h1>Регистрация</h1>
     <div className='regContainer'>
