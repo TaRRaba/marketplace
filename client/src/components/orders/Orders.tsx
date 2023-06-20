@@ -2,16 +2,22 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { IGoodData } from '../../types/cart/cartTypes';
 
+interface IOrder {
+    status: boolean;
+}
+
 interface IOrderData {
     id: number;
     order_id: number;
+    status: boolean;
     quantity: number;
     createdAt: Date;
     Good: IGoodData
+    Order: IOrder;
 }
 
 export const Orders = () => {
-    const [orders, setOrders] = useState<IOrderData[][]>([]);    
+    const [orders, setOrders] = useState<IOrderData[][]>([]);
 
     useEffect(() => {
         (async function () {
@@ -38,15 +44,21 @@ export const Orders = () => {
             <div className="rounded-lg md:w-2/3">
               {orders && orders.map((order) => {
                 let total = 0;
+                
                 return (
                   <div key={order[0].id} className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                     <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                       <div className="mt-5 w-8/12 sm:mt-0">
-                        <h2 className="text-lg mb-0 font-bold text-gray-900">
+                        <div className='flex justify-between'>
+                        <h2 className="mb-2 text-lg mb-0 font-bold text-gray-900">
                           Заказ №
                           {' '}
                           {order[0].order_id}
                         </h2>
+                        {!order[0].Order.status ?
+                        <div className='text-red-600'>Отменен</div>
+                        : null }
+                        </div>
                         <p className="mb-2 text-xs text-gray-700">
                           Дата оформления:
                           {' '}
