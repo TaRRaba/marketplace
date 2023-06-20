@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
-import { useNavigate } from 'react-router-dom';
-import { changeModalregSeller, changeModallogSeller, checkSeller, setSeller } from '../../../redux/store/sellerSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { changeModalregSeller, changeModallogSeller, checkSeller, deleteSeller, resetCheckSeller, setSeller } from '../../../redux/store/sellerSlice';
 import { RootState } from '../../../redux/store/store';
 import { Button, Label, Modal, TextInput } from 'flowbite-react';
 import { HiMail, HiUser, HiOutlineKey, HiOutlineClipboardList } from 'react-icons/hi';
+import { deleteUser, resetCheckUser } from '../../../redux/store/userSlice';
 
 export default function RegistrationSeller() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation()
 
   const initRepeatSeller = false;
   const selectSellerModalReg = useAppSelector((state: RootState) => state.sellers.modalreg)
@@ -20,6 +22,18 @@ export default function RegistrationSeller() {
   const setModalLogOpen = () => {
     dispatch(changeModalregSeller(undefined))
     dispatch(changeModallogSeller('form-elements'))
+
+  const signOut = () => {
+    fetch('http://localhost:3001/api/auth/logout', {
+      credentials: 'include',
+    })
+    .then((res) => res.json())
+ 
+    .catch((error) => console.log(error))
+    dispatch(deleteUser({}))
+    dispatch(deleteSeller({}))
+    dispatch(resetCheckUser(false))
+    dispatch(resetCheckSeller(false))
   }
 
   const [repeatSeller, setRepeatSeller] = useState(initRepeatSeller);
@@ -43,6 +57,7 @@ export default function RegistrationSeller() {
         Body: `${name}, благодарим Вас за регистрацию! Рады, что Вы решили стать нашим партнером, желаем высоких продаж и развития!`,
       }).then();
     }
+    signOut()
 
     try {
       const response: Response = await fetch('http://localhost:3001/api/auth/registration/seller', {
@@ -59,7 +74,8 @@ export default function RegistrationSeller() {
         dispatch(checkSeller(true)) 
         setModalClose()
         regEmail(result.email, result.name);
-        navigate('/') // указать куда перекидывать
+        
+        navigate('/profileSeller/settings') // указать куда перекидывать
       } else {
         setRepeatSeller(true)
       }

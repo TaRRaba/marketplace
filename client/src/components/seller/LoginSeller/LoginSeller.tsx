@@ -49,7 +49,8 @@ const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
       dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))
       setModalClose();
       dispatch(checkSeller(true))  
-      navigate('/') // указать куда перекидывать
+      navigate('/profileSeller/settings') 
+      // navigate('/') // указать куда перекидывать
     } else if (result.status === 403){
       setWrongEmail(false)
       setWrongPassword(true)
