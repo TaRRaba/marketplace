@@ -45,18 +45,19 @@ export function NewGoodsSeller() {
       }  
 
   return (
-    <section className="pb-10 flex bg-gray-100">
+    <section className="pb-10 flex bg-gray-100 w-full">
 
-    <div className="lg:m-10">
+    <div>
 
-  <form onSubmit={handSummit} className="relative border border-gray-100 space-y-3 max-w-screen-md mx-auto rounded-md bg-white p-6 shadow-xl lg:p-10">
-  <h1 className="mb-6 text-xl font-semibold lg:text-2xl">Новый товар</h1>
+  <form onSubmit={handSummit} className="relative border border-gray-100 space-y-3 max-w-screen-lg mx-auto rounded-md bg-white p-6 shadow-xl ">
+  <h1 className="mb-2 text-xl font-semibold lg:text-2xl text-center">Новый товар</h1>
 
-  <div className="grid gap-3 md:grid-cols-2">
-  <div >
+  <p className=' text-red-700 text-xs'> Важно! Необходимо заполнить все поля!</p>
+  <div className="flex m-0 gap-5">
+  <div className=' w-1/2'>
       <label className=""> Категория товара </label>
-      <div className="relative w-64 mt-2 bg-gray-100 rounded-lg">
-        <select value={categoryValue}  onChange={(e)=> setCategoryValue(e.target.value)} name="categories" className="relative w-64 bg-gray-100 rounded-lg">
+      <div className="relative w-full mt-2 bg-gray-100 rounded-lg">
+        <select value={categoryValue}  onChange={(e)=> setCategoryValue(e.target.value)} name="categories" className="relative w-full bg-gray-100 rounded-lg">
             {allCategory && allCategory.map((el)=> (
                 <option key={el?.id} value={el?.id}>{el?.fullName}</option>
             ))}
@@ -64,10 +65,10 @@ export function NewGoodsSeller() {
       </div>
   </div>
 
-  <div >
+  <div className='w-1/2'>
   <label className=""> Подкатегория товара </label>
-      <div className="relative w-64 mt-2 bg-gray-100 rounded-lg">
-        <select name="subcategories" className="relative w-64 bg-gray-100 rounded-lg">
+      <div className="relative w-full mt-2 bg-gray-100 rounded-lg">
+        <select name="subcategories" className="relative w-full bg-gray-100 rounded-lg">
             {subCategory()[0]?.SubCategories.map((el) => (
                  <option key={el?.id} value={el?.id}>{el?.fullName}</option>
             ))}
@@ -81,6 +82,17 @@ export function NewGoodsSeller() {
     <p className=' text-red-700 text-xs'> Важно! Наименование товара не должно содержать символы « . » и « % »</p>
     <input defaultValue={nameCheck} onChange={(e)=> setNameCheck(e.target.value)} required name='name' type="text" className={`mt-2 h-10 w-full rounded-md bg-gray-100 px-3 ${ checkNameProduct && " border-red-600" }`} />
   </div>
+  <div className="grid gap-5 md:grid-cols-2">
+  <div>
+    <label className=""> Цена за единицу товара (шт)</label>
+    <input required name='price' type='number' className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+  </div>
+  <div>
+    <label className=""> Количество товара на складе (в шт)</label>
+    <input required name='amount' type='number' className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+  </div>
+  </div>
+  <div className="grid gap-5 md:grid-cols-2">
   <div>
     <label className=""> Страна производитель</label>
     <input required name='country' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
@@ -89,6 +101,8 @@ export function NewGoodsSeller() {
     <label className=""> Торговая марка</label>
     <input required name='brand' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
   </div>
+  </div>
+  <div className="grid gap-5 md:grid-cols-3">
   <div>
     <label className=""> Артикул товара</label>
     <input required name='code' type='number' className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
@@ -97,23 +111,15 @@ export function NewGoodsSeller() {
     <label className=""> Габариты</label>
     <input required name='size' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
   </div>
-  <div>
+    <div>
     <label className=""> Вес</label>
     <input required name='weight' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
+  </div>
   </div>
   <div>
     <label className=""> Дополнительная информация (тип, материал и тд.)</label>
     <input required name='type' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
   </div>
-  <div>
-    <label className=""> Количество товара на складе (в шт)</label>
-    <input required name='amount' type='number' className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
-  </div>
-  <div>
-    <label className=""> Цена за единицу товара (шт)</label>
-    <input required name='price' type='number' className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
-  </div>
-
     <div
       className="max-w-md"
       id="fileUpload">
