@@ -14,8 +14,7 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
-
-        allowNull: false,
+        onDelete: 'set null',
       },
       status: {
         type: Sequelize.BOOLEAN,
@@ -32,7 +31,7 @@ module.exports = {
           model: 'PickPoints',
           key: 'id',
         },
-        onDelete: 'cascade',
+        onDelete: 'set null',
       },
       createdAt: {
         allowNull: false,
