@@ -7,8 +7,8 @@ import { delUser } from "../thunks/userThunks/delUser.thunk";
 
 const initialState: IInitialState = {
     users: {},
-    modalreg: false,
-    modallog: false,
+    modalreg: undefined,
+    modallog: undefined,
     check: false
 }
 

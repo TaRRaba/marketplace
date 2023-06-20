@@ -1,9 +1,10 @@
-import React, { ChangeEvent, useState } from 'react'
-import "./RegistrationUser.css";
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { changeModalreg, checkUser, setUser } from '../../../redux/store/userSlice';
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { RootState } from '../../../redux/store/store';
+import { Button, Label, Modal, TextInput } from 'flowbite-react';
+import { HiMail, HiUser, HiOutlineKey } from 'react-icons/hi';
 
 export default function RegistrationUser() {
   const dispatch = useAppDispatch();
@@ -12,10 +13,9 @@ export default function RegistrationUser() {
   const initRepeatUser = false;
   const selectUserModalReg = useAppSelector((state: RootState) => state.users.modalreg)
 
-  // Для активации модалки
-  // const setModalActive = () => {
-  //   dispatch(changeModalreg(true))
-  // }
+  const setModalClose = () => {
+    dispatch(changeModalreg(undefined))
+  }
 
   const [repeatUser, setRepeatUser] = useState(initRepeatUser);
 
@@ -26,7 +26,7 @@ export default function RegistrationUser() {
         name: data.get('name'),
         email: data.get('email'),
         password: data.get('password')
-      }
+      } 
 
       function regEmail(email, name) {
         Email.send({
@@ -50,7 +50,7 @@ export default function RegistrationUser() {
         if (result.status === 201) {
         setRepeatUser(false)
         dispatch(setUser({id: result.id, name: result.name, email: result.email}))
-        dispatch(changeModalreg(false))
+        setModalClose();
         dispatch(checkUser(true))
         regEmail(result.email, result.name);
         navigate('/') // указать куда перекидывать
@@ -63,21 +63,41 @@ export default function RegistrationUser() {
     } 
 
   return (
-    <div 
-    className={selectUserModalReg ? "modal active" : "modal"}>
-    <button type='button'
-    onClick={() => dispatch(changeModalreg(false))}
-    >X</button>
-    <h1>Регистрация</h1>
-    <div className='regContainer'>
-      <form className='regContainer' onSubmit={handleSubmit} action='#' method='POST'>
-        <input type="text" name='name' placeholder='Имя' required/>
-        <input type="email" name='email' placeholder='Email' required/>
-        <input type='password' name='password' placeholder='Пароль' required/>
-        <button type="submit">Зарегистрироваться</button>
-      </form>
-      {repeatUser && <h1 className='text-rose-500'>Пользователь с такой электронной почтой уже существует</h1>}
-    </div>
-</div>
+      <Modal show={selectUserModalReg === 'form-elements'} size="md" popup onClose={setModalClose}>
+        <Modal.Header />
+        <Modal.Body>
+        <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit} action='#' method='POST'>
+          <div className="space-y-6">
+            <h3 className="flex text-xl font-medium text-gray-900 dark:text-white justify-center">Регистрация</h3>
+
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="name" value="Ваше имя" />
+              </div>
+              <TextInput icon={HiUser} type='text' id="name" name='name' placeholder="Имя" required />
+            </div>
+
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="email" value="Ваша почта" />
+              </div>
+              <TextInput icon={HiMail} type='email' id="email" name='email' placeholder="Email" required />
+            </div>
+
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="password" value="Ваш пароль" />
+              </div>
+              <TextInput icon={HiOutlineKey} id="password" type="password" name='password' placeholder="Пароль" required />
+            </div>
+
+            <div className="w-full">
+              <Button className="w-full mt-10" type="submit">Зарегистрироваться</Button>
+            </div>
+          </div>
+          {repeatUser && <h1 className='text-rose-500'>Пользователь с такой электронной почтой уже существует</h1>}
+          </form> 
+        </Modal.Body>
+      </Modal>
   )
 }

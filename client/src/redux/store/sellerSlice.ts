@@ -3,11 +3,12 @@ import { RootState } from "./store";
 import { IsellerInfo } from "../../types/user/authTypes";
 import { patchSellerData } from "../thunks/SellerThunks/patchSellerData.thunk";
 import { putSellerPassword } from "../thunks/SellerThunks/putSellerPassword.thunk";
+import { ISellerInitialState } from "../../types/seller/sellerTypes";
 
-const initialState = {
+const initialState: ISellerInitialState = {
     seller: {},
-    modalreg: false,
-    modallog: false,
+    modalreg: undefined,
+    modallog: undefined,
     check: false
 }
 

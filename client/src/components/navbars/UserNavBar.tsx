@@ -32,19 +32,14 @@ export const UserNavBar = () => {
   const [favIcon, setFavIcon] = useState(false);
   const location = useLocation()
  
-
   const dispatch = useAppDispatch();
 
-
-
-
-
       const setModalActiveLog = () => {
-      dispatch(changeModallog(true))
+      dispatch(changeModallog('form-elements'))
     }
 
       const setModalActiveReg = () => {
-    dispatch(changeModalreg(true))
+    dispatch(changeModalreg('form-elements'))
   }
 
   useEffect(() => {
@@ -71,17 +66,19 @@ export const UserNavBar = () => {
   }, [cart])
 
   const setModalActiveRegseller = () => {
-    dispatch(changeModalregSeller(true))
+    dispatch(changeModalregSeller('form-elements'))
   }
 
   const setModalActiveLogSeller = () => {
-    dispatch(changeModallogSeller(true))
+    dispatch(changeModallogSeller('form-elements'))
   }
 
  //--Добавление локации города пользователя --------------------------------------
 //  const [loc, setLoc] = useState('')
+
 //  const locat = ymaps.geolocation.get({
 //    provider: 'browser'
+
 // });
 
 //  locat.then(
