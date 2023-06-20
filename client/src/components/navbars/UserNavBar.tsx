@@ -79,25 +79,24 @@ export const UserNavBar = () => {
   }
 
  //--Добавление локации города пользователя --------------------------------------
- const [loc, setLoc] = useState('')
- const locat = ymaps.geolocation.get({
-   provider: 'browser'
-});
+const [loc, setLoc] = useState('')
 
- locat.then(
+const locat = ymaps?.geolocation?.get({provider:'browser',mapStateAutoApply:true});
+
+if(locat !== undefined) {
+  locat?.then(
    function(result) {
       // Получение местоположения пользователя.
-      const userAddress = (result.geoObjects?.get(0).properties?.get('text'));
+      const userAddress = (result?.geoObjects?.get(0).properties?.get('text'));
      setLoc(userAddress)
    },
    function(err) {
      console.log('Ошибка: ' + err)
    }
- );
-
+ )
+}
 //-----------------------------------------------------------------------------
 
-  
     
   return (    
    
@@ -106,7 +105,7 @@ export const UserNavBar = () => {
     <RegistrationUser />
       <LoginSeller/>
       <div className='flex justify-between'>
-        <div><span className='flex items-center text-center'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48" height="25" width="25"><path fill="#ff6d37" d="M42 21C42 33.9185 28.6491 43.1283 24.9437 45.4357C24.3571 45.8009 23.6429 45.8009 23.0563 45.4357C19.3509 43.1283 6 33.9185 6 21C6 11.0589 14.0589 3 24 3C33.9411 3 42 11.0589 42 21Z"></path><path fill="#ffffff" d="M32.942 23.8215C33.9225 22.2351 34.2415 20.2696 33.815 18.4421C32.9038 14.2794 27.8581 12.5783 24.7152 15.368C24.4663 15.5874 24.2449 15.8405 24 16.0927C23.7551 15.8405 23.5337 15.5874 23.2848 15.368C20.1419 12.5783 15.0962 14.2794 14.185 18.4421C13.7585 20.2696 14.0775 22.2351 15.058 23.8215C16.6502 26.4016 19.1471 28.4518 21.6551 30.3016C23.0456 31.3272 24.9544 31.3272 26.3449 30.3016C28.8529 28.4518 31.3498 26.4016 32.942 23.8215Z"></path><path stroke="#3e3e3e" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M42 21C42 33.9185 28.6491 43.1283 24.9437 45.4357C24.3571 45.8009 23.6429 45.8009 23.0563 45.4357C19.3509 43.1283 6 33.9185 6 21C6 11.0589 14.0589 3 24 3C33.9411 3 42 11.0589 42 21Z"></path><path stroke="#3e3e3e" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M32.942 23.8215C33.9225 22.2351 34.2415 20.2696 33.815 18.4421C32.9038 14.2794 27.8581 12.5783 24.7152 15.368C24.4663 15.5874 24.2449 15.8405 24 16.0927C23.7551 15.8405 23.5337 15.5874 23.2848 15.368C20.1419 12.5783 15.0962 14.2794 14.185 18.4421C13.7585 20.2696 14.0775 22.2351 15.058 23.8215C16.6502 26.4016 19.1471 28.4518 21.6551 30.3016C23.0456 31.3272 24.9544 31.3272 26.3449 30.3016C28.8529 28.4518 31.3498 26.4016 32.942 23.8215Z"></path></svg> <span className=' ml-1'>{loc.split(',')[0]}</span></span></div>
+        <div><span className='flex items-center text-center'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 48 48" height="25" width="25"><path fill="#ff6d37" d="M42 21C42 33.9185 28.6491 43.1283 24.9437 45.4357C24.3571 45.8009 23.6429 45.8009 23.0563 45.4357C19.3509 43.1283 6 33.9185 6 21C6 11.0589 14.0589 3 24 3C33.9411 3 42 11.0589 42 21Z"></path><path fill="#ffffff" d="M32.942 23.8215C33.9225 22.2351 34.2415 20.2696 33.815 18.4421C32.9038 14.2794 27.8581 12.5783 24.7152 15.368C24.4663 15.5874 24.2449 15.8405 24 16.0927C23.7551 15.8405 23.5337 15.5874 23.2848 15.368C20.1419 12.5783 15.0962 14.2794 14.185 18.4421C13.7585 20.2696 14.0775 22.2351 15.058 23.8215C16.6502 26.4016 19.1471 28.4518 21.6551 30.3016C23.0456 31.3272 24.9544 31.3272 26.3449 30.3016C28.8529 28.4518 31.3498 26.4016 32.942 23.8215Z"></path><path stroke="#3e3e3e" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M42 21C42 33.9185 28.6491 43.1283 24.9437 45.4357C24.3571 45.8009 23.6429 45.8009 23.0563 45.4357C19.3509 43.1283 6 33.9185 6 21C6 11.0589 14.0589 3 24 3C33.9411 3 42 11.0589 42 21Z"></path><path stroke="#3e3e3e" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M32.942 23.8215C33.9225 22.2351 34.2415 20.2696 33.815 18.4421C32.9038 14.2794 27.8581 12.5783 24.7152 15.368C24.4663 15.5874 24.2449 15.8405 24 16.0927C23.7551 15.8405 23.5337 15.5874 23.2848 15.368C20.1419 12.5783 15.0962 14.2794 14.185 18.4421C13.7585 20.2696 14.0775 22.2351 15.058 23.8215C16.6502 26.4016 19.1471 28.4518 21.6551 30.3016C23.0456 31.3272 24.9544 31.3272 26.3449 30.3016C28.8529 28.4518 31.3498 26.4016 32.942 23.8215Z"></path></svg> <span className=' ml-1'>{loc?.split(',')[0]}</span></span></div>
         <div className='flex items-center'>
           {location.pathname === "/infoSeller" ?
           <>
@@ -182,7 +181,7 @@ export const UserNavBar = () => {
                        <div className="flex cursor-pointer items-center gap-x-1 rounded-md py-2 px-4 hover:bg-[#4520aa]/10">
                      <div className="relative">
                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5">
-                       <path stroke-linecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
+                       <path strokeLinecap="round" stroke-linejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z" />
                       </svg>
                       {favIcon ?
                        <span id="favIcon" className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 p-2 text-xs text-white">{favourites.length}</span>
