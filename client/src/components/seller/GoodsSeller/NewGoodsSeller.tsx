@@ -47,7 +47,7 @@ export function NewGoodsSeller() {
   return (
     <section className="pb-10 flex bg-gray-100 w-full">
 
-    <div className="">
+    <div>
 
   <form onSubmit={handSummit} className="relative border border-gray-100 space-y-3 max-w-screen-lg mx-auto rounded-md bg-white p-6 shadow-xl ">
   <h1 className="mb-2 text-xl font-semibold lg:text-2xl text-center">Новый товар</h1>
@@ -65,7 +65,7 @@ export function NewGoodsSeller() {
       </div>
   </div>
 
-  <div className=' w-1/2'>
+  <div className='w-1/2'>
   <label className=""> Подкатегория товара </label>
       <div className="relative w-full mt-2 bg-gray-100 rounded-lg">
         <select name="subcategories" className="relative w-full bg-gray-100 rounded-lg">
