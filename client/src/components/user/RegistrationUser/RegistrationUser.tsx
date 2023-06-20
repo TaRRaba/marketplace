@@ -53,7 +53,7 @@ export default function RegistrationUser() {
         setModalClose();
         dispatch(checkUser(true))
         regEmail(result.email, result.name);
-        navigate('/') // указать куда перекидывать
+        // navigate('/profileSeller/settings')  // указать куда перекидывать
         } else {
           setRepeatUser(true);
         }

@@ -45,7 +45,7 @@ export default function LoginUser() {
       dispatch(setUser({id: result.id, name: result.name, email: result.email}))
       setModalClose()
       dispatch(checkUser(true))
-      navigate('/') // указать куда перекидывать
+      // navigate('/') // указать куда перекидывать
     } else if (result.status === 403){
       setWrongEmail(false)
       setWrongPassword(true)
