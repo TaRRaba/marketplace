@@ -5,6 +5,7 @@ import { getGoodsSeller } from '../../../redux/thunks/goodsSellerThunks/getGoods
 import { RootState } from '../../../redux/store/store';
 import { delGoodsSeller } from '../../../redux/thunks/goodsSellerThunks/delGoodsSeller.thunk';
 import { Link } from 'react-router-dom';
+import { getAllGood } from '../../../redux/thunks/goodThunks/gatAllGoods.thunk';
 
 export default function GoodsSeller() {
 
@@ -14,6 +15,11 @@ export default function GoodsSeller() {
   useEffect(()=> {
     dispatch(getGoodsSeller())
   }, [])
+
+  const deleteGoods = ({goodsId}: {goodsId:number}) => {
+    dispatch(delGoodsSeller({goodsId}))
+    dispatch(getAllGood())
+  }
 
   return (
     <div>
@@ -43,7 +49,7 @@ export default function GoodsSeller() {
                       <p>Изменить</p> 
                      </button>
                      </Link>
-                    <button onClick={() => (dispatch(delGoodsSeller({goodsId: el?.id})))}  className="mr-2 mb-4 flex cursor-pointer items-center justify-center rounded-md border py-2 px-8 text-center text-gray-500 transition duration-150 ease-in-out hover:translate-y-1 hover:bg-rose-500 hover:text-white">
+                    <button onClick={() => (deleteGoods({goodsId: el?.id}))} className="mr-2 mb-4 flex cursor-pointer items-center justify-center rounded-md border py-2 px-8 text-center text-gray-500 transition duration-150 ease-in-out hover:translate-y-1 hover:bg-rose-500 hover:text-white">
                       <p>Удалить</p>
                       </button>
                     </div>
