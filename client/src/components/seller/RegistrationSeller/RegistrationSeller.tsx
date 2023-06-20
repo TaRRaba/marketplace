@@ -22,7 +22,8 @@ export default function RegistrationSeller() {
   const setModalLogOpen = () => {
     dispatch(changeModalregSeller(undefined))
     dispatch(changeModallogSeller('form-elements'))
-
+  }
+  
   const signOut = () => {
     fetch('http://localhost:3001/api/auth/logout', {
       credentials: 'include',
