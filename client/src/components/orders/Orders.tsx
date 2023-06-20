@@ -4,6 +4,7 @@ import { IGoodData } from '../../types/cart/cartTypes';
 
 interface IOrder {
     status: boolean;
+    delivery: boolean;
 }
 
 interface IOrderData {
@@ -44,6 +45,7 @@ export const Orders = () => {
             <div className="rounded-lg md:w-2/3">
               {orders && orders.map((order) => {
                 let total = 0;
+                if (order[0].Order.delivery) total += 500;
                 
                 return (
                   <div key={order[0].id} className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
