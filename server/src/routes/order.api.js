@@ -11,7 +11,7 @@ const {
 orderApi.get('/', async (req, res) => {
   const userID = req.session.user.id;
   try {
-    const orders = (await Orders.findAll({ where: { user_id: userID } }))
+    const orders = (await Orders.findAll({ where: { user_id: userID }, order: [['id', 'DESC']] }))
       .map((el) => el.get({ plain: true })).map((el) => el.id);
     const result = (await Entries.findAll({
       include: Goods,
@@ -27,12 +27,13 @@ orderApi.get('/', async (req, res) => {
 orderApi.get('/seller', async (req, res) => {
   const sellerID = req.session.seller.id;
   try {
-    const allEntries = (await Entries.findAll({ where: { seller_id: sellerID } }))
+    const allEntries = (await Entries.findAll({ where: { seller_id: sellerID }, order: [['order_id', 'DESC']] }))
       .map((el) => el.get({ plain: true }));
     const orders = [...new Set(allEntries.map((entry) => entry.order_id))];
     const result = (await Entries.findAll({
       include: [Goods, Orders],
       where: { order_id: orders, seller_id: sellerID },
+      order: [['order_id', 'DESC']],
     })).map((el) => el.get({ plain: true }));
     const data = orders.map((e) => result.filter((el) => el.order_id === e));
     res.json({ status: 200, data });

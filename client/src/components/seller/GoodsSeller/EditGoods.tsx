@@ -2,7 +2,8 @@ import { FileInput, Label } from 'flowbite-react'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { RootState } from '../../../redux/store/store';
-import { useAppSelector } from '../../../redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
+import { getAllGood } from '../../../redux/thunks/goodThunks/gatAllGoods.thunk';
 
 export function EditGoods() {
     const navigate = useNavigate()
@@ -10,6 +11,7 @@ export function EditGoods() {
 
     const category = useAppSelector((state: RootState) => state.good.category)
     const goods = useAppSelector((state: RootState) => state.goodsSeller.goodsSeller);
+    const dispatch = useAppDispatch()
 
     const [allCategor, setAllCategor] = useState([])
     const [categoryValue, setCategoryValue] = useState('')
@@ -45,7 +47,8 @@ export function EditGoods() {
             const result = await response.json();
 
             if(result) {
-                navigate('/profileSeller/goods')
+              dispatch(getAllGood())
+              navigate('/profileSeller/goods')
             }
           } catch (error) {
               console.log(error);
