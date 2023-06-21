@@ -94,11 +94,11 @@ export function NewGoodsSeller() {
   </div>
   <div className="grid gap-5 md:grid-cols-2">
   <div>
-    <label className=""> Бренд</label>
+    <label className="">Страна производитель</label>
     <input required name='country' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
   </div>
   <div>
-    <label className=""> Торговая марка</label>
+    <label className=""> Бренд</label>
     <input required name='brand' type="text" className="mt-2 h-10 w-full rounded-md bg-gray-100 px-3" />
   </div>
   </div>
