@@ -51,6 +51,9 @@ import { HowToPay } from './components/footer/HowToPay'
 import { HowMakeOrder } from './components/footer/HowMakeOrder'
 
 import { MakeOrder } from './components/footer/MakeOrder'
+import { UserProtection } from './components/userProtection'
+import { SellerProtection } from './components/sellerProtection'
+import { NotFound } from './components/NotFound/NotFound'
 
 
 function App() {
@@ -110,12 +113,12 @@ function App() {
       <UserNavBar/>
       <div className='flex-grow '>
       <Routes>
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/completion" element={<Completion />}></Route>
+      <Route path="/cart" element={<UserProtection><Cart /></UserProtection>} />
+      <Route path="/completion" element={<UserProtection><Completion /></UserProtection>} />
       {/* <Routes>
       <Route path="/cart" element={<Cart />}/>
       {/* <Route path="/Bannerpromotion" element={<BannerPromotion />}/> */}
-      <Route path="/profile" element={<ProfileUser />}/>
+      {/* <Route path="/profile" element={<ProfileUser />}/> */}
       {category && category.map((el) => (
         <Route key={`cat_${el.id}`} path={`/${el.name}`} element={<GoodsList CatId={el.id} />}/>  
       ))}     
@@ -125,7 +128,7 @@ function App() {
       <Route path="/infoSeller" element={<InfoSeller />}/>      
       <Route path="/" element={<Main/>}/>
       <Route path="/search" element={<SearchCard/>}/>
-      <Route path="/profileSeller" element={<ProfileSeller/>}> 
+      <Route path="/profileSeller" element={<SellerProtection><ProfileSeller/></SellerProtection>}> 
           <Route path='settings' element={<SettingsSeller/>}></Route>
           <Route path='goods' element={<GoodsSeller />}></Route>
           <Route path='new_goods' element={<NewGoodsSeller />}></Route>
@@ -133,7 +136,7 @@ function App() {
           <Route path='orders' element={<SellerOrders />}></Route>  
           <Route path='reports' element={<Reports />}></Route>     
       </Route>
-      <Route path="/profile" element={<ProfileUser/>}> 
+      <Route path="/profile" element={<UserProtection><ProfileUser/></UserProtection>}> 
           <Route path='settings' element={<SettingsUser/>}></Route>
           <Route path='favourites' element={<Favourites />}></Route>
           <Route path='orders' element={<Orders />}></Route>    
@@ -143,10 +146,12 @@ function App() {
       <Route path="/makeOrder" element={<MakeOrder/>}/>
       <Route path="/delivery_points" element={<Maps/>}/>
 
-
-      <Route path="/payment" element={<HowToPay/>}/>
-
+      <Route path="*" element={<NotFound/>}/>
       </Routes>
+
+
+      {/* <Route path="/payment" element={<HowToPay/>}/> */}
+
       </div>
       {/* <Stripe></Stripe> */}
       {/* <RegistrationSeller></RegistrationSeller> */}
