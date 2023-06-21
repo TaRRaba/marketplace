@@ -30,19 +30,28 @@ export default function Completion() {
   
 
   return (
-    <div className='flex flex-col gap-y-3 justify-center justify-items-center justify-self-center content-center self-center items-center min-h-screen' >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="text-emerald-600 w-36 h-36">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-</svg>
-      <h1 className='text-6xl'>Спасибо! 🎉</h1>
-      <h1 className='text-4xl'>Платеж успешно обработан</h1>
-      <p>Мы свяжемся с вами в ближайшее время</p>
-      <p>Номер вашего заказа # {numberOrder}</p>
-      <Link to="/">
-        <div className='flex cursor-pointer'><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
-          </svg>Вернуться к покупкам</div>
-      </Link>
+    <div className='flex flex-col gap-y-3 justify-center justify-items-center justify-self-center content-center self-center items-center' >
+      <div className="bg-gray-100 p-8">
+        <div className="flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+          <div className="w-full flex 2xl:w-full justify-evenly bg-white rounded-lg shadow-xl items-center">
+            <div className="flex flex-col justify-center justify-items-center justify-self-center content-center self-center items-center p-8">
+              <h4 className="text-3xl text-gray-800 font-medium">Платеж успешно обработан</h4>
+              <img className='w-5/6 rounded-lg' src="/payment.gif" alt="online shopping" />
+              <p className="text-3xl ml-3 mb-1 text-gray-700 font-small">Спасибо!</p>
+              <p className="flex text-lg ml-3  mb-1 text-gray-700 font-small">Мы свяжемся с вами в ближайшее время</p>
+              <p className="text-lg ml-3 mb-1 text-gray-700 font-small">Номер вашего заказа # {numberOrder}</p>
+              <Link to="/">
+              <p className="flex gap-1 text-lg ml-3 mb-1 text-gray-700 font-small cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+              </svg>
+                 Вернуться к покупкам
+              </p>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
