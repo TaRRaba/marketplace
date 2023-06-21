@@ -5,12 +5,14 @@ import { getCart } from '../../redux/thunks/cartThunks/getCart.thunk';
 import { removeFromFav } from '../../redux/thunks/favThunks/removeFromFav.thunk';
 import { addAmountCart } from '../../redux/thunks/cartThunks/addAmountCart.thunk';
 import { getFav } from '../../redux/thunks/favThunks/getFav.thunk';
-
+ 
 export const Favourites = () => {
     const cart = useAppSelector((state: RootState) => state.cart.cart);
     const user = useAppSelector((state: RootState) => state.users.check);
-    const favourites = useAppSelector((state: RootState) => state.favourites.favourites);
+    const favouritesAll = useAppSelector((state: RootState) => state.favourites.favourites);
     const dispatch = useAppDispatch();
+
+    const favourites = favouritesAll?.filter((el) => el.Good.archive === false)    
 
     function checkCart(id: number) {   
       return cart.some((el) => el.good_id === id);

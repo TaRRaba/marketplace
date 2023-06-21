@@ -11,7 +11,9 @@ import { RootState } from '../../../redux/store/store';
 export default function ProfileUser() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
-  const favourites = useAppSelector((state: RootState) => state.favourites.favourites);
+  const favouritesAll = useAppSelector((state: RootState) => state.favourites.favourites);
+
+  const favourites = favouritesAll?.filter((el) => el.Good.archive === false)    
   
   const signOut = () => {
     fetch('http://localhost:3001/api/auth/logout', {

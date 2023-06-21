@@ -26,13 +26,15 @@ export const UserNavBar = () => {
   const userIsActive = useAppSelector((state: RootState) => state.users.check)
   const sellerIsActive = useAppSelector((state: RootState) => state.sellers.check)
   const user = useAppSelector((state: RootState) => state.users.check);
-  const cart = useAppSelector((state: RootState) => state.cart.cart);
-  const favourites = useAppSelector((state: RootState) => state.favourites.favourites);
+  const cartAll = useAppSelector((state: RootState) => state.cart.cart);
+  const favouritesAll = useAppSelector((state: RootState) => state.favourites.favourites);
   const [cartIcon, setCartIcon] = useState(false);
   const [favIcon, setFavIcon] = useState(false);
   const location = useLocation()
- 
   const dispatch = useAppDispatch();
+
+  const favourites = favouritesAll?.filter((el) => el.Good.archive === false) 
+  const cart = cartAll?.filter((el) => el.Good.archive === false)    
 
       const setModalActiveLog = () => {
       dispatch(changeModallog('form-elements'))

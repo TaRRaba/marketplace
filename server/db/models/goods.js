@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     seller_id: DataTypes.INTEGER,
     subcategory_id: DataTypes.INTEGER,
     img_url: DataTypes.STRING,
+    archive: DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'Goods',

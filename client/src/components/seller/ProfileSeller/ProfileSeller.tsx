@@ -12,7 +12,9 @@ import { getGoodsSeller } from '../../../redux/thunks/goodsSellerThunks/getGoods
 export default function ProfileSeller() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
-  const goods = useAppSelector((state: RootState) => state.goodsSeller.goodsSeller);
+  const goodsAll = useAppSelector((state: RootState) => state.goodsSeller.goodsSeller);
+
+  const goods = goodsAll?.filter((el) => el.archive === false)
 
   useEffect(()=> {
     dispatch(getGoodsSeller())
