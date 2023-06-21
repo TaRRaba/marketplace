@@ -32,7 +32,7 @@ export default function RegistrationSeller() {
  
     .catch((error) => console.log(error))
     dispatch(deleteUser({}))
-    // dispatch(deleteSeller({}))
+    dispatch(deleteSeller({}))
     dispatch(resetCheckUser(false))
     dispatch(resetCheckSeller(false))
   }

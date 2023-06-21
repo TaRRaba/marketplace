@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAppSelector } from '../../redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
 import { RootState } from '../../redux/store/store';
+import { getCart } from '../../redux/thunks/cartThunks/getCart.thunk';
+import { getFav } from '../../redux/thunks/favThunks/getFav.thunk';
 
 export default function Completion() {
   const [numberOrder, setNumberOrder] = useState(0);
+  const user = useAppSelector((state: RootState) => state.users.check);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {    
     (async function () {
@@ -16,6 +20,13 @@ export default function Completion() {
       setNumberOrder(order.id);
     })()
   }, [])
+
+  useEffect(() => {
+    if (user) {
+      dispatch(getCart())
+      dispatch(getFav())
+  }
+  }, [user])
   
 
   return (

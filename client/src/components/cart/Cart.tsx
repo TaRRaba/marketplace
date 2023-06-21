@@ -12,6 +12,7 @@ import {Elements} from '@stripe/react-stripe-js';
 import CheckoutForm from '../stripe/CheckoutForm';
 import { setDeliveryAddress, setPickpointAddress } from '../../redux/store/cartSlice';
 import { getMaps } from '../../redux/thunks/mapsThunks/getMapsThunks';
+import { getFav } from '../../redux/thunks/favThunks/getFav.thunk';
 
 export const Cart = () => {
     const userData = useAppSelector((state: RootState) => state.users.users)
@@ -48,8 +49,14 @@ export const Cart = () => {
 
             setStripePromise(loadStripe(publishableKey))
         })
-        dispatch(getCart())
     }, [])
+
+    useEffect(() => {
+      if (userData.id) {
+        dispatch(getCart())
+        dispatch(getFav())
+    }
+    }, [userData])
 
     const handleBill = () => {
       setBillData(!billData)
@@ -78,22 +85,6 @@ export const Cart = () => {
 
     return (
         <>
-      <nav className="flex bg-gray-100 text-gray-700 py-3 px-5" aria-label="Breadcrumb">
-        <ol className="inline-flex items-center space-x-1 md:space-x-3">
-          <li className="inline-flex items-center">
-            <a href="/" className="text-gray-500 hover:text-black text-sm inline-flex font-medium items-center">
-              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
-              <span className="text-gray-500 hover:text-black text-sm font-medium">Главная</span>
-            </a>
-          </li>
-          <li aria-current="page">
-            <div className="flex items-center">
-              <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg>
-              <span className="text-gray-400 ml-1 md:ml-2 text-sm font-medium">Корзина</span>
-            </div>
-          </li>
-        </ol>
-      </nav>
       {cart.length > 0 ? (
         <div id="Cart" className="visibility: visible bg-gray-100 mb-44 min-h-96 pt-10">
           <h1 className="mb-10 text-center text-2xl font-bold">Корзина</h1>

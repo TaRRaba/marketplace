@@ -76,6 +76,7 @@ export default function ProfileSeller() {
       </Link>
 
       <Sidebar.Item
+      className="cursor-pointer"
         onClick={signOut}
         icon={HiArrowSmRight}>
         <p>Выйти</p>

@@ -2,6 +2,7 @@ import React from 'react'
 import { CardsPopular } from './CardsPopular'
 import LoginUser from '../user/LoginUser/LoginUser'
 import RegistrationUser from '../user/RegistrationUser/RegistrationUser'
+import { Link } from 'react-router-dom'
 
 export const Main = () => {
 
@@ -9,10 +10,9 @@ export const Main = () => {
 
   return (
     <>
-
-    <a href='/sport'>
+    <Link to="/category/sport">
     <video autoPlay loop controlsList='nodownload' className="n8o9J" muted data-testid="main-banner-video" playsInline ><source src="https://cdn2.static1-sima-land.com/share/16809.mp4"/></video>
-    </a>
+    </Link>
     {/* <nav className="flex bg-gray-100 text-gray-700  px-5" aria-label="Breadcrumb">
         <ol className="inline-flex items-center space-x-1 md:space-x-3">
           <li className="inline-flex items-center">
