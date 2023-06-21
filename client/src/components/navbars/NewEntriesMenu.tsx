@@ -32,7 +32,7 @@ export const NewEntriesMenu = () => {
     dispatch(deleteSeller({}))
     dispatch(resetCheckUser(false))
     dispatch(resetCheckSeller(false))
-    navigate('/')
+    // navigate('/')
   }
 
 
