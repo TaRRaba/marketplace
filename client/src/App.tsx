@@ -139,7 +139,7 @@ function App() {
           <Route path='orders' element={<Orders />}></Route>    
           <Route path='orders/:id' element={<DetailOrder />}></Route>   
       </Route>
-      <Route path="/infoSeller" element={<InfoSeller />}/>    
+      <Route path="/payment" element={<HowToPay />}/>    
       <Route path="/makeOrder" element={<MakeOrder/>}/>
       <Route path="/delivery_points" element={<Maps/>}/>
 
