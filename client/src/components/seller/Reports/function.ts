@@ -8,7 +8,7 @@ export const imgFunction = (reports: IReport[], id: number) => {
     return reports
       .map((el) => {
         if (el.good_id === id) {
-          return el.Good.img_url;
+          return el.Good?.img_url;
         }
       })
       .filter((el) => el !== undefined);
@@ -18,7 +18,7 @@ export const imgFunction = (reports: IReport[], id: number) => {
     return reports
       .map((el) => {
         if (el.good_id === id) {
-          return el.Good.name;
+          return el.Good?.name;
         }
       })
       .filter((el) => el !== undefined);
@@ -28,7 +28,7 @@ export const imgFunction = (reports: IReport[], id: number) => {
     return reports
       .map((el) => {
         if (el.good_id === id) {
-          return el.Good.price * quant;
+          return el.Good?.price * quant;
         }
       })
       .filter((el) => el !== undefined);

@@ -1,7 +1,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Goods', {
+    await queryInterface.createTable("Goods", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -29,35 +29,39 @@ module.exports = {
       seller_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Sellers',
-          key: 'id',
+          model: "Sellers",
+          key: "id",
         },
-        onDelete: 'set null',
+        onDelete: "set null",
       },
       subcategory_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'SubCategories',
-          key: 'id',
+          model: "SubCategories",
+          key: "id",
         },
-        onDelete: 'set null',
+        onDelete: "set null",
       },
       img_url: {
         type: Sequelize.STRING,
       },
+      archive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
+        defaultValue: Sequelize.fn("NOW"),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW'),
+        defaultValue: Sequelize.fn("NOW"),
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Goods');
+    await queryInterface.dropTable("Goods");
   },
 };

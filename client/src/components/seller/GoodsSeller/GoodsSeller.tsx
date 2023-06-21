@@ -10,7 +10,9 @@ import { getAllGood } from '../../../redux/thunks/goodThunks/gatAllGoods.thunk';
 export default function GoodsSeller() {
 
   const dispatch = useAppDispatch();
-  const goods = useAppSelector((state: RootState) => state.goodsSeller.goodsSeller);
+  const goodsAll = useAppSelector((state: RootState) => state.goodsSeller.goodsSeller);
+
+  const goods = goodsAll?.filter((el) => el.archive === false)
 
   useEffect(()=> {
     dispatch(getGoodsSeller())
@@ -20,7 +22,7 @@ export default function GoodsSeller() {
     dispatch(delGoodsSeller({goodsId}))
     dispatch(getAllGood())
   }
-
+ 
   return (
     <div className=' mr-28'>
       <div className=' flex justify-end mr-20'>

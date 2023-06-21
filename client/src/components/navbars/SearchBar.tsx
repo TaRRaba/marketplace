@@ -17,7 +17,9 @@ export const SearchBar = () => {
 
   const dispatch = useAppDispatch();
 
-  const allGoods = useAppSelector((state: RootState) => state.good.allgood)
+  const allGoodsAll = useAppSelector((state: RootState) => state.good.allgood)
+
+  const allGoods = allGoodsAll?.filter((el) => el.archive === false)
   
   const changeSearchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchWord(e.target.value)

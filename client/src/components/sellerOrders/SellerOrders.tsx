@@ -35,6 +35,8 @@ export const SellerOrders = () => {
     })();
     }, [])
 
+console.log("orders", orders);
+
     return (
         <>
       {orders.length > 0 ? (
@@ -65,21 +67,21 @@ export const SellerOrders = () => {
                         </p>
                         <hr className="mb-5" />
                         {order.map((good) => {
-                          total += good.Good.price * good.quantity;
+                          total += good.Good?.price * good.quantity;
                           return (
                             <div className='flex items-center mb-5'>
-                            <img src={`http://localhost:3001${good.Good.img_url}`} alt="" className="w-32 rounded-lg" />
+                            <img src={`http://localhost:3001${good?.Good?.img_url}`} alt="" className="w-32 rounded-lg" />
                             <div className='flex-col ml-10 item-center'>
-                                <Link to={`/goods/${good.Good.id}`}>
+                                <Link to={`/goods/${good.Good?.id}`}>
                               <p className="cursor-pointer hover:text-gray-900 line-clamp-3 mt-1 text-md text-gray-700">
-                                {good.Good.name}
+                                {good.Good?.name}
                                 {' '}
                               </p>
                               </Link>
                               <p className="mb-3 mt-3 text-xs text-gray-500">
                                 Цена:
                                 {' '}
-                                {good.Good.price}
+                                {good.Good?.price}
                                 {' '}
                                 ₽ ,
                                 {' '}

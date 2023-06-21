@@ -1,10 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+
 export const delGoodsSeller = createAsyncThunk('goods/delGoodsSeller',
-    async ({goodsId}: {goodsId:number}) => {
-        const response = await fetchGoods(goodsId);
-        return response;
-    }
+async ({goodsId}: {goodsId:number}) => {
+  const response = await fetchGoods(goodsId);
+  return response;
+}
 )
 
 const fetchGoods = async (goodsId:number) => {

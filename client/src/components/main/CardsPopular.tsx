@@ -10,11 +10,13 @@ import { Link } from 'react-router-dom';
 import { getFav } from '../../redux/thunks/favThunks/getFav.thunk';
 
 export const CardsPopular = () => {
-  const card = useAppSelector((state: RootState) => state.good.good)
+  const cardAll = useAppSelector((state: RootState) => state.good.good)
   const dispatch = useAppDispatch();
   const userIsActive = useAppSelector((state: RootState) => state.users.check)
   const favourites = useAppSelector((state: RootState) => state.favourites.favourites);
   const cart = useAppSelector((state: RootState) => state.cart.cart);
+
+  const card = cardAll?.filter((el) => el.archive === false)    
 
   function checkFav(id: number) {
     return favourites.some((el) => el.good_id === id);

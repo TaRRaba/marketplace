@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useAppSelector } from '../../redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
 import { RootState } from '../../redux/store/store';
 import { addToFav } from '../../redux/thunks/favThunks/addToFav.thunk';
 import { removeFromFav } from '../../redux/thunks/favThunks/removeFromFav.thunk';
-import { useDispatch } from 'react-redux';
+
 import { getFav } from '../../redux/thunks/favThunks/getFav.thunk';
 import { getCart } from '../../redux/thunks/cartThunks/getCart.thunk';
 import { addAmountCart } from '../../redux/thunks/cartThunks/addAmountCart.thunk';
@@ -36,7 +36,7 @@ export default function GoodsCard({GoodID}: {GoodID: number}) {
   const [inCart, setInCart] = useState(false);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(1)
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   
 
   useEffect(()=> {
