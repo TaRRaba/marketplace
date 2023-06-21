@@ -160,7 +160,7 @@ function addCart (id: number, count: number) {
           <div className=' grid grid-cols-2'>
             <div className='col-start-1 flex flex-col items-start'>
                 <p>Страна производитель:</p>
-                <p>Торговая марка:</p>
+                <p>Бренд:</p>
                 <p>Артикул:</p>
                 <p>Габариты:</p>
                 <p>Вес:</p>

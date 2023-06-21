@@ -116,7 +116,7 @@ export const Cart = () => {
                 }
                 <div className="flex mt-5 w-80 sm:mt-0">
                 <p className="text-left mt-5 text-xs text-gray-500">Страна: {Good.country}</p>
-                <p className="ml-5 text-left mt-5 text-xs text-gray-500">Производитель: {Good.specs.brand}</p>
+                <p className="ml-5 text-left mt-5 text-xs text-gray-500">Бренд: {Good.specs.brand}</p>
               </div>
               </div>
                     <div className="flex flex-col mt-0">
@@ -189,7 +189,7 @@ export const Cart = () => {
         </div>
       ) : (
         <section className="py-10 flex bg-gray-100">
-          <div className="text-2xl my-40 justify-center text-gray-700 m-auto">Ваша корзина пуста!</div>
+          <div className="text-2xl my-40 justify-center text-gray-700 m-auto">Ваша корзина пуста! 😢</div>
         </section>
       )}
         </>
