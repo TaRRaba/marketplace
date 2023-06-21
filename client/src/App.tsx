@@ -45,6 +45,7 @@ import { Maps } from './components/map/Maps'
 import { SellerOrders } from './components/sellerOrders/SellerOrders'
 import { RootState } from './redux/store/store'
 import SettingsUser from './components/user/SettingsUser/SettingsUser'
+import { MakeOrder } from './components/footer/MakeOrder'
 
 function App() {
   const category = useAppSelector((state: RootState) => state.good.category)
@@ -128,9 +129,9 @@ function App() {
           <Route path='orders' element={<Orders />}></Route>    
           <Route path='orders/:id' element={<DetailOrder />}></Route>   
       </Route>
+      <Route path="/infoSeller" element={<InfoSeller />}/>    
+      <Route path="/makeOrder" element={<MakeOrder/>}/>
       <Route path="/delivery_points" element={<Maps/>}/>
-      <Route path="/makeOrder" element={<Maps/>}/>
-      <Route path="/payment" element={<Maps/>}/>
       </Routes>
       </div>
       {/* <Stripe></Stripe> */}
