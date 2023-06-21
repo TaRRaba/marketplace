@@ -15,16 +15,17 @@ import { getMaps } from '../../redux/thunks/mapsThunks/getMapsThunks';
 
 export const Cart = () => {
     const userData = useAppSelector((state: RootState) => state.users.users)
-    const cart = useAppSelector((state: RootState) => state.cart.cart);
+    const cartAll = useAppSelector((state: RootState) => state.cart.cart);
     const address = useAppSelector((state: RootState) => state.maps.maps);
     const pickpointAddress = useAppSelector((state: RootState) => state.cart.pickpointAddress);
     const [stripePromise, setStripePromise] = useState(null);
     const [clientSecret, setClientSecret] = useState();
     const [billData, setBillData] = useState(false);
     const [deliveryState, setDeliveryState] = useState(false);
-
     const dispatch = useAppDispatch();
     
+    const cart = cartAll?.filter((el) => el.Good.archive === false) 
+
     useEffect(() => {
       dispatch(getMaps())
     },[])

@@ -9,6 +9,7 @@ export interface IGoodData {
     img_url: string;
     specs: ISpecs,
     createdAt: Date,
+    archive: boolean,
 }
 
 interface ISpecs {

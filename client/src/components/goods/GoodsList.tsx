@@ -520,7 +520,8 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
   <div id="Cart" className="visibility: visible bg-gray-100 py-10 min-h-96">
     <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
       <div id="amount" className="rounded-lg">
-        {goods && goods.map(({ id, name, img_url, specs, amount, country, price }) => (
+        {goods && goods.map(({ id, name, img_url, specs, amount, country, price, archive }) => (
+          archive === false &&
           <div key={id} id={String(id)} className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
             <img src={`http://localhost:3001${img_url}`} alt="" className="rounded-lg w-40" />
             <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">

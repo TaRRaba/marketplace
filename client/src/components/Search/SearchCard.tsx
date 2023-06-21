@@ -12,15 +12,17 @@ export const SearchCard = () => {
   const favourites = useAppSelector((state: RootState) => state.favourites.favourites);
   const userIsActive = useAppSelector((state: RootState) => state.users.check)
 
-  const findGood = useAppSelector((state: RootState) => state.good.findGood);
+  const findGoodAll = useAppSelector((state: RootState) => state.good.findGood);
   const cart = useAppSelector((state: RootState) => state.cart.cart);
+
+  const findGood = findGoodAll?.filter((el) => el.archive === false)
 
   function checkFav(id: number) {
     return favourites.some((el) => el.good_id === id);
-}
-function checkCart(id: number) {   
-  return cart.some((el) => el.good_id === id);
-}
+  }
+  function checkCart(id: number) {   
+    return cart.some((el) => el.good_id === id);
+  }
 
   return (
     <div className=''>
