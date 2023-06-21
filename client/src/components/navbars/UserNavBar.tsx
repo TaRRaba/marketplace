@@ -19,6 +19,7 @@ import { useEffect, useState } from 'react'
 import { getCart } from '../../redux/thunks/cartThunks/getCart.thunk'
 import { getFav } from '../../redux/thunks/favThunks/getFav.thunk'
 import { NewEntriesMenu } from './NewEntriesMenu'
+import { setLocation } from '../../redux/store/locationSlice'
 
 
 export const UserNavBar = () => {
@@ -32,6 +33,7 @@ export const UserNavBar = () => {
   const [favIcon, setFavIcon] = useState(false);
   const location = useLocation()
   const dispatch = useAppDispatch();
+  const loc = useAppSelector((state: RootState) => state.locs.locs)
 
   const favourites = favouritesAll?.filter((el) => el.Good.archive === false) 
   const cart = cartAll?.filter((el) => el.Good.archive === false)    
@@ -76,7 +78,6 @@ export const UserNavBar = () => {
   }
 
  //--Добавление локации города пользователя --------------------------------------
-const [loc, setLoc] = useState('')
 
 const locat = ymaps?.geolocation?.get({provider:'browser',mapStateAutoApply:true});
 
@@ -85,13 +86,14 @@ if(locat !== undefined) {
    function(result) {
       // Получение местоположения пользователя.
       const userAddress = (result?.geoObjects?.get(0).properties?.get('text'));
-     setLoc(userAddress)
+      dispatch(setLocation(userAddress))
    },
    function(err) {
      console.log('Ошибка: ' + err)
    }
  )
 }
+
 //-----------------------------------------------------------------------------
 
     

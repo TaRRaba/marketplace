@@ -85,7 +85,7 @@ export default function CheckoutForm({deliveryState}: IDeliveryState) {
         method: "POST",
         headers: {'Content-Type' : 'application/json'},
         credentials: 'include',
-        body: JSON.stringify({selectDeliveryAddress, deliveryState, pickpointAddress})
+        body: JSON.stringify({deliveryState, pickpointAddress})
       })
     const result = await response.json()
     SellersEmailing(result.sellers, result.orderID);

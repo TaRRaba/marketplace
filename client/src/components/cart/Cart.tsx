@@ -23,6 +23,7 @@ export const Cart = () => {
     const [billData, setBillData] = useState(false);
     const [deliveryState, setDeliveryState] = useState(false);
     const dispatch = useAppDispatch();
+    const loc = useAppSelector((state: RootState) => state.locs.locs)
     
     const cart = cartAll?.filter((el) => el.Good.archive === false) 
 
@@ -68,7 +69,7 @@ export const Cart = () => {
 
     const changeDeliveryState = () => {
       setDeliveryState(!deliveryState)
-      dispatch(setDeliveryAddress(''))
+      dispatch(setDeliveryAddress(loc))
     }
 
     const changeInputAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -152,7 +153,7 @@ export const Cart = () => {
                 {deliveryState ? 
                 <>
                 <p>Стоимость доставки 500 рублей</p>
-                <input onChange={changeInputAddress} name='text' placeholder='Укажите адрес доставки' className='w-full py-1.5 px-1 border-2 border-gray-500 rounded-lg text-start'></input>
+                <input defaultValue={loc} onChange={changeInputAddress} name='text' placeholder='Укажите адрес доставки' className='w-full py-1.5 px-1 border-2 border-gray-500 rounded-lg text-start'></input>
                 </> 
                 :       <div className="relative w-full mt-2 rounded-lg">
                   <p>Выберите пункт выдачи</p>
