@@ -31,7 +31,7 @@ export function MakeOrder() {
               <p className="text-lg ml-3 mt-3 mb-3 text-gray-700 font-small">5. Выберите способ оплаты и нажмите Оплатить заказ</p>
               <p className="text-lg ml-3 mt-3 mb-3 text-gray-700 font-small">6. Оплатите заказ.</p>
             </div>
-            <div className='h-5/6 m-10'>
+            <div className='h-5/6 m-10' >
             <img className='rounded-lg' src="/online_shopping.jpeg" alt="online shopping" />
             </div>
           </div>
