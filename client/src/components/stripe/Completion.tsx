@@ -36,7 +36,7 @@ export default function Completion() {
           <div className="w-full flex 2xl:w-full justify-evenly bg-white rounded-lg shadow-xl items-center">
             <div className="flex flex-col justify-center justify-items-center justify-self-center content-center self-center items-center p-8">
               <h4 className="text-3xl text-gray-800 font-medium">Платеж успешно обработан</h4>
-              <img className='w-5/6 rounded-lg' src="/payment.gif" alt="online shopping" />
+              <img className='w-4/6 rounded-lg' src="/payment.gif" alt="online shopping" />
               <p className="text-3xl ml-3 mb-1 text-gray-700 font-small">Спасибо!</p>
               <p className="flex text-lg ml-3  mb-1 text-gray-700 font-small">Мы свяжемся с вами в ближайшее время</p>
               <p className="text-lg ml-3 mb-1 text-gray-700 font-small">Номер вашего заказа # {numberOrder}</p>

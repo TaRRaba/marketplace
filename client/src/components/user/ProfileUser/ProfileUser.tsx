@@ -31,12 +31,10 @@ export default function ProfileUser() {
     <div className="grid grid-cols-3" >
         <div >
         <Sidebar aria-label="Default sidebar example">
-        <div className="flex justify-center">
-            <UserCircleIcon className="flex justify-center h-28 w-28 text-gray-300" aria-hidden="true" />
-        </div>
-            <p>
-            Name
-            </p>
+          <div className="h-1/3 flex justify-center">
+            <img className='rounded-full' src="/avatarUser.gif" alt="avatar" />
+          </div>
+          <p className='pb-6 text-center'>Name</p>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
           <Sidebar.Item

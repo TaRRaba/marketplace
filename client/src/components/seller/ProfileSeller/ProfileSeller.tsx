@@ -38,10 +38,10 @@ export default function ProfileSeller() {
 
     <div >
     <Sidebar aria-label="Default sidebar example">
-      <div className="flex justify-center">
-          <UserCircleIcon className="flex justify-center h-28 w-28 text-gray-300" aria-hidden="true" />
+      <div className="h-1/3 flex justify-center">
+        <img className='rounded-full' src="/avatarSeller.gif" alt="avatar" />
       </div>
-      <p className=' pb-9 text-center'>Name</p>
+      <p className='pb-6 text-center'>Name</p>
 
   <Sidebar.Items>
     <Sidebar.ItemGroup className=' pl-3'>
