@@ -87,6 +87,7 @@ cartApi.post('/payment', async (req, res) => {
   const { id } = req.session.user;
   const { deliveryState } = req.body;
   const { selectDeliveryAddress } = req.body;
+ 
   let pickpointAddress;
   if (req.body.pickpointAddress) {
     pickpointAddress = req.body?.pickpointAddress;

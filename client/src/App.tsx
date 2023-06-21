@@ -105,7 +105,6 @@ function App() {
       dispatch(getMaps())
     },[])
 
-  console.log('Проверка связи');
 
   return (
     <> 
