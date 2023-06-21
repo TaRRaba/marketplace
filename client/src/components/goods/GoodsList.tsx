@@ -57,7 +57,7 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
           },
           {
             id: 'brand',
-            name: 'Производитель',
+            name: 'Бренд',
             options: [],
           }
     ]);
@@ -536,7 +536,7 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
                 }
                 <div className="flex mt-5 w-80 sm:mt-0">
                 <p className="text-left mt-5 text-xs text-gray-500">Страна: {country}</p>
-                <p className="ml-5 text-left mt-5 text-xs text-gray-500">Производитель: {specs.brand}</p>
+                <p className="ml-5 text-left mt-5 text-xs text-gray-500">Бренд: {specs.brand}</p>
               </div>
               </div>
               <div className="flex flex-col justify-between">

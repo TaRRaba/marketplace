@@ -46,7 +46,7 @@ export const Favourites = () => {
                 }
                 <div className="flex mt-5 w-80 sm:mt-0">
                 <p className="text-left mt-5 text-xs text-gray-500">Страна: {Good.country}</p>
-                <p className="ml-5 text-left mt-5 text-xs text-gray-500">Производитель: {Good.specs.brand}</p>
+                <p className="ml-5 text-left mt-5 text-xs text-gray-500">Бренд: {Good.specs.brand}</p>
               </div>
               </div>
                     <div className="flex flex-col w-28 mt-0">
