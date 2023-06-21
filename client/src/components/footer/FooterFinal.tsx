@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export const FooterFinal = () => {
   return (
@@ -70,9 +71,15 @@ export const FooterFinal = () => {
         </div>
         <div className='flex flex-col items-center w-4/12 border-x-2 border-x-gray-200'>
           <div>Клиентам</div>
-          <a>Как оформить заказ</a>
-          <a href='/delivery_points' className="ml-3 text-gray-500 cursor-pointer hover:text-sky-600">Пункты выдачи</a>
-          <a>Оплата товара</a>
+          <Link to="/makeOrder">
+          <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Как оформить заказ</div>
+          </Link>
+          <Link to="/delivery_points">
+          <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Пункты выдачи</div>
+          </Link>
+          <Link to="/payment">
+          <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Оплата товара</div>
+          </Link>
         </div>
         <div className='text-center w-4/12'>
           <div>Контакты</div>
