@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../redux/store/hooks';
 import { RootState } from '../../redux/store/store';
 import { addToFav } from '../../redux/thunks/favThunks/addToFav.thunk';
@@ -8,6 +8,7 @@ import { removeFromFav } from '../../redux/thunks/favThunks/removeFromFav.thunk'
 import { getFav } from '../../redux/thunks/favThunks/getFav.thunk';
 import { getCart } from '../../redux/thunks/cartThunks/getCart.thunk';
 import { addAmountCart } from '../../redux/thunks/cartThunks/addAmountCart.thunk';
+import { NotFound } from '../NotFound/NotFound';
 
 interface ICard {
   id: number;
@@ -29,36 +30,43 @@ interface ISpecs {
 export default function GoodsCard({GoodID}: {GoodID: number}) {
 
 //  const { id } = useParams()
- const cart = useAppSelector((state: RootState) => state.cart.cart);
+//  const cart = useAppSelector((state: RootState) => state.cart.cart);
  const favourites = useAppSelector((state: RootState) => state.favourites.favourites);
  const user = useAppSelector((state: RootState) => state.users.check);
+ const category = useAppSelector((state: RootState) => state.good.category)
   const [card, setCard] = useState<ICard>({});
   const [inCart, setInCart] = useState(false);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(1)
+  const [archive, setArchive] = useState(false);
   const dispatch = useAppDispatch();
   
-
+  
   useEffect(()=> {
     (async function () {
-     const response = await fetch(`http://localhost:3001/api/card/subcategory/goods/${GoodID}`, {
+      const response = await fetch(`http://localhost:3001/api/card/subcategory/goods/${GoodID}`, {
         credentials: 'include'
       })
       const result = await response.json()
       setCard(result)
       setLoading(true);
+      setArchive(result.archive);
+      console.log(result.archive);
+      
     })()
     if (user) {
       dispatch(getFav());
       dispatch(getCart());
     }
   }, [])
+  
+  const categoryProduct = category?.filter((el) => el.SubCategories.some((e) => e.id === card.subcategory_id))[0];  
+  const subcategoryProduct = categoryProduct?.SubCategories.filter((el) => el.id === card.subcategory_id)[0];
 
-  // console.log('CARD', card);
 
-  function checkCart(id: number) {   
-    return cart.some((el) => el.good_id === id);
-}
+//   function checkCart(id: number) {   
+//     return cart.some((el) => el.good_id === id);
+// }
 
 function checkFav(id: number) {
     return favourites.some((el) => el.good_id === id);
@@ -76,8 +84,37 @@ function addCart (id: number, count: number) {
     setCount((pre) => pre <= 1 ? 1 : pre - 1)
   }
   
+  if (archive) {
+    return <NotFound/>
+  } else {
   return (
     <>
+        <nav className="flex bg-gray-100 text-gray-700 py-3 px-5" aria-label="Breadcrumb">
+        <ol className="inline-flex items-center space-x-1 md:space-x-3">
+          <li className="inline-flex items-center">
+            <Link to="/">
+            <div className="text-gray-500 hover:text-black text-sm flex font-medium items-center">
+              <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
+              <span className="text-gray-500 hover:text-black text-sm font-medium">Главная</span>
+            </div>
+            </Link>
+          </li>
+              <li>
+                <Link to={`/category/${categoryProduct?.name}`}>
+                <div className="flex items-center">
+                  <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg>
+                  <span className="text-gray-500 hover:text-black ml-1 md:ml-2 text-sm font-medium">{categoryProduct?.fullName}</span>
+                </div>
+                </Link>
+              </li>
+              <li aria-current="page">
+                <div className="flex items-center">
+                  <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg>
+                  <span className="text-gray-400 ml-1 md:ml-2 text-sm font-medium">{subcategoryProduct?.fullName}</span>
+                </div>
+              </li>
+        </ol>
+      </nav>
     {loading ?
     <section className="py-6 sm:py-6"> 
   <div className="container mx-auto px-4">
@@ -160,7 +197,7 @@ function addCart (id: number, count: number) {
           <div className=' grid grid-cols-2'>
             <div className='col-start-1 flex flex-col items-start'>
                 <p>Страна производитель:</p>
-                <p>Бренд:</p>
+                <p>Торговая марка:</p>
                 <p>Артикул:</p>
                 <p>Габариты:</p>
                 <p>Вес:</p>
@@ -185,4 +222,5 @@ function addCart (id: number, count: number) {
  : null }
 </>
   )
+  }
 }

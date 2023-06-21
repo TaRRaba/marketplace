@@ -72,6 +72,7 @@ export default function ProfileUser() {
           </Sidebar.Item>
           </Link>
           <Sidebar.Item
+            className="cursor-pointer"
             onClick={signOut}
             icon={HiArrowSmRight}>
             <p>

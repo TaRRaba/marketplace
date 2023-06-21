@@ -2,8 +2,10 @@ import { Fragment, useRef, useState, useEffect} from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
 import { Link, useParams } from 'react-router-dom'
-import { useAppSelector } from '../../../redux/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { RootState } from '../../../redux/store/store';
+import { getCart } from '../../../redux/thunks/cartThunks/getCart.thunk';
+import { getFav } from '../../../redux/thunks/favThunks/getFav.thunk';
 
 interface IOrder {
   PickPoint: {},
@@ -27,6 +29,7 @@ export function DetailOrder() {
   const [orderInfo, setOrderInfo] = useState<IOrderInfo>({detailOrder: [], order: {}})
   const [orderStatus, setOrderStatus] = useState(true);
   const [orderDelivery, setOrderDelivery] = useState(false);
+  const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
 
@@ -83,6 +86,13 @@ export function DetailOrder() {
       setOrderDelivery(result.order.delivery);
     })()
   }, [])
+
+  useEffect(() => {
+    if (user.id) {
+      dispatch(getCart())
+      dispatch(getFav())
+  }
+  }, [user])
   
 
   return (

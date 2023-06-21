@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { useNavigate } from 'react-router-dom';
-import { changeModallogSeller, changeModalregSeller, checkSeller, setSeller } from '../../../redux/store/sellerSlice';
+import { changeModallogSeller, changeModalregSeller, checkSeller, deleteSeller, resetCheckSeller, setSeller } from '../../../redux/store/sellerSlice';
 import { RootState } from '../../../redux/store/store';
 import { Button, Label, Modal, TextInput } from 'flowbite-react';
 import { HiMail, HiOutlineKey } from 'react-icons/hi';
+import { deleteUser, resetCheckUser } from '../../../redux/store/userSlice';
 
 export default function LoginSeller() {
   const dispatch = useAppDispatch();
@@ -27,6 +28,19 @@ export default function LoginSeller() {
       dispatch(changeModalregSeller('form-elements'))
     }
 
+    const signOut = () => {
+      fetch('http://localhost:3001/api/auth/logout', {
+        credentials: 'include',
+      })
+      .then((res) => res.json())
+   
+      .catch((error) => console.log(error))
+      dispatch(deleteUser({}))
+      dispatch(deleteSeller({}))
+      dispatch(resetCheckUser(false))
+      dispatch(resetCheckSeller(false))
+    }
+
 const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
   const data = new FormData(event.currentTarget)
@@ -35,6 +49,7 @@ const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
     password: data.get('password')
   }
   try {
+    await signOut()
     const response = await fetch('http://localhost:3001/api/auth/login/seller', {
       method: "POST",
       headers: {'Content-Type' : 'application/json'},

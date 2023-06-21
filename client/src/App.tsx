@@ -119,7 +119,7 @@ function App() {
       {/* <Route path="/Bannerpromotion" element={<BannerPromotion />}/> */}
       {/* <Route path="/profile" element={<ProfileUser />}/> */}
       {category && category.map((el) => (
-        <Route key={`cat_${el.id}`} path={`/${el.name}`} element={<GoodsList CatId={el.id} />}/>  
+        <Route key={`cat_${el.id}`} path={`/category/${el.name}`} element={<GoodsList CatId={el.id} />}/>  
       ))}     
       {good && good.map((el) => (
         <Route key={`good_${el.id}`} path={`/goods/${el.name}`} element={<GoodsCard GoodID={el.id} />}/>  
@@ -148,8 +148,6 @@ function App() {
       <Route path="*" element={<NotFound/>}/>
       </Routes>
 
-
-      {/* <Route path="/payment" element={<HowToPay/>}/> */}
 
       </div>
       {/* <Stripe></Stripe> */}

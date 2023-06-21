@@ -12,6 +12,7 @@ import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon } from '@heroicons/react/20/solid'
 import { IGoodData } from '../../types/cart/cartTypes';
+import { Link } from 'react-router-dom';
 
 interface ISubCat {
     name: string;
@@ -220,7 +221,7 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
                         setInitGoods(result.data);
                         setSubCat(result.subCat);
                         setCatName(result.catName);
-                        getMaxPrice(result.data)
+                        getMaxPrice(result.data);
                     }
                   } catch (error) {
                       console.log(error);
@@ -526,7 +527,9 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
             <img src={`http://localhost:3001${img_url}`} alt="" className="rounded-lg w-40" />
             <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
               <div className="mt-5 w-80 sm:mt-0">
-                <a href={`/goods/${name}`}><h2 className="line-clamp-3 text-left text-lg font-bold text-gray-900 hover:text-gray-500">{name}</h2></a>
+                <Link to={`/goods/${name}`}>
+                <h2 className="line-clamp-3 text-left text-lg font-bold text-gray-900 hover:text-gray-500">{name}</h2>
+                </Link>
                 {amount === 0 ? 
                 <p className="text-left mt-3 text-md text-red-600">Нет в наличии</p>
                 : amount > 10 ?

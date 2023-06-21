@@ -22,7 +22,7 @@ export default function InlineDropdown() {
       placement="bottom"
     >
       {category && category.map((el) =>(
-            <Link key={el.id} to={`/${el.name}`}>
+            <Link key={el.id} to={`/category/${el.name}`}>
             <Dropdown.Item id={el.id}>
               {el.fullName}
             </Dropdown.Item>

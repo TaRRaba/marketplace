@@ -8,6 +8,8 @@ import { delUser } from '../../../redux/thunks/userThunks/delUser.thunk'
 import { useNavigate } from 'react-router-dom'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/solid'
+import { getCart } from '../../../redux/thunks/cartThunks/getCart.thunk'
+import { getFav } from '../../../redux/thunks/favThunks/getFav.thunk'
 
 
 export default function SettingsUser() {
@@ -27,6 +29,13 @@ export default function SettingsUser() {
       setInputValueUser({ name: userData.name, email: userData.email });
     }
   }, [userData]);
+
+  useEffect(() => {
+    if (userData.id) {
+      dispatch(getCart())
+      dispatch(getFav())
+  }
+  }, [userData])
   
   const editUserProfile = () => {
     setUserEditProfile(true)
