@@ -129,6 +129,8 @@ function App() {
           <Route path='orders/:id' element={<DetailOrder />}></Route>   
       </Route>
       <Route path="/delivery_points" element={<Maps/>}/>
+      <Route path="/makeOrder" element={<Maps/>}/>
+      <Route path="/payment" element={<Maps/>}/>
       </Routes>
       </div>
       {/* <Stripe></Stripe> */}
