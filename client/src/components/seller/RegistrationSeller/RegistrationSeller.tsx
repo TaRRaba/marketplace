@@ -32,7 +32,7 @@ export default function RegistrationSeller() {
  
     .catch((error) => console.log(error))
     dispatch(deleteUser({}))
-    dispatch(deleteSeller({}))
+    // dispatch(deleteSeller({}))
     dispatch(resetCheckUser(false))
     dispatch(resetCheckSeller(false))
   }
@@ -58,9 +58,9 @@ export default function RegistrationSeller() {
         Body: `${name}, благодарим Вас за регистрацию! Рады, что Вы решили стать нашим партнером, желаем высоких продаж и развития!`,
       }).then();
     }
-    signOut()
-
+    
     try {
+     await signOut()
       const response: Response = await fetch('http://localhost:3001/api/auth/registration/seller', {
         method: 'POST',
         headers: {'Content-Type' : 'application/json'},
