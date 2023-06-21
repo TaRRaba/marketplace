@@ -25,14 +25,14 @@ export function MakeOrder() {
             <div className="flex-col p-8">
               <h4 className="text-3xl text-gray-900 font-medium">Как сделать заказ</h4>
               <p className="text-lg ml-3 mt-6 mb-3 text-gray-700 font-small">1. Выберите товары и добавьте их в корзину.</p>
-              <p className="text-lg ml-3 mt-3 mb-3 text-gray-700 font-small">2. Перейдите в раздел Корзина.</p>
+              <p className="flex text-lg ml-3 mt-3 mb-3 text-gray-700 font-small">2. Перейдите в раздел Корзина.</p>
               <p className="text-lg ml-3 mt-3 mb-3 text-gray-700 font-small">3. Выберите способ доставки и укажите адрес.</p>
               <p className="text-lg ml-3 mt-3 mb-3 text-gray-700 font-small">4. Нажмите Перейти к оплате</p>
               <p className="text-lg ml-3 mt-3 mb-3 text-gray-700 font-small">5. Выберите способ оплаты и нажмите Оплатить заказ</p>
               <p className="text-lg ml-3 mt-3 mb-3 text-gray-700 font-small">6. Оплатите заказ.</p>
             </div>
             <div className='h-5/6 m-10'>
-            <img className='rounded-lg' src="/public/online_shopping.jpeg" alt="online shopping" />
+            <img className='rounded-lg' src="/online_shopping.jpeg" alt="online shopping" />
             </div>
           </div>
         </div>
