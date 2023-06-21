@@ -95,7 +95,7 @@ if(locat !== undefined) {
     
   return (    
    
-    <nav className='grid px-5 sticky top-0 bg-gray-100 z-10'>
+    <nav className=' mb-5 grid px-5 sticky top-0 bg-gray-100 z-10'>
           <LoginUser />
     <RegistrationUser />
       <LoginSeller/>

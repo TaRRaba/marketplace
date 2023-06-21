@@ -8,9 +8,9 @@ export function Maps() {
   const dispatch = useAppDispatch();
   const address = useAppSelector((state: RootState) => state.maps.maps);
 
-  useEffect(() => {
-    dispatch(getMaps())
-  },[])
+  // useEffect(() => {
+  //   dispatch(getMaps())
+  // },[])
 
   useEffect(() => {
     ymaps.ready(init) 
