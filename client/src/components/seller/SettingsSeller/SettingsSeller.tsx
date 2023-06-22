@@ -77,9 +77,9 @@ export default function SettingsSeller() {
   
 
   return (
-    <div className='grid gap-8'>
+    <div className='grid gap-8 mr-10'>
 
-<div className="h-3/5 bg-gray-100 p-8">
+<div className="h-3/5 bg-neutral-50 p-8">
             <div className="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
               <div className="w-full flex flex-col 2xl:w-1/3">
                 <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
@@ -99,6 +99,17 @@ export default function SettingsSeller() {
                       <input onChange={changeSellerData} id="userNameInp" name="email" type="text" autoComplete="text" className="w-72 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" defaultValue={sellerData.email}/>
                       :
                       <span id="userName" className="text-gray-700">{sellerData.email}</span>
+                      }
+                      <h3 id="emptyEmail" className="ml-5 text-center text-md font-bold leading-9 tracking-tight text-red-600" style={{ display: 'none' }}>Это поле обязательно!</h3>
+                      <h3 id="correctEmail" className="ml-5 text-center text-md font-bold leading-9 tracking-tight text-red-600" style={{ display: 'none' }}>Некорректный e-mail!</h3>
+                      <h3 id="emailError" className="ml-5 text-center text-md font-bold leading-9 tracking-tight text-red-600" style={{ display: 'none' }}>Такой e-mail уже зарегистрирован!</h3>
+                    </li>
+                    <li className="flex border-b py-2">
+                      <span className="font-bold flex items-center w-52">ИНН:</span>
+                      {selleEditProfile ? 
+                      <input onChange={changeSellerData} id="userNameInp" name="INN" type="text" autoComplete="text" className="w-72 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" defaultValue={sellerData.INN}/>
+                      :
+                      <span id="userName" className="text-gray-700">{sellerData.INN}</span>
                       }
                       <h3 id="emptyEmail" className="ml-5 text-center text-md font-bold leading-9 tracking-tight text-red-600" style={{ display: 'none' }}>Это поле обязательно!</h3>
                       <h3 id="correctEmail" className="ml-5 text-center text-md font-bold leading-9 tracking-tight text-red-600" style={{ display: 'none' }}>Некорректный e-mail!</h3>
@@ -137,77 +148,6 @@ export default function SettingsSeller() {
           </div>
 
 
-      {/* {selleEditProfile ? 
-      <>
-        <div className='flex items-center'>
-        <h1>Имя: </h1>
-        <input onChange={changeSellerData}  type='text' name="name" className='ml-2  border-2 border-gray-500 rounded-lg w-1/4 text-center' defaultValue={sellerData.name}/>
-        </div>
-        <div className='flex items-center'>
-        <h2>Email: </h2>
-        <input onChange={changeSellerData}  type='text' name="email" className='ml-2  border-2 border-gray-500 rounded-lg w-1/4 text-center' defaultValue={sellerData.email}/>
-        </div>
-        <div className='flex items-center'>
-        <h2>ИНН: </h2>
-        <input onChange={changeSellerData} type='text' name="INN" className='ml-2  border-2 border-gray-500 rounded-lg w-1/4 text-center' defaultValue={sellerData.INN}/>
-        </div>
-        <div className='flex justify-center'>
-        <button
-            onClick={saveSellerProfile}
-            type="button"
-            className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-            Сохранить изменения
-        </button>
-        </div>
-      </> : 
-      <>
-         <h1>Имя: {sellerData.name}</h1>
-        <h2>Email: {sellerData.email}</h2>
-        <h2>ИНН: {sellerData.INN}</h2>
-        <div className='flex justify-center'>
-        <button
-            onClick={editSellerProfile}
-            type="button"
-            className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-            Изменить
-        </button>
-        </div>
-      </>}
-        {sellerChangePassword ? 
-        <>
-        <div className='flex items-center'>
-         <h2>Пароль: </h2>
-         <input onChange={changeSellerPassword}  type='password' name="password" className='ml-2  border-2 border-gray-500 rounded-lg w-1/4 text-center' required/>
-         </div>
-        <div className='flex justify-center'>
-        <button
-            onClick={saveSellerPassword}
-            type="button"
-            className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-            Сохранить новый пароль
-        </button>
-        </div>
-        </> : 
-        <>
-        <h2>Пароль: •••••••••••</h2>
-        <div className='flex justify-center'>
-        <button
-            onClick={editSellerPassword}
-            type="button"
-            className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-            Изменить
-        </button>
-        </div>
-        </>}
- 
-        <div className='flex justify-center'>
-        <button
-            onClick={()=> setOpen(true)}
-            type="button"
-            className="rounded-md bg-red-400 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500">
-            Удалить профиль
-        </button>
-        </div> */}
         <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
         <Transition.Child

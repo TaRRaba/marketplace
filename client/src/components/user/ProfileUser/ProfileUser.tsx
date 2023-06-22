@@ -26,7 +26,7 @@ export default function ProfileUser() {
   }
 
   return (
-    <div className="grid grid-cols-3" >
+    <div className="grid grid-cols-5 mt-12" >
         <div >
         <Sidebar aria-label="Default sidebar example">
           <div className="h-40 flex justify-center">
@@ -78,7 +78,7 @@ export default function ProfileUser() {
     </Sidebar>
     <Link to="/profile/orders/:id" />
         </div>
-    <div className='col-span-2'>
+    <div className='col-span-4'>
         <Outlet />
     </div>
     </div>

@@ -86,8 +86,12 @@ export const Cart = () => {
     return (
         <>
       {cart.length > 0 ? (
-        <div id="Cart" className="visibility: visible bg-gray-100 mb-44 min-h-96 pt-10">
+        <div id="Cart" className="visibility: visible bg-neutral-50 mb-44 min-h-96 pt-10">
+          {billData ? 
+          <h1 className="mb-10 text-center text-2xl font-bold">Оплата</h1>
+          :
           <h1 className="mb-10 text-center text-2xl font-bold">Корзина</h1>
+          }
           <div className="mx-auto max-w-7xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
 
             {
@@ -180,7 +184,7 @@ export const Cart = () => {
           </div>
         </div>
       ) : (
-        <section className="py-10 flex bg-gray-100">
+        <section className="py-10 flex bg-neutral-50">
           <div className="text-2xl my-40 justify-center text-gray-700 m-auto">Ваша корзина пуста! 😢</div>
         </section>
       )}

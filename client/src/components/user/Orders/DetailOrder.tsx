@@ -97,12 +97,13 @@ export function DetailOrder() {
 
   return (
     <>
+    <div className='flex justify-center'>
                   <div className="rounded-lg md:w-2/3">
                   <div className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
                     <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                       <div className="mt-5 w-8/12 sm:mt-0">
                         <div className='flex justify-between'>
-                        <h2 className="mb-2 text-lg mb-0 font-bold text-gray-900">
+                        <h2 className="mb-2 text-lg font-bold text-gray-900">
                           Заказ №
                           {' '}
                           {orderInfo?.order?.id}
@@ -250,7 +251,7 @@ export function DetailOrder() {
         </div>
       </Dialog>
     </Transition.Root>
-
+    </div>
      </>
   )
 }
