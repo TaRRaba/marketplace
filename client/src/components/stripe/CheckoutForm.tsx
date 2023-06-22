@@ -119,7 +119,7 @@ export default function CheckoutForm({deliveryState}: IDeliveryState) {
       <PaymentElement id="payment-element" />
       <button className="w-full" disabled={isProcessing || !stripe || !elements} id="submit">
         <div id="button-text">
-          {isProcessing ? "Платеж в обработке... " : <button id="orderBtn" data-userid='{user.id}' type="button" className="mt-6 w-full rounded-md py-1.5 font-medium text-blue-50 bg-[#4520aa] hover:bg-[#4520aa]/80">Оплатить заказ</button>}
+          {isProcessing ? <p className="mt-4">Платеж в обработке...</p> : <button id="orderBtn" data-userid='{user.id}' type="button" className="mt-6 w-full rounded-md py-1.5 font-medium text-blue-50 bg-[#4520aa] hover:bg-[#4520aa]/80">Оплатить заказ</button>}
         </div>
       </button>
       {/* Show any error or success messages */}

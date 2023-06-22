@@ -14,14 +14,14 @@ export function MakeOrder() {
           <li aria-current="page">
             <div className="flex items-center">
               <svg className="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg>
-              <span className="text-gray-400 ml-1 md:ml-2 text-sm font-medium">Оплата</span>
+              <span className="text-gray-400 ml-1 md:ml-2 text-sm font-medium">Как сделать заказ</span>
             </div>
           </li>
         </ol>
       </nav>
       <div className="bg-gray-100 p-8">
         <div className="flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
-          <div className="w-full flex 2xl:w-full justify-evenly bg-white rounded-lg shadow-xl items-center">
+          <div className="w-full flex 2xl:w-full justify-evenly bg-white rounded-xl shadow-xl items-center">
             <div className="flex-col p-8">
               <h4 className="text-3xl text-gray-900 font-medium">Как сделать заказ</h4>
               <p className="text-lg ml-3 mt-6 mb-3 text-gray-700 font-small">1. Выберите товары и добавьте их в корзину.</p>
