@@ -21,7 +21,7 @@ export const SellerProtection: FC<IProtectProps> = ({ children }) => {
         const result = await response.json()
         if(result){
           dispatch(checkSeller(true))     
-          dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}));
+          dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN, createdAt: result.createdAt}));
           setLoading(true);     
         }
       } catch (error) {

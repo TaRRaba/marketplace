@@ -1,8 +1,5 @@
-import React from 'react'
-import { UserCircleIcon } from '@heroicons/react/24/solid'
 import { Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiUser, HiShoppingBag, HiInbox } from 'react-icons/hi';
-import Settings from '../SettingsUser/SettingsUser';
 import { useAppDispatch, useAppSelector } from '../../../redux/store/hooks';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { deleteUser, resetCheckUser } from '../../../redux/store/userSlice';
@@ -11,6 +8,7 @@ import { RootState } from '../../../redux/store/store';
 export default function ProfileUser() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
+  const user = useAppSelector((state: RootState) => state.users.users)
   const favouritesAll = useAppSelector((state: RootState) => state.favourites.favourites);
 
   const favourites = favouritesAll?.filter((el) => el.Good.archive === false)    
@@ -20,7 +18,7 @@ export default function ProfileUser() {
       credentials: 'include',
     })
     .then((res) => res.json())
-    // .then((data) => console.log(data))
+    
     .catch((error) => console.log(error))
     dispatch(deleteUser({}))
     dispatch(resetCheckUser(false))
@@ -31,16 +29,14 @@ export default function ProfileUser() {
     <div className="grid grid-cols-3" >
         <div >
         <Sidebar aria-label="Default sidebar example">
-          <div className="h-1/3 flex justify-center">
+          <div className="h-40 flex justify-center">
             <img className='rounded-full' src="/avatarUser.gif" alt="avatar" />
           </div>
-          <p className='pb-6 text-center'>Name</p>
+          <p className='pb-2 pt-3 text-center'>{user.name}</p>
       <Sidebar.Items>
         <Sidebar.ItemGroup>
-          <Sidebar.Item
-          >
+          <Sidebar.Item/>
 
-          </Sidebar.Item>
           <Link to="/profile/settings">
           <Sidebar.Item
           icon={HiUser}

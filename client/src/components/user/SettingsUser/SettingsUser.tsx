@@ -85,7 +85,66 @@ export default function SettingsUser() {
   
   return (
     <div className='grid gap-8'>
-      {userEditProfile ? 
+
+<div className="h-3/5 bg-gray-100 p-8">
+            <div className="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
+              <div className="w-full flex flex-col 2xl:w-1/3">
+                <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
+                  <h4 className="text-xl mb-10 text-gray-900 font-bold">Учетная запись</h4>
+                  <ul className="mt-2 mb-5 text-gray-700">
+                    <li className="flex border-b py-2">
+                      <span className="font-bold flex items-center w-52">Имя:</span>
+                      {userEditProfile ? 
+                      <input onChange={changeUserData} id="userNameInp" name="name" type="text" autoComplete="text" className="w-72 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" defaultValue={userData.name}/>
+                      :
+                      <span id="userName" className="text-gray-700">{userData.name}</span>
+                    }
+                    </li>
+                    <li className="flex border-b py-2">
+                      <span className="font-bold flex items-center w-52">E-mail:</span>
+                      {userEditProfile ? 
+                      <input onChange={changeUserData} id="userNameInp" name="email" type="text" autoComplete="text" className="w-72 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" defaultValue={userData.email}/>
+                      :
+                      <span id="userName" className="text-gray-700">{userData.email}</span>
+                      }
+                      <h3 id="emptyEmail" className="ml-5 text-center text-md font-bold leading-9 tracking-tight text-red-600" style={{ display: 'none' }}>Это поле обязательно!</h3>
+                      <h3 id="correctEmail" className="ml-5 text-center text-md font-bold leading-9 tracking-tight text-red-600" style={{ display: 'none' }}>Некорректный e-mail!</h3>
+                      <h3 id="emailError" className="ml-5 text-center text-md font-bold leading-9 tracking-tight text-red-600" style={{ display: 'none' }}>Такой e-mail уже зарегистрирован!</h3>
+                    </li>
+                    <li className="flex border-b py-2">
+                      <span className="font-bold flex items-center w-52">Дата регистрации:</span>
+                      <span className="text-gray-700">{new Date(userData.createdAt).toLocaleDateString('RU-ru')}</span>
+                    </li>
+                    <li className="flex border-b py-2">
+                      <span className="font-bold flex items-center w-52">Пароль:</span>
+                      {userChangePassword ?
+                      <input onChange={changeUserPassword} id="passInp" name="password" type="password" autoComplete="text" className="w-72 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" required/>
+                      :
+                      <span id="pass" className="text-gray-700 flex items-center">•••••••••••</span>
+                      }
+                      {userChangePassword ?
+                      <button id="savePass" onClick={saveUserPassword} type="submit" className="text-sm cursor-pointer rounded-lg bg-green-700 ml-5 px-4 py-1.5 text-white hover:bg-green-800">Сохранить</button>
+                      :
+                      <button id="changePass" onClick={editUserPassword} type="submit" className="text-sm cursor-pointer rounded-lg bg-teal-500 ml-5 px-4 py-1.5 text-white hover:bg-teal-600">Изменить</button>
+                      }
+                      <h3 id="emptyPass" className="ml-5 text-center text-md font-bold leading-9 tracking-tight text-red-600" style={{ display: 'none' }}>Это поле обязательно!</h3>
+                    </li>
+                  </ul>
+                  <div className="flex gap-4">
+                    {userEditProfile ? 
+                    <button id="saveBtn" onClick={saveUserProfile} type="submit" className="text-sm cursor-pointer rounded-lg bg-green-700 px-4 py-1.5 text-white hover:bg-green-800">Сохранить изменения</button>
+                    :
+                    <button id="changeBtn" onClick={editUserProfile} type="submit" className="text-sm cursor-pointer rounded-lg bg-teal-500 px-4 py-1.5 text-white hover:bg-teal-600">Внести изменения</button>
+                    }
+                    <button id="deleteBtn" onClick={() => setOpen(true)} type="submit" className="text-sm cursor-pointer rounded-lg bg-red-600 px-4 py-1.5 text-white hover:bg-red-700">Удалить учетную запись</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+      {/* {userEditProfile ? 
       <>
             <div className='flex items-center'>
        <h1>Имя: </h1>
@@ -155,7 +214,7 @@ export default function SettingsUser() {
             className="rounded-md bg-red-400 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500">
             Удалить профиль
         </button>
-        </div>
+        </div> */}
         <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
         <Transition.Child

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const FooterFinal = () => {
   return (
-    <div>
+    <div className='mb-4'>
 
       <div className='flex'>
         <div className='text-center w-4/12'>
@@ -68,14 +68,14 @@ export const FooterFinal = () => {
                   </a>
                 </span>
           
-        </div>
+        </div >
         <div className='flex flex-col items-center w-4/12 border-x-2 border-x-gray-200'>
           <div>Клиентам</div>
-          <Link to="/payment">
-          <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Способы оплаты</div>
-          </Link>
           <Link to="/makeOrder">
           <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Как сделать заказ</div>
+          </Link>
+          <Link to="/payment">
+          <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Способы оплаты</div>
           </Link>
           <Link to="/delivery_points">
           <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Пункты выдачи</div>

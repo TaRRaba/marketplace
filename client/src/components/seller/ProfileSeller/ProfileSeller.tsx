@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { UserCircleIcon } from '@heroicons/react/24/solid'
+import { useEffect } from 'react'
 import { Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiTable, HiShoppingBag, HiUser, HiChartPie } from 'react-icons/hi';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
@@ -12,6 +11,7 @@ import { getGoodsSeller } from '../../../redux/thunks/goodsSellerThunks/getGoods
 export default function ProfileSeller() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
+  const seller = useAppSelector((state: RootState) => state.sellers.seller)
   const goodsAll = useAppSelector((state: RootState) => state.goodsSeller.goodsSeller);
 
   const goods = goodsAll?.filter((el) => el.archive === false)
@@ -20,13 +20,12 @@ export default function ProfileSeller() {
     dispatch(getGoodsSeller())
   }, [])
 
-  
   const signOut = () => {
     fetch('http://localhost:3001/api/auth/logout', {
       credentials: 'include',
     })
     .then((res) => res.json())
-    // .then((data) => console.log(data))
+
     .catch((error) => console.log(error))
     dispatch(deleteSeller({}))
     dispatch(resetCheckSeller(false))
@@ -38,14 +37,15 @@ export default function ProfileSeller() {
 
     <div >
     <Sidebar aria-label="Default sidebar example">
-      <div className="h-1/3 flex justify-center">
+      <div className="h-40 flex justify-center">
         <img className='rounded-full' src="/avatarSeller.gif" alt="avatar" />
       </div>
-      <p className='pb-6 text-center'>Name</p>
+      <p className='pb-2 pt-3 text-center'>{seller.name}</p>
 
   <Sidebar.Items>
     <Sidebar.ItemGroup className=' pl-3'>
-
+    <Sidebar.Item/>
+    
       <Link to="/profileSeller/settings">
       <Sidebar.Item
       icon={HiUser}>
