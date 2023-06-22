@@ -31,7 +31,7 @@ export default function ProfileUser() {
     <div className="grid grid-cols-3" >
         <div >
         <Sidebar aria-label="Default sidebar example">
-          <div className="h-1/3 flex justify-center">
+          <div className="h-40 flex justify-center">
             <img className='rounded-full' src="/avatarUser.gif" alt="avatar" />
           </div>
           <p className='pb-6 text-center'>Name</p>
