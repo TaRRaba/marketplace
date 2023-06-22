@@ -4,7 +4,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useAppDispatch, useAppSelector } from '../../redux/store/hooks'
 import { RootState } from '../../redux/store/store'
 
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { deleteUser, resetCheckUser } from '../../redux/store/userSlice'
 import { deleteSeller, resetCheckSeller } from '../../redux/store/sellerSlice'
 import classNames from 'classnames'
@@ -12,9 +12,6 @@ import classNames from 'classnames'
 export const NewEntriesMenu = () => {
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
-
-
 
   const userIsActive = useAppSelector((state: RootState) => state.users.check)
   const sellerIsActive = useAppSelector((state: RootState) => state.sellers.check)
@@ -26,15 +23,13 @@ export const NewEntriesMenu = () => {
       credentials: 'include',
     })
     .then((res) => res.json())
- 
+
     .catch((error) => console.log(error))
     dispatch(deleteUser({}))
     dispatch(deleteSeller({}))
     dispatch(resetCheckUser(false))
     dispatch(resetCheckSeller(false))
-    // navigate('/')
   }
-
 
 
   return (
@@ -52,7 +47,6 @@ export const NewEntriesMenu = () => {
       </Menu.Button>
         :
         <>
-        
         </>
         }
     </div>
@@ -134,7 +128,6 @@ export const NewEntriesMenu = () => {
         </>
     :
     <>
-    
     </>
     }
 
