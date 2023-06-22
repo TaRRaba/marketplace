@@ -21,7 +21,7 @@ export const UserProtection: FC<IProtectProps> = ({ children }) => {
         const result = await response.json()
         if (result){
           dispatch(checkUser(true))
-          dispatch(setUser({id: result.id, name: result.name, email: result.email}))
+          dispatch(setUser({id: result.id, name: result.name, email: result.email, createdAt: result.createdAt}))
           setLoading(true); 
         }
     

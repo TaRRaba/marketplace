@@ -70,7 +70,7 @@ function App() {
         if (result){
 
           dispatch(checkUser(true))
-          dispatch(setUser({id: result.id, name: result.name, email: result.email}))     
+          dispatch(setUser({id: result.id, name: result.name, email: result.email, createdAt: result.createdAt}))     
         }
     
       } catch (error) {
@@ -88,7 +88,7 @@ function App() {
           const result = await response.json()
           if(result){
             dispatch(checkSeller(true))     
-            dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN}))    
+            dispatch(setSeller({id: result.id, name: result.name, email: result.email, INN: result.INN, createdAt: result.createdAt}))    
           }
         } catch (error) {
           console.log(error);
