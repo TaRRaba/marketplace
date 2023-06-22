@@ -40,8 +40,8 @@ function checkCart(id: number) {
   return (
   
     <div className='mt-10'>
-     <div className="font-bold text-2xl  text-center bg-gray-100">Лидеры продаж</div>
-    <section className="py-10 bg-gray-100">
+     <div className="font-bold text-2xl  text-center">Лидеры продаж</div>
+    <section className="py-10 ">
     <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {card && card.map(({ id, name, price, amount, img_url }) => (
         <article key={id} id={id} className="grid grid-cols-1 article content-between rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
