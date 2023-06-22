@@ -56,11 +56,11 @@ export function EditGoods() {
     }    
 
   return (
-    <section className="pb-10 flex bg-gray-100 w-full">
+    <section className="pb-10 flex bg-neutral-50 w-full">
 
     <div >
 
-  <form onSubmit={handSubmit} className="relative border border-gray-100 space-y-3 max-w-screen-lg mx-auto rounded-md bg-white p-6 shadow-xl">
+  <form onSubmit={handSubmit} className="relative border border-neutral-50 space-y-3 max-w-screen-lg mx-auto rounded-md bg-white p-6 shadow-xl">
   <h1 className="mb-6 text-xl font-semibold lg:text-2xl text-center">Изменить товар</h1>
   
   <p className=' text-red-700 text-xs'> Важно! Необходимо заполнить все поля!</p>

@@ -249,7 +249,7 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
 
 
     return (
-        <div className="bg-white">
+        <div className="bg-neutral-50">
         <div>
           {/* Mobile filter dialog */}
           <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -307,7 +307,7 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
                           {({ open }) => (
                             <>
                               <h3 className="-mx-2 -my-3 flow-root">
-                                <Disclosure.Button className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
+                                <Disclosure.Button className="flex w-full items-center justify-between bg-neutral-50 px-2 py-3 text-gray-400 hover:text-gray-500">
                                   <span className="font-medium text-gray-900">{section.name}</span>
                                   <span className="ml-6 flex items-center">
                                     {open ? (
@@ -351,7 +351,7 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
           </Transition.Root>
   
           <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+            <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-10">
               <h1 className="text-4xl font-bold tracking-tight text-gray-900">{catName}</h1>
   
               <div className="flex items-center">
@@ -431,7 +431,7 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
                       {({ open }) => (
                         <>
                           <h3 className="-my-3 flow-root">
-                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                            <Disclosure.Button className="flex w-full items-center justify-between bg-neutral-50 py-3 text-sm text-gray-400 hover:text-gray-500">
                               <span className="font-medium text-gray-900">{section.name}</span>
                               <span className="ml-6 flex items-center">
                                 {open ? (
@@ -471,7 +471,7 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
                       {({ open }) => (
                         <>
                           <h3 className="-my-3 flow-root">
-                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                            <Disclosure.Button className="flex w-full items-center justify-between bg-neutral-50 py-3 text-sm text-gray-400 hover:text-gray-500">
                               <span className="font-medium text-gray-900">Цена</span>
                               <span className="ml-6 flex items-center">
                                 {open ? (
@@ -515,10 +515,10 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
                 </form>
   
                 {/* Product grid */}
-                <div style={{maxHeight: '1100px'}} className="overflow-y-scroll lg:col-span-3">
+                <div style={{maxHeight: '1000px'}} className="overflow-y-scroll lg:col-span-3">
                 <>
 {goods.length > 0 ? (
-  <div id="Cart" className="visibility: visible bg-gray-100 py-10 min-h-96">
+  <div id="Cart" className="visibility: visible bg-stone-100 py-10 min-h-96">
     <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
       <div id="amount" className="rounded-lg">
         {goods && goods.map(({ id, name, img_url, specs, amount, country, price, archive }) => (

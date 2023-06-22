@@ -86,7 +86,7 @@ export default function SettingsUser() {
   return (
     <div className='grid gap-8'>
 
-<div className="h-3/5 bg-gray-100 p-8">
+<div className="h-3/5 bg-neutral-50 p-8">
             <div className="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
               <div className="w-full flex flex-col 2xl:w-1/3">
                 <div className="flex-1 bg-white rounded-lg shadow-xl p-8">

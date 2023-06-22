@@ -31,7 +31,7 @@ export default function Completion() {
 
   return (
     <div className='flex flex-col gap-y-3 justify-center justify-items-center justify-self-center content-center self-center items-center' >
-      <div className="bg-gray-100 p-8">
+      <div className="bg-neutral-50 p-8">
         <div className="flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
           <div className="w-full flex 2xl:w-full justify-evenly bg-white rounded-lg shadow-xl items-center">
             <div className="flex flex-col justify-center justify-items-center justify-self-center content-center self-center items-center p-8">
@@ -41,13 +41,13 @@ export default function Completion() {
               <p className="flex text-lg ml-3  mb-1 text-gray-700 font-small">Мы свяжемся с вами в ближайшее время</p>
               <p className="text-lg ml-3 mb-1 text-gray-700 font-small">Номер вашего заказа # {numberOrder}</p>
               <Link to="/">
-              <p className="flex gap-1 text-lg ml-3 mb-1 text-gray-700 font-small cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <div className="mt-1 items-center flex rounded-md bg-[#0d7490] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#0d7490]/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="mr-2 w-6 h-6">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
               </svg>
-                 Вернуться к покупкам
-              </p>
-              </Link>
+              Вернуться к покупкам
+              </div>
+            </Link>
             </div>
           </div>
         </div>

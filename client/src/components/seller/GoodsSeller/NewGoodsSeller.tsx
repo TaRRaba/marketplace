@@ -45,7 +45,7 @@ export function NewGoodsSeller() {
       }  
 
   return (
-    <section className="pb-10 flex bg-gray-100 w-full">
+    <section className="pb-10 flex bg-neutral-50 w-full">
 
     <div>
 
@@ -138,8 +138,8 @@ export function NewGoodsSeller() {
     </div>
  
   <div className=' flex justify-around mt-10'>
-    <button disabled={checkNameProduct} type='submit' className="mt-5 w-48 rounded-md bg-green-500 p-2 text-center font-semibold text-white">Сохранить</button>
-    <button onClick={()=> navigate('/profileSeller/goods')} type="button" className="mt-5 w-48 rounded-md bg-blue-500 p-2 text-center font-semibold text-white">Отменить</button>
+    <button disabled={checkNameProduct} type='submit' className="mt-5 w-48 rounded-md bg-[#0d7490] hover:bg-[#0d7490]/90 p-2 text-center font-semibold text-white">Сохранить</button>
+    <button onClick={()=> navigate('/profileSeller/goods')} type="button" className="mt-5 w-48 rounded-md bg-[#0d7490]/10 text-gray-700 hover:bg-[#0d7490]/20 border p-2 text-center font-semibold">Отменить</button>
   </div>
 </form>
 

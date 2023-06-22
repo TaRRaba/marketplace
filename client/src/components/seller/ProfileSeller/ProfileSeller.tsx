@@ -33,7 +33,7 @@ export default function ProfileSeller() {
   }
   
   return (
-    <div className="grid grid-cols-4 mt-12" >
+    <div className="grid grid-cols-5 mt-12" >
 
     <div >
     <Sidebar aria-label="Default sidebar example">
@@ -48,6 +48,7 @@ export default function ProfileSeller() {
     
       <Link to="/profileSeller/settings">
       <Sidebar.Item
+      className="hover:bg-[#0d7490]/10"
       icon={HiUser}>
         <p>Учетные данные</p>
       </Sidebar.Item>
@@ -55,6 +56,7 @@ export default function ProfileSeller() {
 
       <Link to="/profileSeller/goods">
       <Sidebar.Item
+      className="hover:bg-[#0d7490]/10"
       icon={HiShoppingBag}
         label={goods.length > 0 ? goods.length : null}>
         <p>Товары</p>
@@ -63,6 +65,7 @@ export default function ProfileSeller() {
 
       <Link to="/profileSeller/orders">
       <Sidebar.Item
+        className="hover:bg-[#0d7490]/10"
         icon={HiTable}>
         <p>Заказы</p>
       </Sidebar.Item>
@@ -70,13 +73,14 @@ export default function ProfileSeller() {
     
       <Link to="/profileSeller/reports">
       <Sidebar.Item
+        className="hover:bg-[#0d7490]/10"
         icon={HiChartPie}>
         <p>Отчеты</p>
       </Sidebar.Item>
       </Link>
 
       <Sidebar.Item
-      className="cursor-pointer"
+      className="cursor-pointer hover:bg-[#0d7490]/10"
         onClick={signOut}
         icon={HiArrowSmRight}>
         <p>Выйти</p>
@@ -92,7 +96,7 @@ export default function ProfileSeller() {
 </Sidebar>
     </div>
 
-<div className='col-span-3'>
+<div className='col-span-4'>
     <Outlet></Outlet>
 </div>
 
