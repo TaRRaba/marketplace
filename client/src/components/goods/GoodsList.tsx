@@ -566,11 +566,11 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
                 {amount > 0 ?
                 <>
                 {checkCart(id) ?
-              <div className="addedCart flex mt-4 text-sm items-center cursor-pointer space-x-1.5 rounded-lg bg-teal-600 px-4 py-1.5 text-white duration-100">
+              <div className="addedCart flex mt-4 text-sm items-center cursor-pointer space-x-1.5 rounded-lg bg-green-700 px-4 py-1.5 text-white duration-100">
               В корзине
             </div>
               :
-             <div onClick={() => dispatch(addAmountCart({goodID: id, amount: 1}))} className="addToCart mt-4 flex text-sm items-center cursor-pointer space-x-1.5 rounded-lg bg-[#4520aa] px-4 py-1.5 text-white duration-100 hover:bg-[#4520aa]/80">
+             <div onClick={() => dispatch(addAmountCart({goodID: id, amount: 1}))} className="addToCart mt-4 flex text-sm items-center cursor-pointer space-x-1.5 rounded-lg bg-[#0d7490] px-4 py-1.5 text-white duration-100 hover:bg-[#0d7490]/80">
              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="addToCart mr-2 h-4 w-4">
                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
              </svg>
