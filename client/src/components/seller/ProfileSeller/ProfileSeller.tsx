@@ -37,7 +37,7 @@ export default function ProfileSeller() {
 
     <div >
     <Sidebar aria-label="Default sidebar example">
-      <div className="h-1/3 flex justify-center">
+      <div className="h-40 flex justify-center">
         <img className='rounded-full' src="/avatarSeller.gif" alt="avatar" />
       </div>
       <p className='pb-2 pt-3 text-center'>{seller.name}</p>
