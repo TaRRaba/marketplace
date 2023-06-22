@@ -87,7 +87,7 @@ const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
         <Modal.Body>
         <form className="flex max-w-md flex-col gap-4" onSubmit={handleSubmit} action='#' method='POST'>
           <div className="space-y-6">
-            <h3 className="flex text-xl font-medium text-gray-900 dark:text-white justify-center">Авторизация</h3>
+            <h3 className="flex text-xl font-medium text-gray-900 dark:text-white justify-center">Авторизация продавца</h3>
 
             <div>
               <div className="mb-2 block">

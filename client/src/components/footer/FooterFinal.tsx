@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 
 export const FooterFinal = () => {
   return (
-    <div className='mb-4'>
+    <div className='p-4  bg-stone-100'>
 
       <div className='flex'>
-        <div className='text-center w-4/12'>
-          <div>Мы в сетях</div>
-          <span className="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
+        <div className='text-center flex flex-col justify-between w-3/12'>
+          <div className=' font-semibold'  >Мы в сетях</div>
+          
+          <span className="inline-flex  justify-center">
                   <a href="https://www.facebook.com/elbrusbootcamp" className="text-gray-500 cursor-pointer hover:text-blue-600" target="_blank" rel="noreferrer">
                     <svg
                       fill="currentColor"
@@ -67,25 +68,13 @@ export const FooterFinal = () => {
                     </svg>
                   </a>
                 </span>
-          
+        <div></div>
         </div >
-        <div className='flex flex-col items-center w-4/12 border-x-2 border-x-gray-200'>
-          <div>Клиентам</div>
-          <Link to="/makeOrder">
-          <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Как сделать заказ</div>
-          </Link>
-          <Link to="/payment">
-          <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Способы оплаты</div>
-          </Link>
-          <Link to="/delivery_points">
-          <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Пункты выдачи</div>
-          </Link>
-        </div>
-        <div className='text-center w-4/12'>
-          <div>Контакты</div>
-          <div className="flex flex-col items-center">
-            <div className='flex'>
-                  <a href="https://api.whatsapp.com/send/?phone=74957860581&text&type=phone_number&app_absent=0" target="_blank" rel="noreferrer">
+        <div className='text-center flex flex-col justify-between w-3/12 border-l-2 border-l-gray-200'>       
+        <div className=' font-semibold'>Контакты</div>
+          <div className="flex flex-col justify-between items-center">
+            <div className='flex mb-1'>
+                  <a className='mr-1' href="https://api.whatsapp.com/send/?phone=74957860581&text&type=phone_number&app_absent=0" target="_blank" rel="noreferrer">
                     <svg className="w-6 h-6 text-gray-500 hover:text-green-500" fill="currentColor" enableBackground="new 0 0 512 512" height="512px" id="Layer_4" version="1.1" viewBox="0 0 512 512" width="512px" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
                       <pattern height="69" id="Polka_Dot_Pattern" overflow="visible" patternUnits="userSpaceOnUse" viewBox="2.125 -70.896 69 69" width="69" y="512">
                         <g>
@@ -220,7 +209,7 @@ export const FooterFinal = () => {
                       <g><g><path d="M250.579,53.797c-103.58,0-187.548,83.968-187.548,187.547c0,47.789,17.882,91.393,47.308,124.512l-19.713,69.468    l72.095-28.256c26.211,13.925,56.109,21.825,87.858,21.825c103.579,0,187.547-83.969,187.547-187.549    C438.126,137.765,354.158,53.797,250.579,53.797z M327.271,351.852C305.6,352.654,263,347.5,208.634,296.518    C157,246,152.498,199.553,153.3,177.881c0.804-21.702,28.936-38.581,28.936-38.581l24.917,1.607c0,0,13.665,38.582,18.487,48.227    c4.823,9.646,1.608,13.665,1.608,13.665s-14.468,16.879-17.683,19.291c-3.215,2.412-2.422,4.987-1.607,6.43    c8,14.154,23.526,31.122,30.371,38.305c7.184,6.844,24.151,22.372,38.306,30.371c1.442,0.814,4.019,1.607,6.43-1.607    s19.29-17.684,19.29-17.684s4.02-3.214,13.665,1.608c9.645,4.822,48.227,18.486,48.227,18.486l1.607,24.917    C365.852,322.916,348.973,351.048,327.271,351.852z" /></g></g>
                     </svg>
                   </a>
-                  <a href="https://t.me/elbrus_bootcamp" target="_blank" rel="noreferrer">
+                  <a className='ml-1' href="https://t.me/elbrus_bootcamp" target="_blank" rel="noreferrer">
                     <svg className="w-6 h-6 text-gray-500 hover:text-blue-500" fill="currentColor" height="512px" version="1.1" viewBox="0 0 512 512" xmlSpace="preserve" xmlns="http://www.w3.org/2000/svg">
                       <g id="_x33_35-telegram"><g><g><path d="M484.689,98.231l-69.417,327.37c-5.237,23.105-18.895,28.854-38.304,17.972L271.2,365.631     l-51.034,49.086c-5.646,5.647-10.371,10.372-21.256,10.372l7.598-107.722L402.539,140.23c8.523-7.598-1.848-11.809-13.247-4.21     L146.95,288.614L42.619,255.96c-22.694-7.086-23.104-22.695,4.723-33.579L455.423,65.166     C474.316,58.081,490.85,69.375,484.689,98.231z" /></g></g></g>
                       <g id="Layer_1" />
@@ -228,12 +217,28 @@ export const FooterFinal = () => {
                   </a>
 
             </div>
-                  <span className="ml-5">+7 499 938-68-24</span>
+                  <span className="  text-gray-500">+7 499 938-68-24</span>
                 </div>
+                <div></div>
+        </div>
+        <div className='flex flex-col items-center w-3/12 border-x-2 border-x-gray-200'>
+          <div  className=' font-semibold mb-1'>Клиентам</div>
+          <Link to="/makeOrder">
+          <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Как сделать заказ</div>
+          </Link>
+          <Link to="/payment">
+          <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Способы оплаты</div>
+          </Link>
+          <Link to="/delivery_points">
+          <div className="ml-3 text-gray-500 cursor-pointer hover:text-gray-800">Пункты выдачи</div>
+          </Link>
+        </div>
+        <div className='text-center flex flex-col justify-between w-3/12'>
+            <div className=' font-semibold'>Адрес</div>
               <div>
-                <p>Адресс: Москва, ул. Орджоникидзе, 11 стр. 10(м. Ленинский проспект)</p>
+                <p className=' text-gray-500'>Москва, ул. Орджоникидзе, 11 стр. 10 <br></br>(м. Ленинский проспект)</p>
               </div>
-          
+          <div></div>
         </div>
       </div>
     </div>

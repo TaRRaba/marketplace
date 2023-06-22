@@ -113,13 +113,13 @@ if(locat !== undefined) {
 {sellerIsActive ? 
           <>
           <Link to='/'>
-                <div className='text-gray-500  hover:text-gray-900'>Вернуться в магазин</div>
+                <div className='text-gray-600  hover:text-gray-900'>Вернуться в магазин</div>
                 </Link>
           </>
           :
           <>
         <Link to='/'>
-                <div className='text-gray-500  hover:text-gray-900'>Вернуться в магазин</div>
+                <div className='text-gray-600  hover:text-gray-900'>Вернуться в магазин</div>
                 </Link>
           </>
        
@@ -130,13 +130,13 @@ if(locat !== undefined) {
         {sellerIsActive ? 
           <>
           <Link to='/infoSeller'>
-                <div className='text-gray-500  hover:text-gray-900'>Информация для продавцов</div>
+                <div className='text-gray-600  hover:text-gray-900'>Информация для продавцов</div>
                 </Link>
           </>
           :
           <>
           <Link to='/infoSeller'>
-            <div className='text-gray-500  hover:text-gray-900'>Стать продавцом</div>
+            <div className='text-gray-600  hover:text-gray-900'>Стать продавцом</div>
             </Link>
           </>
        
