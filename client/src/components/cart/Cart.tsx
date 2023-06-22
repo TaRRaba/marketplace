@@ -174,7 +174,7 @@ export const Cart = () => {
                 </div>
               </div>
               {billData ? <></> :
-              <button id="orderBtn" data-userid='{user.id}' onClick={handleBill} type="button" className="mt-6 w-full rounded-md py-1.5 font-medium text-blue-50 bg-[#4520aa] hover:bg-[#4520aa]/80">Перейти к оплате</button>}
+              <button id="orderBtn" data-userid='{user.id}' onClick={handleBill} type="button" className="mt-6 w-full rounded-md py-1.5 font-medium text-blue-50 bg-[#0d7490] hover:bg-[#0d7490]/80">Перейти к оплате</button>}
                 {stripePromise && clientSecret && (
                 <Elements stripe={stripePromise} options={{ clientSecret }}>
                 <CheckoutForm deliveryState={deliveryState}/>
