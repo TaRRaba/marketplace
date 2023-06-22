@@ -524,7 +524,9 @@ export const GoodsList = ({CatId}: {CatId: number}) => {
         {goods && goods.map(({ id, name, img_url, specs, amount, country, price, archive }) => (
           archive === false &&
           <div key={id} id={String(id)} className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start">
-            <img src={`http://localhost:3001${img_url}`} alt="" className="rounded-lg w-40" />
+            <div className='rounded-lg w-40 h-40 '>
+            <img src={`http://localhost:3001${img_url}`} alt="" className='object-contain h-full' />
+            </div>
             <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
               <div className="mt-5 w-80 sm:mt-0">
                 <Link to={`/goods/${name}`}>

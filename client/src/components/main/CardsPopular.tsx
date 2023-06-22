@@ -62,7 +62,7 @@ function checkCart(id: number) {
           <Link to={`/goods/${name}`}>
                 <div className="mb-4">
                   <div className="relative overflow-hidden rounded-xl flex justify-center">
-                      <img className="rounded-xl object-scale-down object-center w-64 h-64 max-sm:w-96 max-sm:h-96 max-sm:my-2 max-sm:mb-6 cursor-pointer max-md:mt-2 mb-1" src={`http://localhost:3001${img_url}`} alt="preview" />
+                      <img className="rounded-xl object-scale-down object-center w-56 h-56 max-sm:w-96 max-sm:h-96 max-sm:my-2 max-sm:mb-6 cursor-pointer max-md:mt-2 mb-1" src={`http://localhost:3001${img_url}`} alt="preview" />
                   </div>
                     <h2 className="cursor-pointer text-slate-700 hover:text-slate-500 line-clamp-3">{name}</h2>
                 </div>
