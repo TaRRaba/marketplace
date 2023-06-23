@@ -147,7 +147,8 @@ export const Cart = () => {
                   onChange={changeDeliveryState}/>
                 {deliveryState ? 
                 <>
-                <p>Стоимость доставки 500 рублей</p>
+                <p className='text-gray-600'>Стоимость доставки 500 рублей</p>
+                <div>Адрес доставки:</div>
                 <input defaultValue={loc} onChange={changeInputAddress} name='text' placeholder='Укажите адрес доставки' className='w-full py-1.5 px-1 border-2 border-gray-500 rounded-lg text-start'></input>
                 </> 
                 :       <div className="relative w-full mt-2 rounded-lg">

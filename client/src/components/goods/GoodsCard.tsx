@@ -143,7 +143,7 @@ function addCart (id: number, count: number) {
                 : null }
       </div>
 
-        <div className="lg:col-span-3">
+        <div className="mt-3 lg:col-span-3">
         <div className="border-b border-gray-300">
           <nav className="flex gap-4">
             <a className="border-b-2 font-bold border-gray-900 pb-2 text-m text-gray-900 hover:border-gray-400 hover:text-gray-800"> Характеристики </a>
